@@ -1,19 +1,7 @@
 import { Component } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
-import { NgForOf, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [
-    MatIcon,
-    NgForOf,
-    NgIf,
-    RouterLink,
-    SearchBarComponent,
-  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

@@ -1,0 +1,7 @@
+<div class='recipes-list'>
+  <div *ngFor='let recipe of recipes'>
+    <a [routerLink]="['/recipes', recipe.id]">
+      <app-recipe-card [recipe]='recipe'></app-recipe-card>
+    </a>
+  </div>
+</div>

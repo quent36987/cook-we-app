@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { UserDetailResponse } from '../../responseClass/UserDetailResponse';
+import { UserDetailResponse } from '../responseClass/UserDetailResponse';
 
 
 const AUTH_API = 'http://localhost:9001/api/auth/';
