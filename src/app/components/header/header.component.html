@@ -1,0 +1,34 @@
+<div class='navbar'>
+  <div class='nav-menu' (click)="toggleMenu()">
+    <mat-icon class='nav-menu-icon'>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </div>
+
+  <div class='nav-menu-overlay' *ngIf='isMenuOpen' (click)='toggleMenu()'></div>
+  <div class='nav-menu-content' *ngIf='isMenuOpen'>
+    <ul class='menu-list'>
+      <li *ngFor='let service of services'>
+        <a [routerLink]='service.link'>{{ service.title }}</a>
+        <ul *ngIf='service.subServices && service.subServices.length'>
+          <li *ngFor='let subService of service.subServices'>
+            <a [routerLink]='subService.link'>{{ subService.title }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class='nav-logo'>
+    <a href="/" class="nav-link">
+      <img src="./assets/logo.jpg" alt="" class='logo'>
+    </a>
+  </div>
+  <div class='nav-search'>
+    <app-search-bar/>
+  </div>
+  <div class='nav-profile'>
+    <a href="/profile" routerLink="profile" class='na'>
+      <mat-icon>account_circle</mat-icon>
+    </a>
+  </div>
+</div>

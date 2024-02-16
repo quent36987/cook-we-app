@@ -1,0 +1,116 @@
+.mat-icon{
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.navbar{
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 0.5rem 1rem;
+  height: 6vh;
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-s);
+}
+
+.nav-menu
+{
+  height: min-content;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+/* Styling for menu */
+.nav-menu-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.menu-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu-list li {
+  padding: 10px;
+}
+
+/* Styling for main services */
+.menu-list > li {
+  font-size: 18px; /* Adjust the font size for main services */
+}
+
+/* Styling for sub services */
+.menu-list > li > ul > li {
+  font-size: 16px; /* Adjust the font size for sub services */
+}
+
+/* Styling for hover effect */
+.menu-list > li:hover {
+  background: #f0f0f0; /* Change background color on hover */
+}
+
+/* Styling for links */
+.menu-list a {
+  text-decoration: none; /* Remove underline */
+  color: #333; /* Change link color */
+}
+
+/* Styling for links on hover */
+.menu-list a:hover {
+  color: #555; /* Change link color on hover */
+}
+
+.nav-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  display: none;
+}
+
+/* Hide overflow to prevent scrolling when menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+
+.nav-logo{
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #007bff;
+  height: 100%;
+}
+
+.logo{
+  height: 100%;
+}
+
+.nav-search{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+
+  flex: 3;
+}
+
+.fixme-navbar{
+  background: #4075a6;
+  height: 100%;
+  width: 100%;
+}
