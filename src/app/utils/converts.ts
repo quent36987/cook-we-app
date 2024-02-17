@@ -1,12 +1,12 @@
-import { Recipe } from '../interfaces/Recipe';
-import { RecipeResponse } from '../responseClass/RecipeResponse';
-import { RecipePicture } from '../interfaces/RecipePicture';
-import { RecipePictureResponse } from '../responseClass/RecipePictureResponse';
-import { UserResponse } from '../responseClass/UserResponse';
-import { User } from '../interfaces/User';
-import { RecipeStepResponse } from '../responseClass/RecipeStepResponse';
-import { RecipeStep } from '../interfaces/RecipeStep';
-import { ESeason } from '../interfaces/ESeason';
+import { RecipePictureResponse } from '@interfaces/responseInterface/RecipePictureResponse';
+import { RecipePicture } from '@interfaces/RecipePicture';
+import { UserResponse } from '@interfaces/responseInterface/UserResponse';
+import { User } from '@interfaces/User';
+import { RecipeStepResponse } from '@interfaces/responseInterface/RecipeStepResponse';
+import { RecipeStep } from '@interfaces/RecipeStep';
+import { ESeason } from '@interfaces/ESeason';
+import { RecipeResponse } from '@interfaces/responseInterface/RecipeResponse';
+import { Recipe } from '@interfaces/Recipe';
 
 
 export function RecipePictureResponseToRecipePicture(pictureResponse: RecipePictureResponse): RecipePicture {

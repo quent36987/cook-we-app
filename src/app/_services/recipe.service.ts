@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_URL } from '../../main';
-import { RecipeResponse } from '../responseClass/RecipeResponse';
-import { RecipeStepResponse } from '../responseClass/RecipeStepResponse';
-import { Recipe } from '../interfaces/Recipe';
-import { RecipeResponseToRecipeList } from '../utils/converts';
+
+import { Recipe } from '@interfaces/Recipe';
+import { RecipeResponseToRecipe, RecipeResponseToRecipeList } from '@utils/converts';
+import { RecipeResponse } from '@interfaces/responseInterface/RecipeResponse';
+import { RecipeStepResponse } from '@interfaces/responseInterface/RecipeStepResponse';
 
 
 @Injectable({
@@ -35,6 +36,16 @@ export class RecipeService {
     });
 
     return recipes;
+  }
+
+  public getRecipe(id: number): Recipe | undefined {
+    let recipe: Recipe | undefined = undefined;
+
+    this.getRecipeById(id).subscribe((recipeResponse) => {
+      recipe = RecipeResponseToRecipe(recipeResponse);
+    });
+
+    return recipe;
   }
 
 

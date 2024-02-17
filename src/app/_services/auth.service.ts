@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-import { UserDetailResponse } from '../responseClass/UserDetailResponse';
-
+import { Observable } from 'rxjs';
+import { UserDetailResponse } from '@interfaces/responseInterface/UserDetailResponse';
+import { SignupRequest } from '@interfaces/requestInterface/SignupRequest';
+import { UserResponse } from '@interfaces/responseInterface/UserResponse';
+import { LoginRequest } from '@interfaces/requestInterface/LoginRequest';
 
 const AUTH_API = 'http://localhost:9001/api/auth/';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  }),
+
 };
 
 @Injectable({
@@ -17,25 +22,18 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(username: string, password: string): Observable<any> {
+  login(loginRequest: LoginRequest): Observable<any> {
     return this.http.post(
       AUTH_API + 'signin',
-      {
-        username,
-        password,
-      },
+      loginRequest,
       httpOptions,
     );
   }
 
-  register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(
+  register(signupRequest : SignupRequest): Observable<UserResponse> {
+    return this.http.post<UserResponse>(
       AUTH_API + 'signup',
-      {
-        username,
-        email,
-        password,
-      },
+      signupRequest,
       httpOptions,
     );
   }

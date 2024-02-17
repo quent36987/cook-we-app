@@ -1,53 +1,45 @@
-import {Component, OnInit} from '@angular/core';
-import { AuthService } from '../../_services/auth.service';
-import { StorageService } from '../../_services/storage.service';
-
+import {Component} from '@angular/core';
+import { AuthService } from '@app/_services/auth.service';
+import { StorageService } from '@app/_services/storage.service';
+import { NotificationService } from '@app/_services/notification.service';
+import { LoginRequest } from '@interfaces/requestInterface/LoginRequest';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  form: any = {
-    username: null,
-    password: null
+export class LoginComponent {
+  form: LoginRequest = {
+    username: "",
+    password: ""
   };
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  constructor(private authService: AuthService, private storageService: StorageService) {
-  }
 
-  ngOnInit(): void {
-    console.log('login')
+  isWaiting = false;
+  showPassword: boolean = false;
 
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-    }
+  constructor(private authService: AuthService, private storageService: StorageService, private notification: NotificationService) {
   }
 
   onSubmit(): void {
-    const {username, password} = this.form;
 
-    this.authService.login(username, password).subscribe({
+    this.isWaiting = true;
+
+    this.authService.login(this.form).subscribe({
         next: data => {
           this.storageService.saveUser(data);
+          this.isWaiting = false;
+          this.notification.openSnackBarSuccess("Connection réussi", "Close");
 
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-
-          this.reloadPage();
+          setTimeout(() => {
+            window.location.href = "/home";
+          }, 1000);
         },
         error: err => {
-          this.errorMessage = err.error.message;
-          this.isLoginFailed = true;
+          this.isWaiting = false;
+          this.notification.openSnackBarError(err.error, "Close");
         },
       },
     );
-  }
-
-  reloadPage(): void {
-    window.location.reload();
   }
 }

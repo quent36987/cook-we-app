@@ -19,6 +19,12 @@ import { RegisterComponent } from './page/register/register.component';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { RecipeCardListComponent } from './components/recipe-card-list/recipe-card-list.component';
 import { HomeComponent } from './page/home/home.component';
+import { RecipeComponent } from '@app/page/recipe/recipe.component';
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardModule } from '@angular/material/card';
+import { MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -30,6 +36,7 @@ import { HomeComponent } from './page/home/home.component';
     SearchBarComponent,
     RecipeCardListComponent,
     HomeComponent,
+    RecipeComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,18 @@ import { HomeComponent } from './page/home/home.component';
     NgOptimizedImage,
     MatIconModule,
     MatProgressBar,
+    MatCard,
+    MatCardModule,
+    MatCardHeader,
+    MatCardContent,
+    MatFormField,
+    MatCardActions,
+    MatInput,
+    MatButton,
+    MatProgressSpinner,
+    MatIconButton,
+    MatPrefix,
+    MatSuffix,
 
   ],
   providers: [httpInterceptorProviders, provideAnimationsAsync()],

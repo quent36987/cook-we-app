@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../_services/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from '@app/_services/auth.service';
+import { SignupRequest } from '@interfaces/requestInterface/SignupRequest';
+import { StorageService } from '@app/_services/storage.service';
+import { NotificationService } from '@app/_services/notification.service';
 
 
 @Component({
@@ -8,30 +11,39 @@ import { AuthService } from '../../_services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  form: any = {
-    username: null,
-    email: null,
-    password: null
+  form: SignupRequest = {
+    username: "",
+    email: "",
+    password: ""
   };
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  isWaiting = false;
+  showPassword: boolean = false;
+
+  constructor(private authService: AuthService, private notification: NotificationService, private storageService: StorageService) { }
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
+    this.isWaiting = true;
 
-    this.authService.register(username, email, password).subscribe({
+    this.authService.register(this.form).subscribe({
       next: data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
+        this.isWaiting = false;
+        this.storageService.saveUser(data);
+        this.notification.openSnackBarSuccess("Compte créé avec succès", "Close");
+
+        setTimeout(() => {
+          window.location.href = "/home";
+        }, 1000);
+
+        this.form = {
+          username: "",
+          email: "",
+          password: ""
+        };
       },
       error: err => {
-        console.log("errro" + err);
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
+        this.isWaiting = false;
+        this.notification.openSnackBarError(err.error, "Close");
       }
     });
   }
