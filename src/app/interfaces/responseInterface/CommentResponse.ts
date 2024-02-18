@@ -1,9 +1,12 @@
-import { UserResponse } from './UserResponse';
+import { z } from 'zod';
+import { UserResponseSchema } from '@interfaces/responseInterface/UserResponse';
 
-export interface CommentResponse {
-  id: number;
-  recipeId: number;
-  text: string;
-  user: UserResponse;
-  created: string;
-}
+export const CommentResponseSchema = z.object({
+  id: z.number(),
+  recipeId: z.number(),
+  text: z.string(),
+  user: UserResponseSchema,
+  created: z.string(),
+});
+
+export type CommentResponse = z.infer<typeof CommentResponseSchema>;

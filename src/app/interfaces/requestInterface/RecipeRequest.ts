@@ -1,6 +1,6 @@
 import { CreateIngredientRequest } from '@interfaces/requestInterface/CreateIngredientRequest';
 
-export interface CreateRecipeRequest {
+export interface RecipeRequest {
   name: string;
   time: number;
   portions: number;

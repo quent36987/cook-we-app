@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { RecipeService } from '@app/_services/recipe.service';
+import { RecipeService } from '@app/_services/api/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '@interfaces/Recipe';
+import { RecipeDetailResponse } from '@interfaces/responseInterface/RecipeDetailResponse';
 
 @Component({
   selector: 'app-page-recipe',
@@ -10,7 +11,7 @@ import { Recipe } from '@interfaces/Recipe';
 })
 export class RecipeComponent {
   recipeId = this.route.snapshot.params['recipeId'];
-  recipe : Recipe | undefined = undefined;
+  recipe : RecipeDetailResponse | undefined = undefined;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) {
     if (!this.recipeId) {
@@ -18,6 +19,10 @@ export class RecipeComponent {
       return;
     }
 
-    this.recipe = this.recipeService.getRecipe(this.recipeId);
+    this.recipeService
+      .getRecipeById(this.recipeId)
+      .subscribe((recipe) => {
+        this.recipe = recipe;
+      });
   }
 }

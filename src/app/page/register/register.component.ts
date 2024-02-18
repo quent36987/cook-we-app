@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@app/_services/auth.service';
+import { AuthService } from '@app/_services/api/auth.service';
 import { SignupRequest } from '@interfaces/requestInterface/SignupRequest';
 import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';

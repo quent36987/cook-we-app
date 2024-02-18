@@ -1,4 +1,3 @@
-import { UNKNOWN_ERROR_CODE } from '@angular/compiler-cli';
 
 export enum ESeason {
   SPRING = 'printemps',

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StorageService} from './_services/storage.service';
-import {AuthService} from './_services/auth.service';
 import {EventBusService} from './_shared/event-bus.service';
+import { UserDetailResponse } from '@interfaces/responseInterface/UserDetailResponse';
+import { AuthService } from '@app/_services/api/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  user: UserDetailResponse | undefined;
   eventBusSub?: Subscription;
 
 
@@ -37,7 +39,7 @@ export class AppComponent implements OnInit {
         this.isLoggedIn = true;
 
         const user = this.storageService.getUser();
-        this.username = user.username;
+        this.username = user?.username;
 
       },
       error: err => {
@@ -50,12 +52,10 @@ export class AppComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
-      this.roles = user.roles;
-
       // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
-      this.username = user.username;
+      this.username = user?.username;
     }
 
 
@@ -77,7 +77,12 @@ export class AppComponent implements OnInit {
         this.storageService.clean();
         console.log(res)
         console.log('logout success');
-        // aller a la page home
+
+
+        //clear cookie
+
+
+
         window.location.href = '/home';
         //window.location.reload();
       },

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Recipe } from '../../interfaces/Recipe';
-import { RecipeService } from '../../_services/recipe.service';
+import { Recipe } from '@interfaces/Recipe';
+import { RecipeService } from '@app/_services/api/recipe.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,6 @@ export class HomeComponent {
   recipes: Recipe[] = [];
 
   constructor(private recipeService: RecipeService) {
-    this.recipes = this.recipeService.getRecipes();
+    //this.recipes = this.recipeService.getRecipes();
   }
 }
