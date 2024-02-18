@@ -11,7 +11,8 @@ import { RecipeDetailResponse } from '@interfaces/responseInterface/RecipeDetail
 })
 export class RecipeComponent {
   recipeId = this.route.snapshot.params['recipeId'];
-  recipe : RecipeDetailResponse | undefined = undefined;
+  recipeResponse : RecipeDetailResponse | undefined = undefined;
+  recipe : Recipe | undefined;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) {
     if (!this.recipeId) {
@@ -21,8 +22,8 @@ export class RecipeComponent {
 
     this.recipeService
       .getRecipeById(this.recipeId)
-      .subscribe((recipe) => {
-        this.recipe = recipe;
+      .subscribe((recipeResponse) => {
+        this.recipe = new Recipe((recipeResponse))
       });
   }
 }
