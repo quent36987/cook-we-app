@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { z } from 'zod';
-
-import { Recipe } from '@interfaces/Recipe';
-import { RecipeResponseToRecipe, RecipeResponseToRecipeList } from '@utils/converts';
 import { RecipeResponse, RecipeResponseSchema } from '@interfaces/responseInterface/RecipeResponse';
 import { RecipeStepResponse } from '@interfaces/responseInterface/RecipeStepResponse';
 import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';

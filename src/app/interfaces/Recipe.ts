@@ -24,9 +24,9 @@ export class Recipe {
   constructor(recipe : RecipeDetailResponse) {
     this.id = recipe.id;
     this.name = recipe.name;
-    this.steps = recipe.steps.map(s => new RecipeStep(s))
-    this.user = new User(recipe.user),
-    this.ingredients = recipe.ingredients.map(i => new Ingredient(i)),
+    this.steps = recipe.steps.map(s => new RecipeStep(s));
+    this.user = new User(recipe.user);
+    this.ingredients = recipe.ingredients.map(i => new Ingredient(i));
     this.pictures = recipe.pictures.map(p => new  RecipePicture(p));
     this.season = StringToESeason(recipe.season);
     this.time = recipe.time;

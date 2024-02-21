@@ -1,1 +1,68 @@
-<p>recipe works!</p>
+<div *ngIf='recipe' class="recipe-container">
+  <div class="flex-row">
+    <div class='title flex-1'>{{ recipe.name }}</div>
+    <mat-icon class="favorite-icon">favorite</mat-icon>
+  </div>
+
+  <div class="pictures-container">
+    <div *ngFor="let picture of recipe.pictures" class="recipe-picture">
+      <img [src]="picture.imageUrl" alt="recipe picture" class='image-picture' />
+    </div>
+  </div>
+
+  <div class="details-container">
+    <div class="detail-item">
+        <div class="detail-label">
+            <mat-icon class="detail-icon">restaurant</mat-icon>
+            <div>Type:</div>
+        </div>
+        <div class="detail-value">{{ recipe.user.username }}</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">
+        <mat-icon class="detail-icon">
+          access_time
+        </mat-icon>
+        Temps:</div>
+      <div class="detail-value">{{ recipe.time }} minutes</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">
+        <mat-icon class="detail-icon">
+          local_florist
+        </mat-icon>
+        Saison:</div>
+      <div class="detail-value">{{ recipe.season }}</div>
+    </div>
+  </div>
+
+  <div class="servings-container">
+    <div class="quantity-container1">
+      <div class="quantity-button">+</div>
+    </div>
+
+    <div class="servings">
+      {{ recipe.portions }}
+      personnes
+    </div>
+
+    <div class="quantity-container2">
+      <div class="quantity-button">-</div>
+    </div>
+  </div>
+
+
+  <div class="ingredients-container">
+    <div class='sub-title'>Ingrédients:</div>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+    </ul>
+  </div>
+
+  <div class="steps-container">
+    <div class='sub-title'>Étapes:</div>
+    <ol>
+      <li *ngFor="let step of recipe.steps">{{ step.text }}</li>
+    </ol>
+  </div>
+</div>

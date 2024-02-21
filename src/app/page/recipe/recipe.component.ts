@@ -3,16 +3,18 @@ import { RecipeService } from '@app/_services/api/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '@interfaces/Recipe';
 import { RecipeDetailResponse } from '@interfaces/responseInterface/RecipeDetailResponse';
+import { ESeason } from '@interfaces/ESeason';
+import recipemodkdata from '@app/mockdata/recipe';
 
 @Component({
   selector: 'app-page-recipe',
   templateUrl: './recipe.component.html',
-  styleUrl: './recipe.component.css'
+  styleUrl: './recipe.component.css',
 })
 export class RecipeComponent {
   recipeId = this.route.snapshot.params['recipeId'];
-  recipeResponse : RecipeDetailResponse | undefined = undefined;
-  recipe : Recipe | undefined;
+  recipeResponse: RecipeDetailResponse | undefined = undefined;
+  recipe: Recipe | undefined;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) {
     if (!this.recipeId) {
@@ -20,10 +22,16 @@ export class RecipeComponent {
       return;
     }
 
-    this.recipeService
-      .getRecipeById(this.recipeId)
-      .subscribe((recipeResponse) => {
-        this.recipe = new Recipe((recipeResponse))
-      });
+    // this.recipeService
+    //   .getRecipeById(this.recipeId)
+    //   .subscribe((recipeResponse) => {
+    //     this.recipe = new Recipe((recipeResponse));
+    //   });
+
+
+    this.recipe = new Recipe(recipemodkdata);
+
   }
+
+
 }
