@@ -10,7 +10,7 @@ import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 
 
 export class Recipe {
-  public  id: number;
+  public id: number;
   public name: string;
   public time: number;
   public portions: number;
@@ -20,33 +20,43 @@ export class Recipe {
   public pictures: RecipePicture[];
   public ingredients: Ingredient[];
   public comments: RecipeComment[];
+  public isFavorite: boolean = false;
 
-  constructor(recipe : RecipeDetailResponse) {
+  constructor(recipe: RecipeDetailResponse) {
     this.id = recipe.id;
     this.name = recipe.name;
     this.steps = recipe.steps.map(s => new RecipeStep(s));
     this.user = new User(recipe.user);
     this.ingredients = recipe.ingredients.map(i => new Ingredient(i));
-    this.pictures = recipe.pictures.map(p => new  RecipePicture(p));
+    this.pictures = recipe.pictures.map(p => new RecipePicture(p));
     this.season = StringToESeason(recipe.season);
     this.time = recipe.time;
     this.portions = recipe.portions;
     this.comments = recipe.comments.map(c => new RecipeComment(c));
+    this.isFavorite = recipe.isFavorite;
   }
 
-  public ingredientCount():number {
+  public ingredientCount(): number {
     return this.ingredients.length;
   }
 
-  public toRecipeRequest() : RecipeRequest {
+  public toRecipeRequest(): RecipeRequest {
     return {
-      name : this.name,
-      time : this.time,
-      portions : this.portions,
-      season : ESeasonToString(this.season),
-      steps : this.steps.map(s => s.text),
+      name: this.name,
+      time: this.time,
+      portions: this.portions,
+      season: ESeasonToString(this.season),
+      steps: this.steps.map(s => s.text),
       ingredients: this.ingredients.map(i => i.toIngredientRequest()),
-    }
+    };
+  }
+
+  public getIngredientsForPortion(portion: number): Ingredient[] {
+    return this.ingredients.map(i => new Ingredient({
+      name: i.name,
+      quantity: i.quantity * portion / this.portions,
+      unit: i.unit,
+    }));
   }
 
 }

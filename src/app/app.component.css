@@ -1,7 +1,18 @@
-.app{
-  width: 100vw;
-  height: 100vh;
+/*.app{*/
+/*  width: 100vw;*/
+/*  height: 100vh;*/
+
+/*}*/
+
+.app {
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 99.8;
 }
 
-
+.container {
+  overflow-y: auto;
+}
 

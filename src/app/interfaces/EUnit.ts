@@ -4,5 +4,5 @@ export enum EUnit {
   TEASPOON = 'petite cuillère',
   TABLESPOON = 'grande cuillère',
   CUP = 'tasse',
-  PIECE = 'pièce',
+  PIECE = '',
 }

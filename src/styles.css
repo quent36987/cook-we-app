@@ -11,7 +11,13 @@
   --color-text: rgba(0, 0, 0, 0.7);
   --column-width: 42rem;
   --column-margin-top: 4rem;
-  font-family: "Roboto", sans-serif;
+
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 99.8;
+
   font-size: 16px;
   color: var(--color-text);
 

@@ -51,7 +51,7 @@ let recipemodkdata = {
     {
       name: 'lardons',
       quantity: 200,
-      unit: 'gramme',
+      unit: 'GRAM',
     },
     {
       name: 'oeuf',
@@ -86,6 +86,7 @@ let recipemodkdata = {
   ],
   createdAt: 'ee',
   comments: [],
+  isFavorite: false,
 };
 
 export default recipemodkdata;

@@ -4,7 +4,7 @@ import { LoginComponent } from './page/login/login.component';
 import { RegisterComponent } from './page/register/register.component';
 import { HomeComponent } from './page/home/home.component';
 import { RecipeComponent } from '@app/page/recipe/recipe.component';
-
+import { FavoritesComponent } from '@app/page/favorites/favorites.component';
 
 
 const routes: Routes = [
@@ -12,11 +12,13 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'recipe/:recipeId', component: RecipeComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: 'favorites', component: FavoritesComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

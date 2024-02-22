@@ -25,6 +25,7 @@ import { MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field
 import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { FavoritesComponent } from '@app/page/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     RecipeCardListComponent,
     HomeComponent,
     RecipeComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,

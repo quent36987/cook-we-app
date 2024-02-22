@@ -7,6 +7,7 @@ import { RecipeStep } from '@interfaces/RecipeStep';
 import { ESeason } from '@interfaces/ESeason';
 import { RecipeResponse } from '@interfaces/responseInterface/RecipeResponse';
 import { Recipe } from '@interfaces/Recipe';
+import { EUnit } from '@interfaces/EUnit';
 
 //
 // export function RecipePictureResponseToRecipePicture(pictureResponse: RecipePictureResponse): RecipePicture {
@@ -51,18 +52,37 @@ export function StringToESeason(season: string): ESeason {
   }
 }
 
-export function ESeasonToString(season : ESeason) : string {
+export function ESeasonToString(season: ESeason): string {
   switch (season) {
     case ESeason.WINTER:
       return 'WINTER';
     case ESeason.SPRING:
-      return'SPRING' ;
+      return 'SPRING';
     case ESeason.SUMMER:
       return 'SUMMER';
     case ESeason.AUTUMN:
-      return  'AUTUMN';
+      return 'AUTUMN';
     default:
       return '';
+  }
+}
+
+export function StringToEUnit(unit: string): EUnit {
+  switch (unit) {
+    case 'GRAM':
+      return EUnit.GRAM;
+    case 'CUP':
+      return EUnit.CUP;
+    case 'MILLILITER':
+      return EUnit.MILLILITER;
+    case 'PIECE':
+      return EUnit.PIECE;
+    case 'TABLESPOON':
+      return EUnit.TABLESPOON;
+    case 'TEASPOON':
+      return EUnit.TEASPOON;
+    default:
+      return EUnit.PIECE;
   }
 }
 

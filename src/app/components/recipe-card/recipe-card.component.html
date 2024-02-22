@@ -1,29 +1,38 @@
 <div class='card'>
-  <div *ngIf='recipe'>
+  <div *ngIf='recipe' class='card-wrapper'>
+
     <div class='image-container'>
-      <img src='{{ recipe.pictures[0].imageUrl}}}' alt='{{ recipe.name }}'>
+      <img [src]='recipe.pictures[0].imageUrl' alt='img'>
     </div>
+
     <div class='content'>
       <div class='title'>
         {{ recipe.name }}
       </div>
 
       <div class='details'>
+
         <div class='detail'>
           <mat-icon>schedule</mat-icon>
           <span class='count'> {{ recipe.time }}</span>
         </div>
+
         <div class='detail'>
           <mat-icon>local_dining</mat-icon>
           <span class='count'>{{recipe.ingredients ? recipe.ingredients.length : '?'}}</span>
         </div>
+
         <div class='detail'>
           <mat-icon>person</mat-icon>
           <span class='count pink'>{{recipe.portions}}</span>
         </div>
+
       </div>
+
       <button class='view-recipe'>View Recipe</button>
+
     </div>
   </div>
+
   <mat-progress-bar *ngIf='!recipe' mode='indeterminate'></mat-progress-bar>
 </div>
