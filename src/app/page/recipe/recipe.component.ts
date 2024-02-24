@@ -36,6 +36,7 @@ export class RecipeComponent {
 
 
     this.recipe = new Recipe(recipemodkdata);
+    //get favorite and set recipe
     this.portions = this.recipe.portions;
 
   }

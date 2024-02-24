@@ -16,7 +16,7 @@ import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInte
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getPublicContent(): Observable<UserDetailResponse> {
+  getMyDetail(): Observable<UserDetailResponse> {
     return this.http.get<UserDetailResponse>(API_URL + '/users/details',
       HTTP_OPTIONS,
     ).pipe(

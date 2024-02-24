@@ -3,6 +3,7 @@ import { AuthService } from '@app/_services/api/auth.service';
 import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';
 import { LoginRequest } from '@interfaces/requestInterface/LoginRequest';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,12 @@ export class LoginComponent {
   isWaiting = false;
   showPassword: boolean = false;
 
-  constructor(private authService: AuthService, private storageService: StorageService, private notification: NotificationService) {
+  constructor(
+    private authService: AuthService,
+    private storageService: StorageService,
+    private notification: NotificationService,
+    private _location: Location,
+  ) {
   }
 
   onSubmit(): void {
@@ -32,7 +38,7 @@ export class LoginComponent {
           this.notification.openSnackBarSuccess("Connection réussi", "Close");
 
           setTimeout(() => {
-            window.location.href = "/home";
+            this._location.back();
           }, 1000);
         },
         error: err => {

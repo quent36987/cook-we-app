@@ -3,10 +3,21 @@ import { UserDetailResponse, UserDetailResponseSchema } from '@interfaces/respon
 
 export class User {
   public username: string;
-  public firstname: undefined | string;
 
-  constructor(user : UserResponse | UserDetailResponse){
+  constructor(user: UserResponse) {
     this.username = user.username;
   }
+}
 
+export class UserDetail extends User {
+  public firstName: string | null;
+  public lastName: string | null;
+  public email: string;
+
+  constructor(user: UserDetailResponse) {
+    super(user);
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
+    this.email = user.email;
+  }
 }

@@ -1,0 +1,53 @@
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: var(--spacing-s);
+}
+
+.sub-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding: var(--spacing-s);
+}
+
+.infos {
+  margin-left: var(--spacing-m);
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-s);
+  align-items: center;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: var(--spacing-s);
+}
+
+.button {
+  font-size: 0.9em;
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-s);
+  padding: var(--spacing-s);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  z-index: 1000;
+}

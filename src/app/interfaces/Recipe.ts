@@ -33,7 +33,6 @@ export class Recipe {
     this.time = recipe.time;
     this.portions = recipe.portions;
     this.comments = recipe.comments.map(c => new RecipeComment(c));
-    this.isFavorite = recipe.isFavorite;
   }
 
   public ingredientCount(): number {

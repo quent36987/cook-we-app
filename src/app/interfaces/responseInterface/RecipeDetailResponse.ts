@@ -17,7 +17,6 @@ export const RecipeDetailResponseSchema = z.object({
   pictures: z.array(RecipePictureResponseSchema),
   ingredients: z.array(IngredientResponseSchema),
   comments: z.array(CommentResponseSchema),
-  isFavorite: z.boolean(),
 });
 
 

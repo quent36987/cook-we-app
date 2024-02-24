@@ -23,9 +23,10 @@ import { RecipeComponent } from '@app/page/recipe/recipe.component';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardModule } from '@angular/material/card';
 import { MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatButton, MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { FavoritesComponent } from '@app/page/favorites/favorites.component';
+import { ProfileComponent } from '@app/page/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { FavoritesComponent } from '@app/page/favorites/favorites.component';
     HomeComponent,
     RecipeComponent,
     FavoritesComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { FavoritesComponent } from '@app/page/favorites/favorites.component';
     MatIconButton,
     MatPrefix,
     MatSuffix,
+    MatFabButton,
 
   ],
   providers: [httpInterceptorProviders, provideAnimationsAsync()],
