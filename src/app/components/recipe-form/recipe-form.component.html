@@ -1,0 +1,129 @@
+<form class='form' [formGroup]='formGroup' (ngSubmit)='onSubmit(formGroup)'>
+  <div class='flex-row'>
+    <mat-form-field class='width-100'>
+      <mat-label>Nom de la recette</mat-label>
+      <input required matInput placeholder='Ex. Pizza' formControlName='name'>
+    </mat-form-field>
+
+    <div class='example-button-container'>
+      <button mat-mini-fab aria-label='take a picture of a recipe' color='primary' type='button'
+              (click)='takePicture()'>
+        <mat-icon>camera_alt</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-button-toggle-group name='type' aria-label='Type de plat' class='toggles' appearance='legacy'
+                           formControlName='type' required>
+    <mat-button-toggle value='ENTRANCE' class='mini-font'>Entrée</mat-button-toggle>
+    <mat-button-toggle value='PLAT' class='mini-font'>Plat</mat-button-toggle>
+    <mat-button-toggle value='DESSERT' class='mini-font'>Dessert</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-button-toggle-group name='season' aria-label='season' class='toggles' appearance='legacy'
+                           formControlName='season' required>
+    <mat-button-toggle value='SUMMER' class='mini-font'>Été</mat-button-toggle>
+    <mat-button-toggle value='AUTUMN' class='mini-font'>Automne</mat-button-toggle>
+    <mat-button-toggle value='WINTER' class='mini-font'>Hiver</mat-button-toggle>
+    <mat-button-toggle value='SPRING' class='mini-font'>Printemps</mat-button-toggle>
+    <mat-button-toggle value='ALL' class='mini-font'>Toutes</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div class='flex-row gap-s'>
+    <mat-form-field class='width-100'>
+      <mat-label class='mini-font'>Nombre de personne</mat-label>
+      <input required matInput placeholder='Ex. 3' type='number' formControlName='portions'>
+    </mat-form-field>
+
+    <mat-form-field class='width-100'>
+      <mat-label class='mini-font'>Temps (en minute)</mat-label>
+      <input required matInput placeholder='Ex. 60 pour 1h' type='number' formControlName='time'>
+    </mat-form-field>
+  </div>
+
+  <div class='flex-row gap-s margin-bottom-s'>
+    <div class='app-sub-title'>Ingrédients</div>
+    <button mat-mini-fab aria-label='add an ingredient' color='primary' class='button-add' type='button'
+            (click)='addIngredient()'>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div formArrayName='ingredients'>
+    <div *ngFor='let ingredient of ingredientForms.controls; let i = index'>
+      <div class='flex-row gap-s' [formGroupName]='i'>
+        <mat-form-field>
+          <mat-label class='mini-font'>Quantité</mat-label>
+          <input required matInput placeholder='Ex. 200' type='number' formControlName='quantity'>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class='mini-font'>Unité</mat-label>
+          <select matNativeControl required formControlName='unit'>
+            <option *ngFor='let unit of units' [value]='unit'>
+              {{unit}}
+            </option>
+          </select>
+        </mat-form-field>
+
+        <mat-form-field class='width-100'>
+          <mat-label class='mini-font'>Ingrédient</mat-label>
+          <input required
+                 type='text'
+                 placeholder='Ingrédient'
+                 matInput
+                 [matAutocomplete]='auto'
+                 formControlName='name'
+          >
+          <mat-autocomplete #auto='matAutocomplete'>
+            <mat-option *ngFor='let option of _filter(i)' [value]='option' class='mini-font'>
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <div class='example-button-container'>
+          <button mat-mini-fab aria-label='suprimer' color='primary' class='button-add' type='button'
+                  (click)='removeIngredient(i)'>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='flex-row gap-s margin-bottom-s'>
+    <div class='app-sub-title'>Etapes</div>
+    <button mat-mini-fab aria-label='add an ingredient' color='primary' class='button-add' type='button'
+            (click)='addStep()'>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div formArrayName='steps'>
+    <div *ngFor='let step of stepForms.controls; let i = index'>
+      <div class='flex-row gap-s' [formGroupName]='i'>
+        <mat-form-field class='width-100'>
+          <mat-label class='mini-font'>Etape</mat-label>
+          <textarea matInput required placeholder='Ex. Préchauffer le four à 180°C' style='font-size: 0.8rem'
+                    formControlName='text' rows='3'>
+
+          </textarea>
+        </mat-form-field>
+        <div class='example-button-container'>
+          <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-add'
+                  (click)='removeStep(i)'>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='submit-button'>
+    <button mat-raised-button color='primary' type='submit' disabled='{{!canSubmit}}'>
+      Ajouter
+    </button>
+  </div>
+
+</form>

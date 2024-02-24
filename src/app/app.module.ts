@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -23,10 +23,16 @@ import { RecipeComponent } from '@app/page/recipe/recipe.component';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardModule } from '@angular/material/card';
 import { MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { MatButton, MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { FavoritesComponent } from '@app/page/favorites/favorites.component';
 import { ProfileComponent } from '@app/page/profile/profile.component';
+import { CreateRecipeComponent } from '@app/page/create-recipe/create-recipe.component';
+import { RecipeFormComponent } from '@app/components/recipe-form/recipe-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
+import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -41,6 +47,8 @@ import { ProfileComponent } from '@app/page/profile/profile.component';
     RecipeComponent,
     FavoritesComponent,
     ProfileComponent,
+    CreateRecipeComponent,
+    RecipeFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +71,15 @@ import { ProfileComponent } from '@app/page/profile/profile.component';
     MatPrefix,
     MatSuffix,
     MatFabButton,
+    MatFormFieldModule,
+    MatInputModule,
+    MatMiniFabButton,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    MatAutocomplete,
+    MatAutocompleteTrigger,
+    MatOption,
+    ReactiveFormsModule,
 
   ],
   providers: [httpInterceptorProviders, provideAnimationsAsync()],

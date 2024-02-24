@@ -1,0 +1,36 @@
+.form{
+    padding: var(--spacing-s);
+  overflow-y: auto;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  margin: var(--spacing-s);
+}
+
+.toggles {
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-s);
+}
+
+.mini-font {
+  font-size: 0.8rem;
+}
+
+input[type="text"]
+{
+  font-size:0.7rem
+}
+
+
+
+.button-add{
+  height: 2rem;
+  width: 2rem;
+  font-size: 1rem;
+}
+
+.submit-button {
+  margin: var(--spacing-s);
+}
