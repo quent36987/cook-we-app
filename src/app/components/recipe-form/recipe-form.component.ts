@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EUnit } from '@interfaces/EUnit';
@@ -9,6 +9,13 @@ import { NotificationService } from '@app/_services/notification.service';
 import { EType } from '@interfaces/EType';
 import { ESeason } from '@interfaces/ESeason';
 import { Recipe } from '@interfaces/Recipe';
+import { Event } from '@angular/router';
+import { RecipeDetail } from '@interfaces/RecipeDetail';
+
+
+export interface EmitRecipeForm extends RecipeRequest {
+  pictures: File[];
+}
 
 @Component({
   selector: 'app-recipe-form',
@@ -16,10 +23,10 @@ import { Recipe } from '@interfaces/Recipe';
   styleUrl: './recipe-form.component.css',
 })
 export class RecipeFormComponent implements OnInit {
-  @Input() recipe!: Recipe | null;
+  @Input() recipe!: RecipeDetail | null;
   @Input() canSubmit = true;
 
-  @Output() submitForm: EventEmitter<RecipeRequest> = new EventEmitter();
+  @Output() submitForm: EventEmitter<EmitRecipeForm> = new EventEmitter();
 
   units = [
     { value: EUnit.PIECE, viewValue: 'pièce' },
@@ -63,7 +70,7 @@ export class RecipeFormComponent implements OnInit {
     return ingredientsExemple.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  getRecipeRequest(): RecipeRequest {
+  getRecipeRequest(): EmitRecipeForm {
     const form = this.formGroup.value;
 
     return {
@@ -74,6 +81,7 @@ export class RecipeFormComponent implements OnInit {
       season: form.season,
       steps: form.steps.map((step: { text: string }) => step.text),
       ingredients: form.ingredients,
+      pictures: form.pictures.map((picture: { file: File }) => picture.file),
     };
   }
 
@@ -112,6 +120,7 @@ export class RecipeFormComponent implements OnInit {
     console.log('take picture');
   }
 
+
   addIngredient() {
     const ingredient = this.formBuilder.group({
       quantity: ['', Validators.required],
@@ -132,7 +141,7 @@ export class RecipeFormComponent implements OnInit {
 
   addPicture() {
     const picture = this.formBuilder.group({
-      url: ['', Validators.required],
+      file: [''],
     });
 
     this.pictureForms.push(picture);
@@ -141,6 +150,11 @@ export class RecipeFormComponent implements OnInit {
   onFileChange(event: any) {
     console.log('onFileChange');
     console.log(event);
+  }
+
+
+  onFileSelected(event: any, i: number): void {
+    this.pictureForms.at(i).setValue({ file: event.target.files[0] as File });
   }
 
   protected readonly EType = EType;

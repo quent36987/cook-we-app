@@ -7,6 +7,8 @@ import recipemodkdata from '@app/mockdata/recipe';
 import { UserService } from '@app/_services/api/user.service';
 import { NotificationService } from '@app/_services/notification.service';
 import { StorageService } from '@app/_services/storage.service';
+import { CommentService } from '@app/_services/api/comment.service';
+import { RecipeDetail } from '@interfaces/RecipeDetail';
 
 @Component({
   selector: 'app-page-recipe',
@@ -16,15 +18,17 @@ import { StorageService } from '@app/_services/storage.service';
 export class RecipeComponent {
   recipeId = this.route.snapshot.params['recipeId'];
   recipeResponse: RecipeDetailResponse | undefined = undefined;
-  recipe: Recipe | undefined;
+  recipe: RecipeDetail | undefined;
   portions = 0;
   isFavorite = false;
+  newComment = '';
 
   constructor(private route: ActivatedRoute,
               private recipeService: RecipeService,
               private userService: UserService,
               private notificationService: NotificationService,
               private storageService: StorageService,
+              private commentService: CommentService,
   ) {
     if (!this.recipeId) {
       console.error('No recipe id provided');
@@ -34,7 +38,7 @@ export class RecipeComponent {
     this.recipeService
       .getRecipeById(this.recipeId)
       .subscribe((recipeResponse) => {
-        this.recipe = new Recipe((recipeResponse));
+        this.recipe = new RecipeDetail((recipeResponse));
         this.portions = this.recipe.portions;
       });
 
@@ -50,6 +54,12 @@ export class RecipeComponent {
     }
   }
 
+  getPictures() {
+    if (!this.recipe) {
+      return [];
+    }
+    return this.recipe.pictures;
+  }
 
   decreasePortions() {
     if (this.portions > 1) {
@@ -92,6 +102,17 @@ export class RecipeComponent {
     }
 
     this.isFavorite = !this.isFavorite;
+  }
+
+  addComment() {
+    this.commentService.postComment(this.recipeId, { text: this.newComment }).subscribe({
+      next: data => {
+        this.notificationService.openSnackBarSuccess('Comment added', 'Close');
+      },
+      error: err => {
+        this.notificationService.openSnackBarError(err.error, 'Close');
+      },
+    });
   }
 
 

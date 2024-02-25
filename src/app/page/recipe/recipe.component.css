@@ -13,7 +13,7 @@
 }
 
 .title {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -95,7 +95,7 @@
 }
 
 .quantity-container1 {
-  padding: 0 var(--spacing-m) ;
+  padding: 0 var(--spacing-m);
   border-right: 1px solid #ccc;
   font-weight: bold;
   font-size: 1.3rem;
@@ -113,9 +113,8 @@
 }
 
 
-
-.sub-title{
-  font-size: 1.5rem;
+.sub-title {
+  font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -128,4 +127,40 @@
 .ingredients-container h2,
 .steps-container h2 {
   margin-bottom: 10px;
+}
+
+.comments-container {
+  margin-top: 20px;
+}
+
+.mat-mdc-form-field {
+  margin-bottom: -1em;
+}
+
+.recipe-author{
+  font-size: 0.8rem;
+  margin-top: var(--spacing-s);
+}
+
+.comment {
+  border-radius: var(--border-radius);
+  padding: var(--spacing-s);
+  margin-top: var(--spacing-s);
+  background-color: var(--light-gray);
+  position: relative;
+}
+
+.comment-author {
+  font-weight: bold;
+}
+
+.comment-text {
+}
+
+.comment-date {
+  font-size: 0.8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: var(--spacing-xs);
 }

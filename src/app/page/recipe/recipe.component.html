@@ -6,8 +6,8 @@
   </div>
 
   <div class='pictures-container'>
-    <div *ngFor='let picture of recipe.pictures' class='recipe-picture'>
-      <img [src]='picture.imageUrl' alt='recipe picture' class='image-picture' />
+    <div *ngFor='let picture of recipe.getPictureUrl()' class='recipe-picture'>
+      <img [src]='picture' alt='recipe picture' class='image-picture' />
     </div>
   </div>
 
@@ -59,7 +59,9 @@
     <div class='sub-title'>Ingrédients:</div>
     <ul>
       <li
-        *ngFor='let ingredient of recipe.getIngredientsForPortion(portions)'>{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+        *ngFor='let ingredient of recipe.getIngredientsForPortion(portions)'>
+        {{ ingredient.roundQuantity }} {{ ingredient.unit }} {{ ingredient.name }}
+      </li>
     </ul>
   </div>
 
@@ -69,4 +71,26 @@
       <li *ngFor='let step of recipe.steps'>{{ step.text }}</li>
     </ol>
   </div>
+
+  <div class='recipe-author'>
+    Recette proposée par <strong>{{ recipe.user.username }} </strong>
+  </div>
+
+  <mat-divider />
+
+  <div class='comments-container'>
+    <div class='sub-title'>Commentaires:</div>
+    <div>
+      <mat-form-field class='comment-input width-100'>
+        <textarea matInput placeholder='Ajouter un commentaire' [(ngModel)]='newComment' name='newComment'></textarea>
+      </mat-form-field>
+      <button mat-raised-button color='primary' (click)='addComment()'>Ajouter</button>
+    </div>
+    <div *ngFor='let comment of recipe.comments' class='comment'>
+      <div class='comment-author'>{{ comment.user.username }}</div>
+      <div class='comment-text'>{{ comment.text }}</div>
+      <div class='comment-date'>{{ comment.createdAt | date: 'dd/MM/yyyy' }}</div>
+    </div>
+  </div>
+
 </div>

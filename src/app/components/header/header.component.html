@@ -1,5 +1,5 @@
 <div class='navbar'>
-  <div class='nav-menu' (click)="toggleMenu()">
+  <div class='nav-menu' (click)='toggleMenu()'>
     <mat-icon class='nav-menu-icon'>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
   </div>
 
@@ -19,16 +19,16 @@
 
 
   <div class='nav-logo'>
-    <a href="/" class="nav-link">
-      <img src="./assets/logo.jpg" alt="" class='logo'>
+    <a href='/' class='nav-link'>
+      <img src='./assets/logo.jpg' alt='' class='logo'>
     </a>
   </div>
-  <div class='nav-search'>
-    <app-search-bar/>
-  </div>
+  <!--  <div class='nav-search'>-->
+  <!--    <app-search-bar/>-->
+  <!--  </div>-->
   <div class='nav-profile'>
-    <a href="/profile" routerLink="profile" class='na'>
-      <mat-icon>account_circle</mat-icon>
+    <a href='/profile' routerLink='profile' class='na'>
+      <mat-icon color='primary'>account_circle</mat-icon>
     </a>
   </div>
 </div>

@@ -15,7 +15,7 @@ export class CommentService {
   constructor(private http: HttpClient) {
   }
 
-  public getCommentsByRecipeId(recipeId: number) : Observable<CommentResponse[]> {
+  public getCommentsByRecipeId(recipeId: number): Observable<CommentResponse[]> {
     return this.http.get<CommentResponse[]>(
       API_URL + '/comments/recipes/' + recipeId,
       HTTP_OPTIONS,
@@ -24,7 +24,7 @@ export class CommentService {
     );
   }
 
-  public getCommentsByUsername(username: string) : Observable<CommentResponse[]> {
+  public getCommentsByUsername(username: string): Observable<CommentResponse[]> {
     return this.http.get<CommentResponse[]>(
       API_URL + '/comments/users/' + username,
       HTTP_OPTIONS,
@@ -33,17 +33,17 @@ export class CommentService {
     );
   }
 
-  public postComment(recipeId: number, comment: CommentRequest) : Observable<CommentResponse> {
+  public postComment(recipeId: number, comment: CommentRequest): Observable<CommentResponse> {
     return this.http.post<CommentResponse>(
       API_URL + '/comments/recipes/' + recipeId,
-      { comment },
+      comment,
       HTTP_OPTIONS,
     ).pipe(
       parseResponse(CommentResponseSchema),
     );
   }
 
-  public deleteComment(commentId: number) : Observable<MessageResponse> {
+  public deleteComment(commentId: number): Observable<MessageResponse> {
     return this.http.delete<MessageResponse>(
       API_URL + '/comments/' + commentId,
       HTTP_OPTIONS,
@@ -52,7 +52,7 @@ export class CommentService {
     );
   }
 
-  public putComment(commentId: number, comment: CommentRequest) : Observable<CommentResponse> {
+  public putComment(commentId: number, comment: CommentRequest): Observable<CommentResponse> {
     return this.http.put<CommentResponse>(
       API_URL + '/comments/' + commentId,
       { comment },

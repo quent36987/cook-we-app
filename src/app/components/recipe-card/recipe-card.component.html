@@ -2,7 +2,7 @@
   <div *ngIf='recipe' class='card-wrapper'>
 
     <div class='image-container'>
-      <img [src]='recipe.pictures[0].imageUrl' alt='img'>
+      <img [src]='recipe.getPictureUrl()[0]' alt='img'>
     </div>
 
     <div class='content'>
@@ -18,8 +18,8 @@
         </div>
 
         <div class='detail'>
-          <mat-icon>local_dining</mat-icon>
-          <span class='count'>{{recipe.ingredients ? recipe.ingredients.length : '?'}}</span>
+          <mat-icon>restaurant</mat-icon>
+          <span class='count'>{{recipe.type }}</span>
         </div>
 
         <div class='detail'>

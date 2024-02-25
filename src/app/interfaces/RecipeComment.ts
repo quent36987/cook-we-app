@@ -6,12 +6,12 @@ export class RecipeComment {
   public recipeId: number;
   public text: string;
   public user: User;
-  public created: string;
+  public createdAt: string;
 
   constructor(comment : CommentResponse){
     this.id = comment.id;
     this.recipeId = comment.recipeId;
-    this.created = comment.created;
+    this.createdAt = comment.createdAt;
     this.text = comment.text;
     this.user = new User(comment.user);
   }

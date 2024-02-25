@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
 import { Observable } from 'rxjs';
 import { parseResponse } from '@app/_services/parseResponse';
@@ -17,7 +17,7 @@ export class PictureService {
   constructor(private http: HttpClient) {
   }
 
-  public getPictureUrlByRecipeId(id: number) : Observable<RecipePictureResponse>{
+  public getPictureUrlByRecipeId(id: number): Observable<RecipePictureResponse> {
     return this.http.get<RecipePictureResponse>(
       API_URL + '/pictures/recipes/' + id,
       HTTP_OPTIONS,
@@ -26,24 +26,30 @@ export class PictureService {
     );
   }
 
-  public getPictureByFilename(filename: string) : Observable<Blob> {
+  public getPictureByFilename(filename: string): Observable<Blob> {
     return this.http.get<Blob>(
       API_URL + '/pictures/' + filename,
       HTTP_OPTIONS,
     );
   }
 
-  public postPicture(picture: Blob, filename: string) : Observable<RecipePictureResponse> {
+  public postPicture(picture: File, recipeId: number): Observable<RecipePictureResponse> {
+    const formData = new FormData();
+    formData.append('file', picture, picture.name);
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+
     return this.http.post<RecipePictureResponse>(
-      API_URL + '/pictures/' + filename,
-      picture,
-      HTTP_OPTIONS,
+      API_URL + '/pictures/recipes/' + recipeId,
+      formData,
+      { headers },
     ).pipe(
       parseResponse(RecipePictureResponseSchema),
     );
   }
 
-  public deletePicture(filename: string) : Observable<MessageResponse> {
+  public deletePicture(filename: string): Observable<MessageResponse> {
     return this.http.delete<MessageResponse>(
       API_URL + '/pictures/' + filename,
       HTTP_OPTIONS,

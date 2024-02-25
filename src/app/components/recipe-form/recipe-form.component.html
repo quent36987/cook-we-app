@@ -16,20 +16,17 @@
   <div class='flex-row gap-s margin-bottom-s'>
     <div class='app-sub-title'>Photos</div>
     <button mat-mini-fab aria-label='add a pictures' color='primary' class='button-add' type='button'
-            (click)='addPicture()' disabled>
+            (click)='addPicture()'>
       <mat-icon>add</mat-icon>
     </button>
   </div>
 
   <div formArrayName='pictures'>
     <div *ngFor='let picture of pictureForms.controls; let i = index'>
-      <div class='flex-row gap-s' [formGroupName]='i'>
-        <input type='file' accept='image/*' class='input-file' formControlName='url'>
-        <!--               (change)='onFileChange($event, i)'-->
-
-
+      <div class='flex-row gap-s center' [formGroupName]='i'>
+        <input type='file' accept='image/*' class='input-file'
+                (change)="onFileSelected($event,i)" required>
         <div class='example-button-container'>
-          <img [src]='picture' class='img-preview' *ngIf='picture'>
           <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-add'
                   (click)='removePicture(i)'>
             <mat-icon>delete</mat-icon>

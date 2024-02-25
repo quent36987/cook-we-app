@@ -33,6 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/material/autocomplete';
+import { MatDivider } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/mat
     MatAutocompleteTrigger,
     MatOption,
     ReactiveFormsModule,
+    MatDivider,
 
   ],
   providers: [httpInterceptorProviders, provideAnimationsAsync()],

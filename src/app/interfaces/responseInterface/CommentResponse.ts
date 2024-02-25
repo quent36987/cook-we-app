@@ -6,7 +6,7 @@ export const CommentResponseSchema = z.object({
   recipeId: z.number(),
   text: z.string(),
   user: UserResponseSchema,
-  created: z.string(),
+  createdAt: z.string(),
 });
 
 export type CommentResponse = z.infer<typeof CommentResponseSchema>;

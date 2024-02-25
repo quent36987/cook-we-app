@@ -9,9 +9,10 @@ export const RecipeResponseSchema = z.object({
   time: z.number(),
   portions: z.number(),
   season: z.string(),
+  type: z.string(),
   user: UserResponseSchema,
   steps: z.array(RecipeStepResponseSchema),
-  pictures: z.array(RecipePictureResponseSchema).nullable(),
+  pictures: z.array(RecipePictureResponseSchema),
 });
 
 

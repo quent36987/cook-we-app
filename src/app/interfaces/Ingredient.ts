@@ -18,6 +18,14 @@ export class Ingredient {
     return this.quantity + ' ' + this.unit + ' ' + this.name;
   }
 
+  public get roundQuantity(): string {
+    if (this.quantity % 1 === 0) {
+      return this.quantity.toFixed(0);
+    }
+
+    return this.quantity.toFixed(2);
+  }
+
   public toIngredientRequest(): CreateIngredientRequest {
     return {
       name: this.name,
