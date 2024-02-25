@@ -15,7 +15,8 @@
 
   <div class='flex-row gap-s margin-bottom-s'>
     <div class='app-sub-title'>Photos</div>
-    <button mat-mini-fab aria-label='add a pictures' color='primary' class='button-add' type='button' (click)='addPicture()' disabled>
+    <button mat-mini-fab aria-label='add a pictures' color='primary' class='button-add' type='button'
+            (click)='addPicture()' disabled>
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -23,8 +24,8 @@
   <div formArrayName='pictures'>
     <div *ngFor='let picture of pictureForms.controls; let i = index'>
       <div class='flex-row gap-s' [formGroupName]='i'>
-        <input type='file' accept='image/*'  class='input-file' formControlName='url'>
-<!--               (change)='onFileChange($event, i)'-->
+        <input type='file' accept='image/*' class='input-file' formControlName='url'>
+        <!--               (change)='onFileChange($event, i)'-->
 
 
         <div class='example-button-container'>
@@ -41,18 +42,18 @@
 
   <mat-button-toggle-group name='type' aria-label='Type de plat' class='toggles' appearance='legacy'
                            formControlName='type' required>
-    <mat-button-toggle value='ENTRANCE' class='mini-font'>Entrée</mat-button-toggle>
-    <mat-button-toggle value='PLAT' class='mini-font'>Plat</mat-button-toggle>
-    <mat-button-toggle value='DESSERT' class='mini-font'>Dessert</mat-button-toggle>
+    <mat-button-toggle [value]='EType.ENTREE' class='mini-font'>Entrée</mat-button-toggle>
+    <mat-button-toggle [value]='EType.PLAT' class='mini-font'>Plat</mat-button-toggle>
+    <mat-button-toggle [value]='EType.DESSERT' class='mini-font'>Dessert</mat-button-toggle>
   </mat-button-toggle-group>
 
   <mat-button-toggle-group name='season' aria-label='season' class='toggles' appearance='legacy'
                            formControlName='season' required>
-    <mat-button-toggle value='SUMMER' class='mini-font'>Été</mat-button-toggle>
-    <mat-button-toggle value='AUTUMN' class='mini-font'>Automne</mat-button-toggle>
-    <mat-button-toggle value='WINTER' class='mini-font'>Hiver</mat-button-toggle>
-    <mat-button-toggle value='SPRING' class='mini-font'>Printemps</mat-button-toggle>
-    <mat-button-toggle value='ALL' class='mini-font'>Toutes</mat-button-toggle>
+    <mat-button-toggle [value]='ESeason.SUMMER' class='mini-font'>Été</mat-button-toggle>
+    <mat-button-toggle [value]='ESeason.AUTUMN' class='mini-font'>Automne</mat-button-toggle>
+    <mat-button-toggle [value]='ESeason.WINTER' class='mini-font'>Hiver</mat-button-toggle>
+    <mat-button-toggle [value]='ESeason.SPRING' class='mini-font'>Printemps</mat-button-toggle>
+    <mat-button-toggle [value]='ESeason.ALL' class='mini-font'>Toutes</mat-button-toggle>
   </mat-button-toggle-group>
 
   <div class='flex-row gap-s'>
@@ -86,8 +87,8 @@
         <mat-form-field>
           <mat-label class='mini-font'>Unité</mat-label>
           <select matNativeControl required formControlName='unit'>
-            <option *ngFor='let unit of units' [value]='unit'>
-              {{unit}}
+            <option *ngFor='let unit of units' [value]='unit.value'>
+              {{unit.viewValue}}
             </option>
           </select>
         </mat-form-field>

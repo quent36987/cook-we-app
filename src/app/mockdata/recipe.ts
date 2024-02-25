@@ -4,6 +4,7 @@ let recipemodkdata = {
   time: 10,
   portions: 2,
   season: 'SPRING',
+  type: 'PLAT',
   user: {
     username: 'test',
   },

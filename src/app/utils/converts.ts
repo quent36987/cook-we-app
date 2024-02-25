@@ -49,7 +49,7 @@ export function StringToESeason(season: string): ESeason {
     case 'AUTUMN':
       return ESeason.AUTUMN;
     default:
-      return ESeason.UNKNOWN;
+      return ESeason.ALL;
   }
 }
 

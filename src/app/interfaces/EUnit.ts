@@ -1,8 +1,8 @@
 export enum EUnit {
-  GRAM = 'g',
-  MILLILITER = 'ml',
-  TEASPOON = 'petite cuillère',
-  TABLESPOON = 'grande cuillère',
-  CUP = 'tasse',
-  PIECE = '',
+  GRAM = 'GRAM',
+  MILLILITER = 'MILLILITER',
+  TEASPOON = 'TEASPOON',
+  TABLESPOON = 'TABLESPOON',
+  CUP = 'CUP',
+  PIECE = 'PIECE',
 }

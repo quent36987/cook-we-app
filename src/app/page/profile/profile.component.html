@@ -4,20 +4,18 @@
     <div>
       <div class='sub-title'>Mes infos:</div>
       <div class='infos'>
-        <div class='info'>Nom: {{user.username}}</div>
+        <div class='info'>Username: {{user.username}}</div>
         <div class='info'>Email: {{user.email}}</div>
         <div class='info'>Prénom: {{user.firstName}}</div>
         <div class='info'>Nom: {{user.lastName}}</div>
       </div>
     </div>
-
-    <div class='logout'>
-      <div (click)='logout()' class='button' >
-        <mat-icon>logout</mat-icon>
-        <span>Se déconnecter</span>
-      </div>
+  </div>
+  <div class='logout'>
+    <div (click)='logout()' class='button'>
+      <mat-icon>logout</mat-icon>
+      <span>Se déconnecter</span>
     </div>
-
   </div>
   <mat-spinner class='spinner' *ngIf='!user'></mat-spinner>
 </div>

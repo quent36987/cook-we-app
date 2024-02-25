@@ -2,7 +2,7 @@
   <div class='flex-row'>
     <div class='title flex-1'>{{ recipe.name }}</div>
     <mat-icon class='favorite-icon'
-              (click)='toggleFavorite()'>{{ recipe.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+              (click)='toggleFavorite()'>{{ isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
   </div>
 
   <div class='pictures-container'>
@@ -17,7 +17,7 @@
         <mat-icon class='detail-icon'>restaurant</mat-icon>
         <div>Type:</div>
       </div>
-      <div class='detail-value'>{{ recipe.user.username }}</div>
+      <div class='detail-value'>{{ recipe.type }}</div>
     </div>
     <div class='detail-item'>
       <div class='detail-label'>

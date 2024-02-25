@@ -29,15 +29,6 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.user = new UserDetail({
-      username: 'Loading...',
-      email: 'Loading...',
-      firstName: 'Loading...',
-      lastName: 'Loading...',
-    });
-
-    return;
-
     this.userService.getMyDetail().subscribe({
       next: (user: UserDetailResponse) => {
         this.user = new UserDetail(user);

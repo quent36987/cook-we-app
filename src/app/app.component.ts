@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
         this.isLoggedIn = true;
 
         const user = this.storageService.getUser();
-        this.username = user?.username;
 
       },
       error: err => {
@@ -55,7 +54,6 @@ export class AppComponent implements OnInit {
       // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
-      this.username = user?.username;
     }
 
 

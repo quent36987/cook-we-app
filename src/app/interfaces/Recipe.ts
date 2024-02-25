@@ -22,7 +22,6 @@ export class Recipe {
   public pictures: RecipePicture[];
   public ingredients: Ingredient[];
   public comments: RecipeComment[];
-  public isFavorite: boolean = false;
 
   constructor(recipe: RecipeDetailResponse) {
     this.id = recipe.id;
@@ -47,7 +46,7 @@ export class Recipe {
       name: this.name,
       time: this.time,
       portions: this.portions,
-      season: ESeasonToString(this.season),
+      season: this.season,
       type: this.type,
       steps: this.steps.map(s => s.text),
       ingredients: this.ingredients.map(i => i.toIngredientRequest()),

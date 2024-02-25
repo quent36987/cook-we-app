@@ -20,23 +20,22 @@ export class CreateRecipeComponent {
   }
 
   onSubmitted(recipeRequest: RecipeRequest) {
-    console.log('Recipe created', recipeRequest);
-    // this.canSubmit = false;
-    //
-    // this.recipeService.postRecipe(recipeRequest).subscribe({
-    //   next: (data) => {
-    //     this.notificationService.openSnackBarSuccess('Recette créée', 'Close');
-    //
-    //     setTimeout(() => {
-    //       this.router.navigate(['/recipe', data.id]);
-    //     }, 2000);
-    //   },
-    //   error: (error) => {
-    //     console.error('An error occurred', error);
-    //     this.notificationService.openSnackBarError('Erreur lors de la création de la recette', 'Close');
-    //     this.canSubmit = true;
-    //   },
-    // });
+    this.canSubmit = false;
+
+    this.recipeService.postRecipe(recipeRequest).subscribe({
+      next: (data) => {
+        this.notificationService.openSnackBarSuccess('Recette créée', 'Close');
+
+        setTimeout(() => {
+          this.router.navigate(['/recipe', data.id]);
+        }, 2000);
+      },
+      error: (error) => {
+        console.error('An error occurred', error);
+        this.notificationService.openSnackBarError('Erreur lors de la création de la recette', 'Close');
+        this.canSubmit = true;
+      },
+    });
   }
 
 }

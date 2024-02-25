@@ -2,20 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EUnit } from '@interfaces/EUnit';
-import { CreateIngredientRequest } from '@interfaces/requestInterface/CreateIngredientRequest';
 import { ingredientsExemple } from '@app/components/recipe-form/constante';
 import { AuthService } from '@app/_services/api/auth.service';
 import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';
-
-interface formGroup {
-  name: string;
-  time: number;
-  portions: number;
-  season: string;
-  steps: string[];
-  ingredients: CreateIngredientRequest[];
-}
+import { EType } from '@interfaces/EType';
+import { ESeason } from '@interfaces/ESeason';
+import { Recipe } from '@interfaces/Recipe';
 
 @Component({
   selector: 'app-recipe-form',
@@ -23,12 +16,19 @@ interface formGroup {
   styleUrl: './recipe-form.component.css',
 })
 export class RecipeFormComponent implements OnInit {
-  @Input() recipe!: RecipeRequest | null;
+  @Input() recipe!: Recipe | null;
   @Input() canSubmit = true;
 
   @Output() submitForm: EventEmitter<RecipeRequest> = new EventEmitter();
 
-  units: string[] = Object.values(EUnit);
+  units = [
+    { value: EUnit.PIECE, viewValue: 'pièce' },
+    { value: EUnit.GRAM, viewValue: 'g' },
+    { value: EUnit.CUP, viewValue: 'tasse' },
+    { value: EUnit.MILLILITER, viewValue: 'ml' },
+    { value: EUnit.TABLESPOON, viewValue: 'cuillère à soupe' },
+    { value: EUnit.TEASPOON, viewValue: 'cuillère à café' },
+  ];
 
   formGroup: FormGroup;
 
@@ -63,9 +63,6 @@ export class RecipeFormComponent implements OnInit {
     return ingredientsExemple.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  protected readonly EUnit = EUnit;
-
-
   getRecipeRequest(): RecipeRequest {
     const form = this.formGroup.value;
 
@@ -81,10 +78,9 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
-    console.log('submit');
-    console.log(form);
-
-    console.log(form.value);
+    if (!this.formGroup.valid) {
+      this.notificationService.openSnackBarError('Please fill all the required fields', 'Close');
+    }
 
     this.submitForm.emit(this.getRecipeRequest());
   }
@@ -119,7 +115,7 @@ export class RecipeFormComponent implements OnInit {
   addIngredient() {
     const ingredient = this.formBuilder.group({
       quantity: ['', Validators.required],
-      unit: ['', Validators.required],
+      unit: [EUnit.PIECE, Validators.required],
       name: ['', Validators.required],
     });
 
@@ -146,4 +142,7 @@ export class RecipeFormComponent implements OnInit {
     console.log('onFileChange');
     console.log(event);
   }
+
+  protected readonly EType = EType;
+  protected readonly ESeason = ESeason;
 }

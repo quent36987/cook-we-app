@@ -5,7 +5,7 @@ export class User {
   public username: string;
 
   constructor(user: UserResponse) {
-    this.username = user.username;
+    this.username = user.username ?? 'NaN';
   }
 }
 

@@ -11,7 +11,7 @@ export const RecipeResponseSchema = z.object({
   season: z.string(),
   user: UserResponseSchema,
   steps: z.array(RecipeStepResponseSchema),
-  pictures: z.array(RecipePictureResponseSchema),
+  pictures: z.array(RecipePictureResponseSchema).nullable(),
 });
 
 

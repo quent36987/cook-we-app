@@ -10,5 +10,5 @@ export const HTTP_OPTIONS = {
 export const API_URL = 'http://localhost:9001/api';
 
 export const ENVIROMENT = {
-  production: false,
+  production: true,
 }
