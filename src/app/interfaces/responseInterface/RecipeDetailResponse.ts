@@ -11,6 +11,7 @@ export const RecipeDetailResponseSchema = z.object({
   time: z.number(),
   portions: z.number(),
   season: z.string(),
+  type: z.string(),
   createdAt: z.string(),
   user: UserResponseSchema,
   steps: z.array(RecipeStepResponseSchema),

@@ -14,7 +14,8 @@ import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInte
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getMyDetail(): Observable<UserDetailResponse> {
     return this.http.get<UserDetailResponse>(API_URL + '/users/details',
@@ -58,6 +59,15 @@ export class UserService {
       HTTP_OPTIONS,
     ).pipe(
       parseResponse(UserDetailResponseSchema),
+    );
+  }
+
+  getMyFavRecipes(): Observable<RecipeResponse[]> {
+    return this.http.get<RecipeResponse[]>(
+      API_URL + '/users/favorites-recipes',
+      HTTP_OPTIONS,
+    ).pipe(
+      parseResponse(z.array(RecipeResponseSchema)),
     );
   }
 

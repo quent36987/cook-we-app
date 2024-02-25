@@ -8,6 +8,7 @@ import { ESeason } from '@interfaces/ESeason';
 import { RecipeResponse } from '@interfaces/responseInterface/RecipeResponse';
 import { Recipe } from '@interfaces/Recipe';
 import { EUnit } from '@interfaces/EUnit';
+import { EType } from '@interfaces/EType';
 
 //
 // export function RecipePictureResponseToRecipePicture(pictureResponse: RecipePictureResponse): RecipePicture {
@@ -64,6 +65,51 @@ export function ESeasonToString(season: ESeason): string {
       return 'AUTUMN';
     default:
       return '';
+  }
+}
+
+export function EUnitToString(unit: EUnit): string {
+  switch (unit) {
+    case EUnit.GRAM:
+      return 'GRAM';
+    case EUnit.CUP:
+      return 'CUP';
+    case EUnit.MILLILITER:
+      return 'MILLILITER';
+    case EUnit.PIECE:
+      return 'PIECE';
+    case EUnit.TABLESPOON:
+      return 'TABLESPOON';
+    case EUnit.TEASPOON:
+      return 'TEASPOON';
+    default:
+      return '';
+  }
+}
+
+export function ETypeToString(type: EType): string {
+  switch (type) {
+    case EType.ENTREE:
+      return 'ENTREE';
+    case EType.PLAT:
+      return 'PLAT';
+    case EType.DESSERT:
+      return 'DESSERT';
+    default:
+      return '';
+  }
+}
+
+export function StringToEType(type: string): EType {
+  switch (type) {
+    case 'ENTREE':
+      return EType.ENTREE;
+    case 'PLAT':
+      return EType.PLAT;
+    case 'DESSERT':
+      return EType.DESSERT;
+    default:
+      return EType.ENTREE;
   }
 }
 

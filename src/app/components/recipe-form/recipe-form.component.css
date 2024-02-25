@@ -34,3 +34,7 @@ input[type="text"]
 .submit-button {
   margin: var(--spacing-s);
 }
+
+.mat-mdc-form-field{
+  margin-bottom: -1em;
+}

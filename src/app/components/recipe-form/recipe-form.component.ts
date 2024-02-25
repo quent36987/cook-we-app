@@ -45,6 +45,7 @@ export class RecipeFormComponent implements OnInit {
       time: ['', Validators.required],
       ingredients: this.formBuilder.array([]),
       steps: this.formBuilder.array([]),
+      pictures: this.formBuilder.array([]),
     });
   }
 
@@ -72,6 +73,7 @@ export class RecipeFormComponent implements OnInit {
       name: form.name,
       time: form.time,
       portions: form.portions,
+      type: form.type,
       season: form.season,
       steps: form.steps.map((step: { text: string }) => step.text),
       ingredients: form.ingredients,
@@ -122,5 +124,26 @@ export class RecipeFormComponent implements OnInit {
     });
 
     this.ingredientForms.push(ingredient);
+  }
+
+  get pictureForms() {
+    return this.formGroup.get('pictures') as FormArray;
+  }
+
+  removePicture(index: number) {
+    this.pictureForms.removeAt(index);
+  }
+
+  addPicture() {
+    const picture = this.formBuilder.group({
+      url: ['', Validators.required],
+    });
+
+    this.pictureForms.push(picture);
+  }
+
+  onFileChange(event: any) {
+    console.log('onFileChange');
+    console.log(event);
   }
 }

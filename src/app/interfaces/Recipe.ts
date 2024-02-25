@@ -5,8 +5,9 @@ import { Ingredient } from './Ingredient';
 import { RecipeComment } from './RecipeComment';
 import { ESeason } from './ESeason';
 import { RecipeDetailResponse } from '@interfaces/responseInterface/RecipeDetailResponse';
-import { ESeasonToString, StringToESeason } from '@utils/converts';
+import { ESeasonToString, StringToESeason, StringToEType } from '@utils/converts';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
+import { EType } from '@interfaces/EType';
 
 
 export class Recipe {
@@ -15,6 +16,7 @@ export class Recipe {
   public time: number;
   public portions: number;
   public season: ESeason;
+  public type: EType;
   public user: User;
   public steps: RecipeStep[];
   public pictures: RecipePicture[];
@@ -30,6 +32,7 @@ export class Recipe {
     this.ingredients = recipe.ingredients.map(i => new Ingredient(i));
     this.pictures = recipe.pictures.map(p => new RecipePicture(p));
     this.season = StringToESeason(recipe.season);
+    this.type = StringToEType(recipe.type);
     this.time = recipe.time;
     this.portions = recipe.portions;
     this.comments = recipe.comments.map(c => new RecipeComment(c));
@@ -45,6 +48,7 @@ export class Recipe {
       time: this.time,
       portions: this.portions,
       season: ESeasonToString(this.season),
+      type: this.type,
       steps: this.steps.map(s => s.text),
       ingredients: this.ingredients.map(i => i.toIngredientRequest()),
     };

@@ -5,6 +5,7 @@ export interface RecipeRequest {
   time: number;
   portions: number;
   season: string;
+  type: string;
   steps: string[];
   ingredients: CreateIngredientRequest[];
 }
