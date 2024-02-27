@@ -1,5 +1,5 @@
-.form{
-    padding: var(--spacing-s);
+.form {
+  padding: var(--spacing-s);
   overflow-y: auto;
 }
 
@@ -18,14 +18,12 @@
   font-size: 0.8rem;
 }
 
-input[type="text"]
-{
-  font-size:0.7rem
+input[type="text"] {
+  font-size: 0.7rem
 }
 
 
-
-.button-add{
+.button-add {
   height: 2rem;
   width: 2rem;
   font-size: 1rem;
@@ -35,6 +33,10 @@ input[type="text"]
   margin: var(--spacing-s);
 }
 
-.mat-mdc-form-field{
+.mat-mdc-form-field {
   margin-bottom: -1em;
+}
+
+.input-picture {
+  display: none;
 }

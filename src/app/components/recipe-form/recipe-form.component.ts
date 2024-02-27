@@ -8,9 +8,8 @@ import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';
 import { EType } from '@interfaces/EType';
 import { ESeason } from '@interfaces/ESeason';
-import { Recipe } from '@interfaces/Recipe';
-import { Event } from '@angular/router';
 import { RecipeDetail } from '@interfaces/RecipeDetail';
+import { AutoService } from '@app/_services/api/auto.service';
 
 
 export interface EmitRecipeForm extends RecipeRequest {
@@ -28,6 +27,29 @@ export class RecipeFormComponent implements OnInit {
 
   @Output() submitForm: EventEmitter<EmitRecipeForm> = new EventEmitter();
 
+  fileName = '';
+
+  onPictureSelected(event: any) {
+
+    const file: File = event.target.files[0];
+
+    if (file) {
+
+      console.log('file', file);
+
+      this.autoService.generateRecipeWithPicture(file).subscribe({
+        next: (data) => {
+          console.log('picture creatyjyujed', data);
+        },
+        error: (error) => {
+          console.error('An error occurred', error);
+        },
+      });
+
+
+    }
+  }
+
   units = [
     { value: EUnit.PIECE, viewValue: 'pièce' },
     { value: EUnit.GRAM, viewValue: 'g' },
@@ -43,6 +65,7 @@ export class RecipeFormComponent implements OnInit {
               private authService: AuthService,
               private storageService: StorageService,
               private notificationService: NotificationService,
+              private autoService: AutoService,
   ) {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],

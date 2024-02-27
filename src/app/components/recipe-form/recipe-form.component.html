@@ -6,10 +6,14 @@
     </mat-form-field>
 
     <div class='example-button-container'>
-      <button mat-mini-fab aria-label='take a picture of a recipe' color='primary' type='button'
-              (click)='takePicture()'>
-        <mat-icon>camera_alt</mat-icon>
-      </button>
+      <input type='file' accept='image/*' class='input-picture'
+             (change)="onPictureSelected($event)" #fileUpload>
+      <div class="file-upload">
+        <button mat-mini-fab aria-label='take a picture of a recipe' color='primary' type='button'
+                (click)='fileUpload.click()'>
+          <mat-icon>camera_alt</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -25,7 +29,7 @@
     <div *ngFor='let picture of pictureForms.controls; let i = index'>
       <div class='flex-row gap-s center' [formGroupName]='i'>
         <input type='file' accept='image/*' class='input-file'
-                (change)="onFileSelected($event,i)" required>
+               (change)="onFileSelected($event,i)" required>
         <div class='example-button-container'>
           <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-add'
                   (click)='removePicture(i)'>
@@ -85,7 +89,7 @@
           <mat-label class='mini-font'>Unité</mat-label>
           <select matNativeControl required formControlName='unit'>
             <option *ngFor='let unit of units' [value]='unit.value'>
-              {{unit.viewValue}}
+              {{ unit.viewValue }}
             </option>
           </select>
         </mat-form-field>
@@ -101,7 +105,7 @@
           >
           <mat-autocomplete #auto='matAutocomplete'>
             <mat-option *ngFor='let option of _filter(i)' [value]='option' class='mini-font'>
-              {{option}}
+              {{ option }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
