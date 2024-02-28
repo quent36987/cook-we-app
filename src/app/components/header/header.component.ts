@@ -3,52 +3,59 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent {
   isMenuOpen: boolean = false;
   services: any[] = [
     {
-      title: 'Informatique',
-      link: 'vente',
+      title: 'Mon espace',
+      link: 'profile',
       subServices: [
         {
-          title: 'Entretiens de vos équipements',
-          link: 'entretiens'
+          icon: 'home',
+          title: 'Mon profile',
+          link: 'profile',
         },
         {
-          title: "Vente d'équipements",
-          link: 'vente'
+          icon: 'fastfood',
+          title: 'Mes recettes',
+          link: 'my-recipes',
         },
         {
-          title: 'Montage de PC',
-          link: 'vente'
-        }
-      ]
+          icon: 'favorite',
+          title: 'Mes favorites',
+          link: 'favorites',
+        },
+      ],
     },
     {
-      title: 'Impression 3D',
-      link: 'impression3d',
+      title: 'Recettes',
+      link: 'recipes',
       subServices: [
         {
-          title: 'Modélisation Technique',
-          link: 'impression3d#modelisation'
+          icon: 'create',
+          title: 'Créer une recette',
+          link: 'create-recipe',
         },
         {
-          title: 'Impression 3D FDM',
-          link: 'impression3d'
+          icon: 'search',
+          title: 'Trouver une recette',
+          link: 'search-recipe',
         },
-        {
-          title: 'Vente de consommables',
-          link: 'impression3d#consommables'
-        },
-      ]
+      ],
     },
     {
-      title: 'Déplacement à domicile',
-      link: 'domicile',
-      subServices: []
-    }
+      title: 'Mes listes',
+      link: '',
+      subServices: [
+        {
+          icon: 'add',
+          title: 'Créer une liste',
+          link: '',
+        },
+      ],
+    },
   ];
 
   toggleMenu() {
@@ -58,5 +65,10 @@ export class HeaderComponent {
     } else {
       document.body.classList.remove('menu-open');
     }
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+    document.body.classList.remove('menu-open');
   }
 }

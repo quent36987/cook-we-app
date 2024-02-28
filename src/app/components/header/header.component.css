@@ -24,7 +24,41 @@
   display: flex;
   align-content: center;
   justify-content: center;
+
+
 }
+
+
+.link {
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 99.8;
+
+  font-size: 1.5rem;
+  color: var(--color-text);
+  font-weight: 500;
+
+  padding: var(--spacing-s);
+}
+
+.sub-link {
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 99.8;
+
+  font-size: 1rem;
+  color: var(--color-text);
+
+  padding: var(--spacing-s) var(--spacing-m);
+}
+
+.sub-link:hover {
+  background-color: var(--light-gray);
+}
+
 
 /* Styling for menu */
 .nav-menu-content {
@@ -40,6 +74,7 @@
 .menu-list {
   list-style-type: none;
   padding: 0;
+  cursor: pointer;
 }
 
 .menu-list li {
@@ -113,4 +148,14 @@ body.menu-open {
   background: #4075a6;
   height: 100%;
   width: 100%;
+}
+
+.nav-profile {
+  font-size: 2.2rem;
+}
+
+.icon-header {
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }

@@ -34,6 +34,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/material/autocomplete';
 import { MatDivider } from '@angular/material/divider';
+import { MyRecipesComponent } from '@app/page/my-recipes/my-recipes.component';
+import { UpdateRecipeComponent } from '@app/page/update-recipe/update-recipe.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { MatDivider } from '@angular/material/divider';
     ProfileComponent,
     CreateRecipeComponent,
     RecipeFormComponent,
+    MyRecipesComponent,
+    UpdateRecipeComponent,
   ],
   imports: [
     BrowserModule,

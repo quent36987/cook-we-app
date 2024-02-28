@@ -1,0 +1,7 @@
+<div>
+  <div *ngIf='isWaiting' class='flex-row center'>
+    <mat-spinner diameter='30'></mat-spinner>
+  </div>
+
+  <app-recipe-card-list [recipes]="recipes" />
+</div>

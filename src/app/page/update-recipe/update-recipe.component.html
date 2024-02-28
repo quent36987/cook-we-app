@@ -1,0 +1,6 @@
+<div>
+  <div class='app-title'>
+    Mettre à jour une recette
+  </div>
+  <app-recipe-form *ngIf="recipe" [recipe]='recipe' (submitForm)='onSubmitted($event)' [canSubmit]='canSubmit' />
+</div>
