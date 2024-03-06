@@ -9,14 +9,20 @@ import { FavoritesComponent } from '@app/profile/page/favorites/favorites.compon
 import { RouterModule, Routes } from '@angular/router';
 import { RecipeCardListComponent } from '@app/_shared/component/recipe-card-list/recipe-card-list.component';
 
+export const PROFILE_ROUTES = {
+  path: 'profile',
+  recipes: 'recipes',
+  favorites: 'favorites',
+};
+
 const profileRoutes: Routes = [
   {
     path: '',
     component: ProfileComponent,
     children: [
       { path: '', component: ProfilePageComponent },
-      { path: 'recipes', component: MyRecipesComponent },
-      { path: 'favorites', component: FavoritesComponent },
+      { path: PROFILE_ROUTES.recipes, component: MyRecipesComponent },
+      { path: PROFILE_ROUTES.favorites, component: FavoritesComponent },
     ],
   },
 ];

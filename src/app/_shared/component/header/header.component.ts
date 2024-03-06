@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { CommonModule, NgForOf, NgIf } from '@angular/common';
+import { PROFILE_ROUTES } from '@app/profile/profile.module';
+import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
 
 @Component({
   selector: 'app-header',
@@ -19,38 +21,38 @@ export class HeaderComponent {
   services: any[] = [
     {
       title: 'Mon espace',
-      link: 'profile',
+      link: PROFILE_ROUTES.path,
       subServices: [
         {
           icon: 'home',
           title: 'Mon profile',
-          link: 'profile',
+          link: '',
         },
         {
           icon: 'fastfood',
           title: 'Mes recettes',
-          link: 'my-recipes',
+          link: PROFILE_ROUTES.recipes,
         },
         {
           icon: 'favorite',
           title: 'Mes favorites',
-          link: 'favorites',
+          link: PROFILE_ROUTES.favorites,
         },
       ],
     },
     {
       title: 'Recettes',
-      link: 'recipes',
+      link: RECIPE_ROUTES.path,
       subServices: [
         {
           icon: 'create',
           title: 'Créer une recette',
-          link: 'create-recipe',
+          link: RECIPE_ROUTES.create,
         },
         {
           icon: 'search',
           title: 'Trouver une recette',
-          link: 'search-recipe',
+          link: '',
         },
       ],
     },

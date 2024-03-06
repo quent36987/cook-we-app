@@ -16,15 +16,21 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatDivider } from '@angular/material/divider';
 import { RecipeComponent } from '@app/recipe/recipe/recipe.component';
 
+export const RECIPE_ROUTES = {
+  path: 'recipe',
+  create: 'create',
+  update: 'update/:id',
+  detail: ':id',
+};
 
-const recipeRoutes: Routes = [
+export const recipeRoutes: Routes = [
   {
     path: '',
     component: RecipeComponent,
     children: [
-      { path: 'create', component: CreateRecipeComponent },
-      { path: 'update/:id', component: UpdateRecipeComponent },
-      { path: ':id', component: RecipePageComponent },
+      { path: RECIPE_ROUTES.create, component: CreateRecipeComponent },
+      { path: RECIPE_ROUTES.update, component: UpdateRecipeComponent },
+      { path: RECIPE_ROUTES.detail, component: RecipePageComponent },
     ],
   },
 ];

@@ -11,6 +11,13 @@ import { MatIcon } from '@angular/material/icon';
 import { AuthComponent } from '@app/auth/auth/auth.component';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
+import { A } from '@angular/cdk/keycodes';
+
+export const AUTH_ROUTES = {
+  path: 'auth',
+  login: 'login',
+  register: 'register',
+};
 
 
 const authRoutes: Routes = [
@@ -18,9 +25,9 @@ const authRoutes: Routes = [
     path: '',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: '**', redirectTo: 'login' },
+      { path: AUTH_ROUTES.login, component: LoginComponent },
+      { path: AUTH_ROUTES.register, component: RegisterComponent },
+      { path: '**', redirectTo: AUTH_ROUTES.login },
     ],
   },
 ];
