@@ -11,7 +11,8 @@
         <div *ngIf='service.subServices && service.subServices.length'>
           <div *ngFor='let subService of service.subServices' class="sub-link">
             <div [routerLink]='subService.link' class="flex-row alignCenter gap-s">
-              <mat-icon *ngIf="subService.icon" color="primary" class="icon-header">{{ subService.icon ?? '' }}</mat-icon>
+              <mat-icon *ngIf="subService.icon" color="primary" class="icon-header">{{ subService.icon ?? '' }}
+              </mat-icon>
               <div>{{ subService.title }}</div>
             </div>
           </div>

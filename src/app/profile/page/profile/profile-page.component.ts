@@ -24,10 +24,12 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.storageService.isLoggedIn()) {
-      window.location.href = '/login';
-      return;
-    }
+    console.log('init page profile');
+
+    // if (!this.storageService.isLoggedIn()) {
+    //   window.location.href = '/auth/login';
+    //   return;
+    // }
 
     this.userService.getMyDetail().subscribe({
       next: (user: UserDetailResponse) => {

@@ -18,7 +18,7 @@ export class UserService {
   }
 
   getMyDetail(): Observable<UserDetailResponse> {
-    return this.http.get<UserDetailResponse>(API_URL + '/users/details',
+    return this.http.get<UserDetailResponse>(API_URL + '/auth/me',
       HTTP_OPTIONS,
     ).pipe(
       parseResponse(UserDetailResponseSchema),

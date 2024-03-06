@@ -1,9 +1,18 @@
 import { Component } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { CommonModule, NgForOf, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  standalone: true,
   styleUrl: './header.component.css',
+  imports: [
+    MatIcon,
+    RouterLink,
+    CommonModule,
+  ],
 })
 export class HeaderComponent {
   isMenuOpen: boolean = false;

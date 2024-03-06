@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 import { RecipeService } from '@app/_services/api/recipe.service';
 import { NotificationService } from '@app/_services/notification.service';
@@ -11,7 +11,7 @@ import { EmitRecipeForm } from '@app/recipe/component/recipe-form/recipe-form.co
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.css',
 })
-export class CreateRecipeComponent {
+export class CreateRecipeComponent implements OnInit {
 
   canSubmit = true;
 
@@ -20,6 +20,10 @@ export class CreateRecipeComponent {
               private router: Router,
               private pictureService: PictureService,
   ) {
+  }
+
+  ngOnInit() {
+    console.log('init create recipe');
   }
 
   onSubmitted(recipeRequest: EmitRecipeForm) {

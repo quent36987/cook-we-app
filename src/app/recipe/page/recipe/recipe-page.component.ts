@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '@app/_services/api/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '@interfaces/Recipe';
@@ -15,7 +15,7 @@ import { RecipeDetail } from '@interfaces/RecipeDetail';
   templateUrl: './recipe-page.component.html',
   styleUrl: './recipe-page.component.css',
 })
-export class RecipePageComponent {
+export class RecipePageComponent implements OnInit {
   recipeId = this.route.snapshot.params['recipeId'];
   recipeResponse: RecipeDetailResponse | undefined = undefined;
   recipe: RecipeDetail | undefined;
@@ -30,6 +30,12 @@ export class RecipePageComponent {
               private storageService: StorageService,
               private commentService: CommentService,
   ) {
+
+  }
+
+  ngOnInit() {
+    console.log('ici page recipe');
+
     if (!this.recipeId) {
       console.error('No recipe id provided');
       return;

@@ -6,8 +6,8 @@ import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MyRecipesComponent } from '@app/profile/page/my-recipes/my-recipes.component';
 import { FavoritesComponent } from '@app/profile/page/favorites/favorites.component';
-import { RecipeModule } from '@app/recipe/recipe.module';
-import { RouterModule, RouterOutlet, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { RecipeCardListComponent } from '@app/_shared/component/recipe-card-list/recipe-card-list.component';
 
 const profileRoutes: Routes = [
   {
@@ -32,9 +32,8 @@ const profileRoutes: Routes = [
     CommonModule,
     MatIcon,
     MatProgressSpinner,
-    RecipeModule,
-    RouterOutlet,
     RouterModule.forChild(profileRoutes),
+    RecipeCardListComponent,
   ],
 })
 export class ProfileModule {

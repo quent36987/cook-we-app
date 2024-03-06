@@ -24,6 +24,7 @@ export class MyRecipesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('init page my recipê');
     if (!this.storageService.isLoggedIn()) {
       this.notificationService.openSnackBarError('You need to be logged in to view your recipe', 'Close');
 

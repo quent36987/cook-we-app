@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from '@app/shared/page/home/home.component';
+import { HomeComponent } from '@app/_shared/component/home/home.component';
+import { AppComponent } from '@app/app.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },

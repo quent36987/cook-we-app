@@ -1,17 +1,18 @@
-import { ApplicationConfig, importProvidersFrom, Provider } from '@angular/core';
+import { ApplicationConfig, ApplicationModule, importProvidersFrom, Provider } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { SharedModule } from '@app/shared/shared.module';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { credentialInterceptor } from '@app/_helpers/credential.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(SharedModule),
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    // provideHttpClient(withInterceptors([MyInterceptor]))
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([credentialInterceptor])),
   ],
 };

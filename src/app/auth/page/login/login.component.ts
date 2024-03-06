@@ -38,7 +38,7 @@ export class LoginComponent {
           this.notification.openSnackBarSuccess("Connection réussi", "Close");
 
           setTimeout(() => {
-            this._location.back();
+           // this._location.back();
           }, 1000);
         },
         error: err => {

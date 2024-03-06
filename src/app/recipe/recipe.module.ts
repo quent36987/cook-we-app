@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateRecipeComponent } from '@app/recipe/page/create-recipe/create-recipe.component';
 import { UpdateRecipeComponent } from '@app/recipe/page/update-recipe/update-recipe.component';
 import { RecipePageComponent } from '@app/recipe/page/recipe/recipe-page.component';
-import { RecipeCardComponent } from '@app/recipe/component/recipe-card/recipe-card.component';
-import { RecipeCardListComponent } from '@app/recipe/component/recipe-card-list/recipe-card-list.component';
+import { RecipeCardComponent } from '@app/_shared/component/recipe-card/recipe-card.component';
+import { RecipeCardListComponent } from '@app/_shared/component/recipe-card-list/recipe-card-list.component';
 import { RecipeFormComponent } from '@app/recipe/component/recipe-form/recipe-form.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -34,8 +34,6 @@ const recipeRoutes: Routes = [
     RecipePageComponent,
     CreateRecipeComponent,
     UpdateRecipeComponent,
-    RecipeCardComponent,
-    RecipeCardListComponent,
     RecipeFormComponent,
     RecipeComponent,
   ],
@@ -55,9 +53,7 @@ const recipeRoutes: Routes = [
     MatDivider,
     FormsModule,
   ],
-  exports: [
-    RecipeCardListComponent,
-  ],
+  exports: [],
 })
 export class RecipeModule {
 }

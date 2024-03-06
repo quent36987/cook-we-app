@@ -5,6 +5,7 @@ import { RecipeService } from '@app/_services/api/recipe.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  standalone: true,
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
