@@ -1,30 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs';
-import {StorageService} from './_services/storage.service';
-import {EventBusService} from './_shared/event-bus.service';
+import { Subscription } from 'rxjs';
+import { StorageService } from './_services/storage.service';
+import { EventBusService } from './_shared/event-bus.service';
 import { UserDetailResponse } from '@interfaces/responseInterface/UserDetailResponse';
 import { AuthService } from '@app/_services/api/auth.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { NgForOf } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from '@app/auth/page/register/register.component';
+import { SharedModule } from '@app/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
+  imports: [
+    RouterOutlet,
+    NgForOf,
+    HttpClientModule,
+    RouterLink,
+    SharedModule,
+  ],
   selector: 'app-root',
+  standalone: true,
+  styleUrls: ['./app.component.css'],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent { //implements OnInit {
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
-  showModeratorBoard = false;
   username?: string;
   user: UserDetailResponse | undefined;
-  eventBusSub?: Subscription;
-
 
 
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
-    private eventBusService: EventBusService
   ) {
   }
 
@@ -46,7 +57,7 @@ export class AppComponent implements OnInit {
         this.storageService.clean();
 
 
-      }
+      },
     });
 
     if (this.isLoggedIn) {
@@ -66,19 +77,18 @@ export class AppComponent implements OnInit {
   logout()
     :
     void {
-    console.log('logout')
+    console.log('logout');
 
 
     this.authService.logout().subscribe({
       next: res => {
         //this.storageService.clean();
         this.storageService.clean();
-        console.log(res)
+        console.log(res);
         console.log('logout success');
 
 
         //clear cookie
-
 
 
         window.location.href = '/home';
@@ -87,7 +97,7 @@ export class AppComponent implements OnInit {
       error: err => {
         console.log('NOOOOOOOO');
         console.log(err);
-      }
+      },
     });
   }
 }
