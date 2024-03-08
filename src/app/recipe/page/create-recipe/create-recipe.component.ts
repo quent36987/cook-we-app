@@ -5,6 +5,7 @@ import { NotificationService } from '@app/_services/notification.service';
 import { Router } from '@angular/router';
 import { PictureService } from '@app/_services/api/picture.service';
 import { EmitRecipeForm } from '@app/recipe/component/recipe-form/recipe-form.component';
+import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
 
 @Component({
   selector: 'app-create-recipe',
@@ -46,7 +47,7 @@ export class CreateRecipeComponent implements OnInit {
         }
 
         setTimeout(() => {
-          this.router.navigate(['/recipe', data.id]);
+          this.router.navigate(['/', RECIPE_ROUTES.path, data.id]);
         }, 2000);
       },
       error: (error) => {

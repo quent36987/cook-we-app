@@ -10,6 +10,8 @@ import { EType } from '@interfaces/EType';
 import { ESeason } from '@interfaces/ESeason';
 import { RecipeDetail } from '@interfaces/RecipeDetail';
 import { AutoService } from '@app/_services/api/auto.service';
+import { RecipeStep } from '@interfaces/RecipeStep';
+import { Ingredient } from '@interfaces/Ingredient';
 
 
 export interface EmitRecipeForm extends RecipeRequest {
@@ -24,6 +26,7 @@ export interface EmitRecipeForm extends RecipeRequest {
 export class RecipeFormComponent implements OnInit {
   @Input() recipe!: RecipeDetail | null;
   @Input() canSubmit = true;
+  @Input() buttonSubmitText = 'Ajouter';
 
   @Output() submitForm: EventEmitter<EmitRecipeForm> = new EventEmitter();
 
@@ -84,6 +87,24 @@ export class RecipeFormComponent implements OnInit {
       this.notificationService.openSnackBarError('You need to be logged in to create a recipe', 'Close');
       return;
     }
+
+    if (this.recipe) {
+      this.formGroup.patchValue({
+        name: this.recipe.name,
+        type: this.recipe.type,
+        season: this.recipe.season,
+        portions: this.recipe.portions,
+        time: this.recipe.time,
+      });
+
+      this.recipe.steps.forEach((step) => {
+        this.addStep(step);
+      });
+
+      this.recipe.ingredients.forEach((ingredient) => {
+        this.addIngredient(ingredient);
+      });
+    }
   }
 
   public _filter(index: number): string[] {
@@ -120,9 +141,9 @@ export class RecipeFormComponent implements OnInit {
     return this.formGroup.get('steps') as FormArray;
   }
 
-  addStep() {
+  addStep(stepRecipe: RecipeStep | null = null) {
     const step = this.formBuilder.group({
-      text: ['', Validators.required],
+      text: [stepRecipe?.text ?? '', Validators.required],
     });
     this.stepForms.push(step);
   }
@@ -144,19 +165,18 @@ export class RecipeFormComponent implements OnInit {
   }
 
 
-  addIngredient() {
-    const ingredient = this.formBuilder.group({
-      quantity: ['', Validators.required],
-      unit: [EUnit.PIECE, Validators.required],
-      name: ['', Validators.required],
-    });
-
-    this.ingredientForms.push(ingredient);
+  addIngredient(ingredient: Ingredient | null = null) {
+    this.ingredientForms.push(this.formBuilder.group({
+      quantity: [ingredient?.quantity ?? '', Validators.required],
+      unit: [ingredient?.unit ?? EUnit.PIECE, Validators.required],
+      name: [ingredient?.name ?? '', Validators.required],
+    }));
   }
 
   get pictureForms() {
     return this.formGroup.get('pictures') as FormArray;
   }
+
 
   removePicture(index: number) {
     this.pictureForms.removeAt(index);
@@ -175,6 +195,11 @@ export class RecipeFormComponent implements OnInit {
     console.log(event);
   }
 
+  getImageUrl(index: number): string {
+    const formGroup = this.pictureForms.at(index);
+    const file = formGroup.get('file')?.value as File ?? null;
+    return file ? URL.createObjectURL(file) : '';
+  }
 
   onFileSelected(event: any, i: number): void {
     this.pictureForms.at(i).setValue({ file: event.target.files[0] as File });

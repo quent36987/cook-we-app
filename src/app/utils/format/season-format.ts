@@ -2,11 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ESeason } from '@interfaces/ESeason';
 
 const type = {
-  [ESeason.SPRING]: 'printemps',
-  [ESeason.SUMMER]: 'été',
-  [ESeason.WINTER]: 'hiver',
-  [ESeason.AUTUMN]: 'automne',
-  [ESeason.ALL]: 'toutes',
+  [ESeason.SPRING]: 'Printemps',
+  [ESeason.SUMMER]: 'Eté',
+  [ESeason.WINTER]: 'Hiver',
+  [ESeason.AUTUMN]: 'Automne',
+  [ESeason.ALL]: 'Toutes',
 };
 
 @Pipe({ standalone: true, name: 'seasonFormat' })

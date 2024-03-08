@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PictureService } from '@app/_services/api/picture.service';
 import { EmitRecipeForm } from '@app/recipe/component/recipe-form/recipe-form.component';
 import { RecipeDetail } from '@interfaces/RecipeDetail';
+import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
 
 @Component({
   selector: 'app-update-recipe',
@@ -58,7 +59,7 @@ export class UpdateRecipeComponent implements OnInit {
         // }
 
         setTimeout(() => {
-          this.router.navigate(['/recipe', data.id]);
+          this.router.navigate(['/', RECIPE_ROUTES.path, data.id]);
         }, 1500);
       },
       error: (error) => {

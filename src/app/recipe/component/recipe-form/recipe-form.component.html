@@ -7,8 +7,8 @@
 
     <div class='example-button-container'>
       <input type='file' accept='image/*' class='input-picture'
-             (change)="onPictureSelected($event)" #fileUpload>
-      <div class="file-upload">
+             (change)='onPictureSelected($event)' #fileUpload>
+      <div class='file-upload'>
         <button mat-mini-fab aria-label='take a picture of a recipe' color='primary' type='button'
                 (click)='fileUpload.click()'>
           <mat-icon>camera_alt</mat-icon>
@@ -19,7 +19,7 @@
 
   <div class='flex-row gap-s margin-bottom-s'>
     <div class='app-sub-title'>Photos</div>
-    <button mat-mini-fab aria-label='add a pictures' color='primary' class='button-add' type='button'
+    <button mat-mini-fab aria-label='add a pictures' color='primary' class='button-style' type='button'
             (click)='addPicture()'>
       <mat-icon>add</mat-icon>
     </button>
@@ -28,10 +28,17 @@
   <div formArrayName='pictures'>
     <div *ngFor='let picture of pictureForms.controls; let i = index'>
       <div class='flex-row gap-s center' [formGroupName]='i'>
-        <input type='file' accept='image/*' class='input-file'
-               (change)="onFileSelected($event,i)" required>
+        <input type='file' accept='image/*' class='input-picture'
+               (change)='onFileSelected($event,i)' required #pictureUpload>
+        <button mat-mini-fab aria-label='take a picture of a recipe' color='primary' type='button' class='button-style'
+                (click)='pictureUpload.click()'>
+          <mat-icon>camera_alt</mat-icon>
+        </button>
+        <div>
+          <img [src]='getImageUrl(i)' alt='' height='50px' width='50px'>
+        </div>
         <div class='example-button-container'>
-          <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-add'
+          <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-style'
                   (click)='removePicture(i)'>
             <mat-icon>delete</mat-icon>
           </button>
@@ -71,7 +78,7 @@
 
   <div class='flex-row gap-s margin-bottom-s'>
     <div class='app-sub-title'>Ingrédients</div>
-    <button mat-mini-fab aria-label='add an ingredient' color='primary' class='button-add' type='button'
+    <button mat-mini-fab aria-label='add an ingredient' color='primary' class='button-style' type='button'
             (click)='addIngredient()'>
       <mat-icon>add</mat-icon>
     </button>
@@ -111,7 +118,7 @@
         </mat-form-field>
 
         <div class='example-button-container'>
-          <button mat-mini-fab aria-label='suprimer' color='primary' class='button-add' type='button'
+          <button mat-mini-fab aria-label='suprimer' color='primary' class='button-style' type='button'
                   (click)='removeIngredient(i)'>
             <mat-icon>delete</mat-icon>
           </button>
@@ -122,7 +129,7 @@
 
   <div class='flex-row gap-s margin-bottom-s'>
     <div class='app-sub-title'>Etapes</div>
-    <button mat-mini-fab aria-label='add an ingredient' color='primary' class='button-add' type='button'
+    <button mat-mini-fab aria-label='add an ingredient' color='primary' class='button-style' type='button'
             (click)='addStep()'>
       <mat-icon>add</mat-icon>
     </button>
@@ -139,7 +146,7 @@
           </textarea>
         </mat-form-field>
         <div class='example-button-container'>
-          <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-add'
+          <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-style'
                   (click)='removeStep(i)'>
             <mat-icon>delete</mat-icon>
           </button>
@@ -150,7 +157,7 @@
 
   <div class='submit-button'>
     <button mat-raised-button color='primary' type='submit' disabled='{{!canSubmit}}'>
-      Ajouter
+      {{ buttonSubmitText }}
     </button>
   </div>
 

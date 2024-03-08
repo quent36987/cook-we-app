@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { EType } from '@interfaces/EType';
 
 const type = {
-  [EType.DESSERT]: 'dessert',
-  [EType.PLAT]: 'plat',
-  [EType.ENTREE]: 'entrée',
+  [EType.DESSERT]: 'Dessert',
+  [EType.PLAT]: 'Plat',
+  [EType.ENTREE]: 'Entrée',
 };
 
 @Pipe({ standalone: true, name: 'typeFormat' })

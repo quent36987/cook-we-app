@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateRecipeComponent } from '@app/recipe/page/create-recipe/create-recipe.component';
 import { UpdateRecipeComponent } from '@app/recipe/page/update-recipe/update-recipe.component';
@@ -69,6 +69,7 @@ export const recipeRoutes: Routes = [
     TypeFormat,
     SeasonFormat,
     UnitFormat,
+    NgOptimizedImage,
   ],
   exports: [],
 })

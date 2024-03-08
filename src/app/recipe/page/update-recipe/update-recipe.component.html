@@ -4,9 +4,10 @@
   </div>
 
   <app-recipe-form
-    *ngIf="recipe"
+    *ngIf='recipe'
     [recipe]='recipe'
     (submitForm)='onSubmitted($event)'
     [canSubmit]='canSubmit'
+    buttonSubmitText='Enregistrer'
   />
 </div>
