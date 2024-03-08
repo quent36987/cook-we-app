@@ -1,53 +1,62 @@
-import { Inject, Injectable, InjectionToken, makeStateKey, TransferState } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { UserResponse } from '@interfaces/responseInterface/UserResponse';
-
-const USER_KEY = 'auth-user';
-
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  constructor(private transferState: TransferState) {
+
+  constructor(private router: Router,
+              private actvRoute: ActivatedRoute,
+              @Inject(PLATFORM_ID) private platformId: Object) {
   }
 
-  getItem(key: string): any {
-    const stateKey = makeStateKey(key);
-    return this.transferState.get(stateKey, null);
-  }
-
-  // Méthode pour stocker une paire clé-valeur dans le TransferState
-  setItem(key: string, value: any): void {
-    const stateKey = makeStateKey(key);
-    this.transferState.set(stateKey, value);
-  }
-
-  // Méthode pour supprimer une clé du TransferState
-  removeItem(key: string): void {
-    const stateKey = makeStateKey(key);
-    this.transferState.remove(stateKey);
-  }
-
-  clean(): void {
-    this.removeItem(USER_KEY);
-  }
-
-  public saveUser(user: UserResponse): void {
-    this.removeItem(USER_KEY);
-    this.setItem(USER_KEY, JSON.stringify(user));
-  }
-
-  public getUser(): UserResponse | null {
-    const user = this.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+  public saveData(key: string, value: string) {
+    if (isPlatformBrowser(this.platformId))//<== means you are client side
+    {
+      localStorage.setItem(key, value);
     }
+  }
 
+  public getData(key: string) {
+    if (isPlatformBrowser(this.platformId))//<== means you are client side
+    {
+      return localStorage.getItem(key);
+    }
     return null;
   }
 
+  public removeData(key: string) {
+    if (isPlatformBrowser(this.platformId))//<== means you are client side
+    {
+      localStorage.removeItem(key);
+    }
+  }
+
+  public clearData() {
+    if (isPlatformBrowser(this.platformId))//<== means you are client side
+    {
+      localStorage.clear();
+    }
+  }
+
+  public saveUser(user: UserResponse) {
+    this.removeData('user');
+    this.saveData('user', JSON.stringify(user));
+    this.saveData('username', user.username ?? 'anonymous');
+  }
+
+  public getUsername(): Observable<string> {
+    console.log('ici', this.getData('username'));
+    return of(this.getData('username') ?? 'anonymous');
+  }
+
   public isLoggedIn(): boolean {
-    let user = this.getItem(USER_KEY);
+    let user = this.getData('user');
 
     if (user) {
       return true;
@@ -55,4 +64,5 @@ export class StorageService {
 
     return false;
   }
+
 }

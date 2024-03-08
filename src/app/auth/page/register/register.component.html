@@ -6,16 +6,21 @@
     <mat-card-content>
       <form #registerForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
         <mat-form-field class="width-100">
-          <input matInput placeholder="Nom d'utilisateur" name="username"  [(ngModel)]="form.username" required>
+          <input matInput placeholder="Nom d'utilisateur" name="username" [(ngModel)]="form.username" required>
         </mat-form-field>
         <mat-form-field class="width-100">
-          <input matInput  [type]="!showPassword ? 'password' : 'text'" placeholder="Mot de passe" name="password" [(ngModel)]="form.password" required autocomplete="on"/>
-          <mat-icon matSuffix (click)="showPassword = !showPassword">{{!showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <input matInput [type]="!showPassword ? 'password' : 'text'" placeholder="Mot de passe" name="password"
+                 [(ngModel)]="form.password" required autocomplete="on" />
+          <mat-icon matSuffix
+                    (click)="showPassword = !showPassword">{{ !showPassword ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
         </mat-form-field>
         <mat-form-field class="width-100">
           <input matInput type="email" placeholder="Email" name="email" [(ngModel)]="form.email" required>
         </mat-form-field>
-        <button *ngIf='!isWaiting' mat-raised-button color="primary" type="submit" class="width-100" [disabled]="!registerForm.valid">Créer son compte</button>
+        <button *ngIf='!isWaiting' mat-raised-button color="primary" type="submit" class="width-100"
+                [disabled]="!registerForm.valid">Créer son compte
+        </button>
         <div *ngIf='isWaiting' class='flex-row center'>
           <mat-spinner diameter='30'></mat-spinner>
         </div>
@@ -23,7 +28,8 @@
       </form>
     </mat-card-content>
     <mat-card-footer>
-      <p class="already-have-account">Déjà un compte ? <a routerLink="/login">Connecte-toi</a></p>
+      <p class="already-have-account">Déjà un compte ? <a [routerLink]="['/',AUTH_ROUTES.path,AUTH_ROUTES.login]">Connecte-toi</a>
+      </p>
     </mat-card-footer>
   </mat-card>
 </div>

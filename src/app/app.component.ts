@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StorageService } from './_services/storage.service';
 import { UserDetailResponse } from '@interfaces/responseInterface/UserDetailResponse';
 import { AuthService } from '@app/_services/api/auth.service';
@@ -21,58 +21,29 @@ import { HeaderComponent } from '@app/_shared/component/header/header.component'
   styleUrls: ['./app.component.css'],
   templateUrl: './app.component.html',
 })
-export class AppComponent { //implements OnInit {
-  // private roles: string[] = [];
-  // isLoggedIn = false;
-  // showAdminBoard = false;
-  // username?: string;
-  // user: UserDetailResponse | undefined;
-  //
-  //
-  // constructor(
-  //   private storageService: StorageService,
-  //   private authService: AuthService,
-  // ) {
-  // }
-  //
-  // ngOnInit(): void {
-  //   this.isLoggedIn = this.storageService.isLoggedIn();
-  //
-  //
-  //   this.authService.me().subscribe({
-  //     next: data => {
-  //       console.log('ici hello', data);
-  //       this.storageService.saveUser(data);
-  //       this.isLoggedIn = true;
-  //
-  //       const user = this.storageService.getUser();
-  //
-  //     },
-  //     error: err => {
-  //       console.log('ici error', err);
-  //       this.storageService.clean();
-  //
-  //
-  //     },
-  //   });
-  //
-  //   if (this.isLoggedIn) {
-  //     const user = this.storageService.getUser();
-  //     // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-  //     // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-  //
-  //   }
-  //
-  //
-  //   this.showAdminBoard = true;
-  //   /*this.eventBusSub = this.eventBusService.on('logout', () => {
-  //     this.logout();
-  //   });*/
-  // }
-  //
-  // logout()
-  //   :
-  //   void {
+export class AppComponent implements OnInit {
+
+  constructor(
+    private storageService: StorageService,
+    private authService: AuthService,
+  ) {
+  }
+
+  ngOnInit(): void {
+
+    this.authService.me().subscribe({
+      next: data => {
+        console.log('ici hello', data);
+        this.storageService.saveUser(data);
+      },
+      error: err => {
+        console.log('ici error', err);
+        this.storageService.clearData();
+      },
+    });
+  }
+
+  // logout(): void {
   //   console.log('logout');
   //
   //
@@ -95,6 +66,6 @@ export class AppComponent { //implements OnInit {
   //       console.log(err);
   //     },
   //   });
-  // }
+
 }
 

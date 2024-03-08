@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Recipe } from '@interfaces/Recipe';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule, NgIf, NgOptimizedImage } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { TimeFormat } from '@utils/format/time-format';
+import { TypeFormat } from '@utils/format/type-format';
 
 @Component({
   selector: 'app-recipe-card',
@@ -12,6 +14,9 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     CommonModule,
     MatIcon,
     MatProgressBar,
+    NgOptimizedImage,
+    TimeFormat,
+    TypeFormat,
   ],
   styleUrl: './recipe-card.component.css',
 })

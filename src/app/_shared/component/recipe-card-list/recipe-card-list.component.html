@@ -1,5 +1,4 @@
 <div class='recipes-list'>
-  <div [routerLink]="['/recipe', recipe.id]" *ngFor='let recipe of recipes'>
-    <app-recipe-card [recipe]='recipe'></app-recipe-card>
-  </div>
+  <app-recipe-card [recipe]='recipe' [routerLink]="['/recipe', recipe.id]"
+                   *ngFor='let recipe of recipes'></app-recipe-card>
 </div>

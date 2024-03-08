@@ -15,15 +15,11 @@ export class Recipe {
   public portions: number;
   public season: ESeason;
   public type: EType;
-  public user: User;
-  public steps: RecipeStep[];
   public pictures: RecipePicture[];
 
   constructor(recipe: RecipeResponse) {
     this.id = recipe.id;
     this.name = recipe.name;
-    this.steps = recipe.steps.map(s => new RecipeStep(s));
-    this.user = new User(recipe.user);
     this.pictures = recipe.pictures.map(p => new RecipePicture(p));
     this.season = StringToESeason(recipe.season);
     this.type = StringToEType(recipe.type);

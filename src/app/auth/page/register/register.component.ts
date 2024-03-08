@@ -3,6 +3,8 @@ import { AuthService } from '@app/_services/api/auth.service';
 import { SignupRequest } from '@interfaces/requestInterface/SignupRequest';
 import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';
+import { AUTH_ROUTES } from '@app/auth/auth.module';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +22,13 @@ export class RegisterComponent {
   isWaiting = false;
   showPassword: boolean = false;
 
-  constructor(private authService: AuthService, private notification: NotificationService, private storageService: StorageService) { }
+  constructor(
+    private authService: AuthService,
+    private notification: NotificationService,
+    private storageService: StorageService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
 
   onSubmit(): void {
     this.isWaiting = true;
@@ -32,8 +40,9 @@ export class RegisterComponent {
         this.notification.openSnackBarSuccess("Compte créé avec succès", "Close");
 
         setTimeout(() => {
-          window.location.href = "/home";
-        }, 1000);
+          const returnUrl = this.route.snapshot.queryParams['redirectUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+        }, 400);
 
         this.form = {
           username: "",
@@ -47,4 +56,6 @@ export class RegisterComponent {
       }
     });
   }
+
+  protected readonly AUTH_ROUTES = AUTH_ROUTES;
 }

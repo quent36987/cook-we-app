@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { CommonModule, NgForOf, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { PROFILE_ROUTES } from '@app/profile/profile.module';
 import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
 
@@ -26,28 +26,28 @@ export class HeaderComponent {
         {
           icon: 'home',
           title: 'Mon profile',
-          link: '',
+          link: PROFILE_ROUTES.path,
         },
         {
           icon: 'fastfood',
           title: 'Mes recettes',
-          link: PROFILE_ROUTES.recipes,
+          link: `${PROFILE_ROUTES.path}/${PROFILE_ROUTES.recipes}`,
         },
         {
           icon: 'favorite',
           title: 'Mes favorites',
-          link: PROFILE_ROUTES.favorites,
+          link: `${PROFILE_ROUTES.path}/${PROFILE_ROUTES.favorites}`,
         },
       ],
     },
     {
       title: 'Recettes',
-      link: RECIPE_ROUTES.path,
+      link: '',
       subServices: [
         {
           icon: 'create',
           title: 'Créer une recette',
-          link: RECIPE_ROUTES.create,
+          link: `${RECIPE_ROUTES.path}/${RECIPE_ROUTES.create}`,
         },
         {
           icon: 'search',
@@ -82,4 +82,6 @@ export class HeaderComponent {
     this.isMenuOpen = false;
     document.body.classList.remove('menu-open');
   }
+
+  protected readonly PROFILE_ROUTES = PROFILE_ROUTES;
 }

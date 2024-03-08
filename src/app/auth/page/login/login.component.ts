@@ -1,19 +1,20 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@app/_services/api/auth.service';
 import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';
 import { LoginRequest } from '@interfaces/requestInterface/LoginRequest';
-import {Location} from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AUTH_ROUTES } from '@app/auth/auth.module';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   form: LoginRequest = {
-    username: "",
-    password: ""
+    username: '',
+    password: '',
   };
 
   isWaiting = false;
@@ -23,7 +24,8 @@ export class LoginComponent {
     private authService: AuthService,
     private storageService: StorageService,
     private notification: NotificationService,
-    private _location: Location,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
   }
 
@@ -35,17 +37,35 @@ export class LoginComponent {
         next: data => {
           this.storageService.saveUser(data);
           this.isWaiting = false;
-          this.notification.openSnackBarSuccess("Connection réussi", "Close");
+          this.notification.openSnackBarSuccess('Connection réussi', 'Close');
 
           setTimeout(() => {
-           // this._location.back();
-          }, 1000);
+            const returnUrl = this.route.snapshot.queryParams['redirectUrl'] || '/';
+            this.router.navigateByUrl(returnUrl);
+          }, 400);
         },
         error: err => {
           this.isWaiting = false;
-          this.notification.openSnackBarError(err.error, "Close");
+          this.notification.openSnackBarError(err.error, 'Close');
         },
       },
     );
   }
+
+  goToRegister() {
+    const returnUrl = this.route.snapshot.queryParams['redirectUrl'];
+
+    console.log('retuen url', returnUrl);
+    if (returnUrl) {
+      this.router.navigateByUrl(this.router.createUrlTree(['/auth/register'], {
+        queryParams: {
+          redirectUrl: returnUrl,
+        },
+      }));
+      return;
+    }
+
+    this.router.navigateByUrl(this.router.createUrlTree(['/auth/register']));
+  }
+
 }

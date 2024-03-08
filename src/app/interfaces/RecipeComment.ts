@@ -5,7 +5,7 @@ export class RecipeComment {
   public id: number;
   public recipeId: number;
   public text: string;
-  public user: User;
+  public ownerUsername: string;
   public createdAt: string;
 
   constructor(comment : CommentResponse){
@@ -13,7 +13,7 @@ export class RecipeComment {
     this.recipeId = comment.recipeId;
     this.createdAt = comment.createdAt;
     this.text = comment.text;
-    this.user = new User(comment.user);
+    this.ownerUsername = comment.ownerUsername
   }
 
 }

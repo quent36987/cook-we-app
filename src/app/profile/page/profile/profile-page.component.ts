@@ -5,6 +5,8 @@ import { AuthService } from '@app/_services/api/auth.service';
 import { UserDetailResponse } from '@interfaces/responseInterface/UserDetailResponse';
 import { User, UserDetail } from '@interfaces/User';
 import { NotificationService } from '@app/_services/notification.service';
+import { AUTH_ROUTES } from '@app/auth/auth.module';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -19,17 +21,13 @@ export class ProfilePageComponent implements OnInit {
               private userService: UserService,
               private authService: AuthService,
               private notificationService: NotificationService,
+              private location: Location,
   ) {
 
   }
 
   ngOnInit(): void {
     console.log('init page profile');
-
-    // if (!this.storageService.isLoggedIn()) {
-    //   window.location.href = '/auth/login';
-    //   return;
-    // }
 
     this.userService.getMyDetail().subscribe({
       next: (user: UserDetailResponse) => {
@@ -43,7 +41,7 @@ export class ProfilePageComponent implements OnInit {
 
   logout(): void {
     this.authService.logout().subscribe();
-    this.storageService.clean();
-    window.location.href = '/login';
+    this.storageService.clearData();
+    this.location.go(`/${AUTH_ROUTES.path}/${AUTH_ROUTES.login}`);
   }
 }

@@ -13,7 +13,7 @@ import { RecipeDetail } from '@interfaces/RecipeDetail';
 })
 export class UpdateRecipeComponent implements OnInit {
 
-  recipeId = this.route.snapshot.params['recipeId'];
+  recipeId = this.route.snapshot.params['id'];
   canSubmit = true;
   recipe!: RecipeDetail;
 

@@ -144,5 +144,9 @@
   margin-bottom: var(--spacing-s);
 }
 
+.margin-right-s{
+  margin-right: var(--spacing-s);
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

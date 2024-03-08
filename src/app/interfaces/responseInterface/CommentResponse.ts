@@ -5,7 +5,7 @@ export const CommentResponseSchema = z.object({
   id: z.number(),
   recipeId: z.number(),
   text: z.string(),
-  user: UserResponseSchema,
+  ownerUsername: z.string(),
   createdAt: z.string(),
 });
 

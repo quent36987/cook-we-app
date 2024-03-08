@@ -1,8 +1,16 @@
 <div *ngIf='recipe' class='recipe-container'>
   <div class='flex-row'>
     <div class='title flex-1'>{{ recipe.name }}</div>
+
+    <mat-icon *ngIf="$isMine | async" class='favorite-icon margin-right-s'
+              [routerLink]="['/',RECIPE_ROUTES.path,RECIPE_ROUTES.update,recipe.id]">edit
+    </mat-icon>
+
     <mat-icon class='favorite-icon'
-              (click)='toggleFavorite()'>{{ isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+              (click)='toggleFavorite()'>{{ isFavorite ? 'favorite' : 'favorite_border' }}
+    </mat-icon>
+
+
   </div>
 
   <div class='pictures-container'>
@@ -17,7 +25,7 @@
         <mat-icon class='detail-icon'>restaurant</mat-icon>
         <div>Type:</div>
       </div>
-      <div class='detail-value'>{{ recipe.type }}</div>
+      <div class='detail-value'>{{ recipe.type | typeFormat }}</div>
     </div>
     <div class='detail-item'>
       <div class='detail-label'>
@@ -26,7 +34,7 @@
         </mat-icon>
         Temps:
       </div>
-      <div class='detail-value'>{{ recipe.time }} minutes</div>
+      <div class='detail-value'>{{ recipe.time | timeFormat }}</div>
     </div>
     <div class='detail-item'>
       <div class='detail-label'>
@@ -35,7 +43,7 @@
         </mat-icon>
         Saison:
       </div>
-      <div class='detail-value'>{{ recipe.season }}</div>
+      <div class='detail-value'>{{ recipe.season | seasonFormat }}</div>
     </div>
   </div>
 
@@ -60,7 +68,7 @@
     <ul>
       <li
         *ngFor='let ingredient of recipe.getIngredientsForPortion(portions)'>
-        {{ ingredient.roundQuantity }} {{ ingredient.unit }} {{ ingredient.name }}
+        {{ ingredient.quantity | unitFormat : ingredient.unit }} {{ ingredient.name }}
       </li>
     </ul>
   </div>
@@ -73,7 +81,7 @@
   </div>
 
   <div class='recipe-author'>
-    Recette proposée par <strong>{{ recipe.user.username }} </strong>
+    Recette proposée par <strong>{{ recipe.ownerUsername }} </strong>
   </div>
 
   <mat-divider />
@@ -87,7 +95,7 @@
       <button mat-raised-button color='primary' (click)='addComment()'>Ajouter</button>
     </div>
     <div *ngFor='let comment of recipe.comments' class='comment'>
-      <div class='comment-author'>{{ comment.user.username }}</div>
+      <div class='comment-author'>{{ comment.ownerUsername }}</div>
       <div class='comment-text'>{{ comment.text }}</div>
       <div class='comment-date'>{{ comment.createdAt | date: 'dd/MM/yyyy' }}</div>
     </div>

@@ -9,6 +9,10 @@ import { NotificationService } from '@app/_services/notification.service';
 import { StorageService } from '@app/_services/storage.service';
 import { CommentService } from '@app/_services/api/comment.service';
 import { RecipeDetail } from '@interfaces/RecipeDetail';
+import { BehaviorSubject, combineLatest, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
+import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
 
 @Component({
   selector: 'app-page-recipe',
@@ -16,12 +20,12 @@ import { RecipeDetail } from '@interfaces/RecipeDetail';
   styleUrl: './recipe-page.component.css',
 })
 export class RecipePageComponent implements OnInit {
-  recipeId = this.route.snapshot.params['recipeId'];
-  recipeResponse: RecipeDetailResponse | undefined = undefined;
+  recipeId = this.route.snapshot.params['id'];
   recipe: RecipeDetail | undefined;
   portions = 0;
   isFavorite = false;
   newComment = '';
+  $isMine = new BehaviorSubject<boolean>(false);
 
   constructor(private route: ActivatedRoute,
               private recipeService: RecipeService,
@@ -41,23 +45,44 @@ export class RecipePageComponent implements OnInit {
       return;
     }
 
-    this.recipeService
-      .getRecipeById(this.recipeId)
-      .subscribe((recipeResponse) => {
+    // Observable to get recipe details
+    const recipeObservable = this.recipeService.getRecipeById(this.recipeId).pipe(
+      map((recipeResponse) => {
         this.recipe = new RecipeDetail((recipeResponse));
         this.portions = this.recipe.portions;
-      });
+      })
+    );
 
-    if (this.storageService.isLoggedIn()) {
-      this.userService.getMyFavRecipes().subscribe({
-        next: data => {
-          this.isFavorite = data.some((fav) => fav.id == this.recipeId);
-        },
-        error: err => {
-          console.error('Error while fetching favorites', err);
-        },
-      });
-    }
+    // Observable to check if recipe is favorite
+    const favoriteObservable = this.storageService.isLoggedIn() ?
+      this.userService.getMyFavRecipes().pipe(
+        map(data => data.some((fav) => fav.id == this.recipeId))
+      ) :
+      of(false);
+
+    const isMineObservable = combineLatest([
+      this.storageService.getUsername(),
+      recipeObservable.pipe(map(() => this.recipe?.ownerUsername))
+    ]).pipe(
+      map(([username, ownerUsername]) =>
+      {
+        console.log('u',username,ownerUsername);
+       return username == ownerUsername
+      }
+
+      )
+    );
+
+    // Subscribe to combined observables to update isMine
+    combineLatest([
+      favoriteObservable,
+      isMineObservable
+    ]).subscribe(([isFavorite, isMine]) => {
+      this.isFavorite = isFavorite;
+      this.$isMine.next(isMine);
+      console.log('ismine',isMine);
+    });
+
   }
 
   getPictures() {
@@ -122,4 +147,5 @@ export class RecipePageComponent implements OnInit {
   }
 
 
+  protected readonly RECIPE_ROUTES = RECIPE_ROUTES;
 }

@@ -13,7 +13,7 @@ export const RecipeDetailResponseSchema = z.object({
   season: z.string(),
   type: z.string(),
   createdAt: z.string(),
-  user: UserResponseSchema,
+  ownerUsername: z.string(),
   steps: z.array(RecipeStepResponseSchema),
   pictures: z.array(RecipePictureResponseSchema),
   ingredients: z.array(IngredientResponseSchema),
