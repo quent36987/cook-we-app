@@ -1,13 +1,53 @@
 <div class='page' xmlns='http://www.w3.org/1999/html'>
-  <div class='app-title'>
-    Bienvenu sur Cook We !
+
+  <div class="main-container">
+    <header>
+      <h1> Bienvenu sur Cook We !</h1>
+      <p>Découvrez, partagez et savourez des recettes délicieuses !</p>
+    </header>
+    <section class="features">
+      <div class="feature">
+        <mat-icon>restaurant_menu</mat-icon>
+        <h2>Ajoutez vos recettes</h2>
+        <p>Partagez vos créations culinaires avec la communauté.</p>
+      </div>
+      <div class="feature">
+        <mat-icon>comment</mat-icon>
+        <h2>Commentez</h2>
+        <p>Échangez des avis et des conseils avec d'autres passionnés de cuisine.</p>
+      </div>
+      <div class="feature">
+        <mat-icon>favorite</mat-icon>
+        <h2>Ajoutez en favoris</h2>
+        <p>Gardez vos recettes préférées à portée de main.</p>
+      </div>
+    </section>
+
+    <div [routerLink]='["/",PROFILE_ROUTES.path]' class="cta-button">Commencer</div>
   </div>
+
+
   <div class='app-sub-title'>
     Les dernières recttes ajoutées:
   </div>
   <app-recipe-card-list [recipes]='recipes'></app-recipe-card-list>
-  <div class='app-sub-title'>
+  <div class='app-sub-title margin-top-l'>
     Les dernières fonctionnalités ajoutées:
+  </div>
+
+  <div>
+    <div class="">
+      <mat-icon>search</mat-icon>
+      <h2>Recherchez</h2>
+      <p>Recherchez des recettes par catégories ou par mots clés.</p>
+    </div>
+
+    <div class="margin-top-l">
+      <mat-icon>comment</mat-icon>
+      <h2>Commentez</h2>
+      <p>Échangez des avis et des conseils avec d'autres passionnés de cuisine.</p>
+    </div>
+
   </div>
 
 </div>

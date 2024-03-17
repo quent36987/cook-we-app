@@ -9,7 +9,18 @@ import { parseResponse } from '@app/_services/parseResponse';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
 import { RecipeDetailResponse, RecipeDetailResponseSchema } from '@interfaces/responseInterface/RecipeDetailResponse';
+import { PageResponse, PageResponseSchema } from '@interfaces/responseInterface/PageResponse';
+import { EType } from '@interfaces/EType';
+import { ESeason } from '@interfaces/ESeason';
 
+export interface GetRecipeParams {
+  name? : string;
+  type? : EType[];
+  season? : ESeason[];
+  sort? : string;
+  size? : number;
+  page? : number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +29,23 @@ export class RecipeService {
   constructor(private http: HttpClient) {
   }
 
-  public getAllRecipes(): Observable<RecipeResponse[]> {
-    return this.http.get<RecipeResponse[]>(
+  public getAllRecipes(
+    params: GetRecipeParams = {},
+  ): Observable<PageResponse<RecipeResponse>> {
+    return this.http.get<PageResponse<RecipeResponse>>(
       API_URL + '/recipes',
-      HTTP_OPTIONS,
+      {
+        ...HTTP_OPTIONS,
+        params: {
+          ...params,
+          type: params.type?.join(',') ?? '',
+          season: params.season?.join(',') ?? '',
+        },
+      },
     ).pipe(
-      parseResponse(z.array(RecipeResponseSchema)),
+      parseResponse(
+        PageResponseSchema(RecipeResponseSchema),
+      ),
     );
   }
 

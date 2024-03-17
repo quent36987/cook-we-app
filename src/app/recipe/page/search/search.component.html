@@ -1,0 +1,71 @@
+<div class='page'>
+  <div class='app-title textCenter'>
+    Rechercher une recette
+  </div>
+
+  <mat-form-field appearance="fill">
+    <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="onSearch()" placeholder="Ex: Tartiflette">
+    <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div class='filters'>
+    <div class='chip-basic'
+      *ngFor='let filtre of selectedFiltersType'>
+      {{ filtre | typeFormat }}
+    </div>
+    <div class='chip-basic'  *ngFor='let filtre of selectedFiltersSeason'>
+      {{ filtre | seasonFormat }}
+    </div>
+  </div>
+
+  <mat-accordion class='width-100 margin-bottom-s'>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Filtres
+        </mat-panel-title>
+        <mat-panel-description>
+         Filtrer les recettes
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class='expends-filters'>
+        <div class='sub-filters'>
+          <div>
+            type:
+          </div>
+          <mat-chip-option
+            *ngFor='let filtre of filtersType'
+            [value]="filtre"
+            class='ship'
+            [ngClass]="{'selected': selectedFiltersType.includes(filtre)}"
+            (click)="toggleTypeFilter(filtre)"
+          >
+            {{ filtre | typeFormat }}
+          </mat-chip-option>
+        </div>
+
+        <div class='sub-filters'>
+          <div>
+          saison:
+          </div>
+          <mat-chip-option
+            *ngFor='let filtre of filtersSeason'
+            [value]="filtre"
+            class='ship'
+            [ngClass]="{'selected': selectedFiltersSeason.includes(filtre)}"
+            (click)="toggleSeasonFilter(filtre)"
+          >
+            {{ filtre | seasonFormat }}
+          </mat-chip-option>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <app-recipe-card-list [recipes]="recipes"></app-recipe-card-list>
+</div>

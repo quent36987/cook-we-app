@@ -1,3 +1,39 @@
 .page {
   padding: var(--spacing-m);
+  text-align: center;
 }
+
+h1{
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Fredoka", sans-serif;
+}
+
+header {
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: var(--spacing-l);
+}
+
+.feature {
+  flex: 1;
+}
+
+.cta-button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: var(--spacing-l);
+}
+

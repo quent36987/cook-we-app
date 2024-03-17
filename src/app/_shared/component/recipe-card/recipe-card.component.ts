@@ -5,6 +5,8 @@ import { MatIcon } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { TimeFormat } from '@utils/format/time-format';
 import { TypeFormat } from '@utils/format/type-format';
+import { SeasonFormat } from '@utils/format/season-format';
+import { TitleFormat } from '@utils/format/title-format';
 
 @Component({
   selector: 'app-recipe-card',
@@ -17,6 +19,8 @@ import { TypeFormat } from '@utils/format/type-format';
     NgOptimizedImage,
     TimeFormat,
     TypeFormat,
+    SeasonFormat,
+    TitleFormat,
   ],
   styleUrl: './recipe-card.component.css',
 })
