@@ -7,7 +7,9 @@ export const HTTP_OPTIONS = {
   }),
 };
 
-export const API_URL = 'http://localhost:9001/api';
+//env :
+export const API_URL = process.env['URL_BACK'] ? process.env['URL_BACK'] : 'http://localhost:9001/api';
+
 
 export const ENVIROMENT = {
   production: true,

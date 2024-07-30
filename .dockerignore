@@ -4,3 +4,5 @@ node_modules/
 dist/
 .idea/
 .angular/
+docker-compose.yml
+README.md
