@@ -1,0 +1,6 @@
+services:
+  cook-we-front:
+    image: ghcr.io/quent36987/cook-we-app:latest
+    container_name: cook-we-front
+    ports:
+      - 8080:80
