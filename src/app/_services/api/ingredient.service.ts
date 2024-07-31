@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IngredientResponse, IngredientResponseSchema } from '@interfaces/responseInterface/IngredientResponse';
 import { Observable } from 'rxjs';
-import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
+import {  HTTP_OPTIONS } from '@app/_services/constante';
 import { CreateIngredientRequest } from '@interfaces/requestInterface/CreateIngredientRequest';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
 import { parseResponse } from '@app/_services/parseResponse';
 import { z } from 'zod';
+import { API_URL } from '@app/environments/environment';
 
 
 @Injectable({

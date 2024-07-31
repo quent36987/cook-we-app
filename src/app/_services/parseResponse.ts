@@ -1,6 +1,6 @@
 import { ZodType } from 'zod';
 import { MonoTypeOperatorFunction, tap } from 'rxjs';
-import { ENVIROMENT } from '@app/_services/constante';
+import { ENVIROMENT } from '@app/environments/environment';
 
 export function parseResponse<T>(schema: ZodType): MonoTypeOperatorFunction<T> {
   return tap({

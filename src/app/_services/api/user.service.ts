@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
+import { HTTP_OPTIONS } from '@app/_services/constante';
 import { parseResponse } from '@app/_services/parseResponse';
 import { UserDetailResponse, UserDetailResponseSchema } from '@interfaces/responseInterface/UserDetailResponse';
 import { UserResponse, UserResponseSchema } from '@interfaces/responseInterface/UserResponse';
@@ -9,6 +9,7 @@ import { RecipeResponse, RecipeResponseSchema } from '@interfaces/responseInterf
 import { z } from 'zod';
 import { UpdateUserRequest } from '@interfaces/requestInterface/UpdateUserRequest';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
+import { API_URL } from '@app/environments/environment';
 
 @Injectable({
   providedIn: 'root',

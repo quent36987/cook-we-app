@@ -5,6 +5,4 @@ services:
       dockerfile: Dockerfile
     container_name: cook-we-front-local
     ports:
-      - 8080:80
-    environment:
-      URL_BACK: http://localhost:9000/api
+      - 8086:80

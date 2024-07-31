@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { z } from 'zod';
 import { RecipeResponse, RecipeResponseSchema } from '@interfaces/responseInterface/RecipeResponse';
 import { RecipeStepResponse } from '@interfaces/responseInterface/RecipeStepResponse';
-import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
+import { HTTP_OPTIONS } from '@app/_services/constante';
 import { parseResponse } from '@app/_services/parseResponse';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
@@ -12,6 +12,7 @@ import { RecipeDetailResponse, RecipeDetailResponseSchema } from '@interfaces/re
 import { PageResponse, PageResponseSchema } from '@interfaces/responseInterface/PageResponse';
 import { EType } from '@interfaces/EType';
 import { ESeason } from '@interfaces/ESeason';
+import { API_URL } from '@app/environments/environment';
 
 export interface GetRecipeParams {
   name? : string;

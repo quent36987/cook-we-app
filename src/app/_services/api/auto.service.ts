@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
+import { HTTP_OPTIONS } from '@app/_services/constante';
 import { Observable } from 'rxjs';
 import { parseResponse } from '@app/_services/parseResponse';
 import { RecipeDetailResponse, RecipeDetailResponseSchema } from '@interfaces/responseInterface/RecipeDetailResponse';
+import { API_URL } from '@app/environments/environment';
 
 
 @Injectable({

@@ -6,8 +6,9 @@ import { SignupRequest } from '@interfaces/requestInterface/SignupRequest';
 import { UserResponse, UserResponseSchema } from '@interfaces/responseInterface/UserResponse';
 import { LoginRequest } from '@interfaces/requestInterface/LoginRequest';
 import { parseResponse } from '@app/_services/parseResponse';
-import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
+import {  HTTP_OPTIONS } from '@app/_services/constante';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
+import { API_URL } from '@app/environments/environment';
 
 
 

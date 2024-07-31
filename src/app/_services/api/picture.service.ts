@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
+import {  HTTP_OPTIONS } from '@app/_services/constante';
 import { Observable } from 'rxjs';
 import { parseResponse } from '@app/_services/parseResponse';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
@@ -8,6 +8,7 @@ import {
   RecipePictureResponse,
   RecipePictureResponseSchema,
 } from '@interfaces/responseInterface/RecipePictureResponse';
+import { API_URL } from '@app/environments/environment';
 
 
 @Injectable({

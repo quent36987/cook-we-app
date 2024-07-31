@@ -4,8 +4,8 @@ import { RecipePicture } from './RecipePicture';
 import { ESeason } from './ESeason';
 import {  StringToESeason, StringToEType } from '@utils/converts';
 import { EType } from '@interfaces/EType';
-import { API_URL } from '@app/_services/constante';
 import { RecipeResponse } from '@interfaces/responseInterface/RecipeResponse';
+import { API_URL } from '@app/environments/environment';
 
 
 export class Recipe {

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { API_URL, HTTP_OPTIONS } from '@app/_services/constante';
+import { HTTP_OPTIONS } from '@app/_services/constante';
 import { Observable } from 'rxjs';
 import { z } from 'zod';
 import { CommentResponse, CommentResponseSchema } from '@interfaces/responseInterface/CommentResponse';
 import { parseResponse } from '@app/_services/parseResponse';
 import { CommentRequest } from '@interfaces/requestInterface/CommentRequest';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
+import { API_URL } from '@app/environments/environment';
 
 @Injectable({
   providedIn: 'root',
