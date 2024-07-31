@@ -1,4 +1,4 @@
-export const API_URL =  'http://localhost:9004/api';
+export const API_URL =  'http://api.cook-we.home.quentinou.ovh/api';
 
 export const ENVIROMENT = {
   production: true,
