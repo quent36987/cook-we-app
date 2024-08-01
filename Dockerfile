@@ -12,6 +12,8 @@ RUN ng build --configuration=production
 FROM nginx:latest
 
 COPY --from=build /app/dist/cook-we-app/browser/ /usr/share/nginx/html
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+
 
 EXPOSE 80
 
