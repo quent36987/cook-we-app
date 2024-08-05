@@ -12,6 +12,7 @@
 .toggles {
   border-radius: var(--border-radius);
   margin-bottom: var(--spacing-s);
+  flex-wrap: wrap;
 }
 
 .mini-font {

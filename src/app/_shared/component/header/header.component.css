@@ -1,10 +1,10 @@
-.mat-icon{
+.mat-icon {
   font-size: 2rem;
   width: 2rem;
   height: 2rem;
 }
 
-.navbar{
+.navbar {
   background-color: #f8f9fa;
   border-bottom: 1px solid #e9ecef;
   padding: 0.5rem 1rem;
@@ -18,16 +18,12 @@
   gap: var(--spacing-s);
 }
 
-.nav-menu
-{
+.nav-menu {
   height: min-content;
   display: flex;
   align-content: center;
   justify-content: center;
-
-
 }
-
 
 .link {
   font-family: "Fredoka", sans-serif;
@@ -67,7 +63,7 @@
   left: 0;
   background: #fff;
   border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
@@ -113,9 +109,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(238, 236, 236, 0.5);
   z-index: 999;
-  display: none;
+  display: block;
 }
 
 /* Hide overflow to prevent scrolling when menu is open */
@@ -124,18 +120,18 @@ body.menu-open {
 }
 
 
-.nav-logo{
+.nav-logo {
   font-size: 1.5rem;
   font-weight: 500;
   color: #007bff;
   height: 100%;
 }
 
-.logo{
+.logo {
   height: 100%;
 }
 
-.nav-search{
+.nav-search {
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -144,7 +140,7 @@ body.menu-open {
   flex: 3;
 }
 
-.fixme-navbar{
+.fixme-navbar {
   background: #4075a6;
   height: 100%;
   width: 100%;

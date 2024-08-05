@@ -24,6 +24,7 @@ import { RecipeCardListComponent } from '@app/_shared/component/recipe-card-list
 import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
 import { MatChip, MatChipOption } from '@angular/material/chips';
 import { MatSelect } from '@angular/material/select';
+import { IsLoginGuard } from '@utils/guard/IsLoginGuard';
 
 export const RECIPE_ROUTES = {
   path: 'recipe',
@@ -38,7 +39,7 @@ export const recipeRoutes: Routes = [
     path: '',
     component: RecipeComponent,
     children: [
-      { path: RECIPE_ROUTES.create, component: CreateRecipeComponent },
+      { path: RECIPE_ROUTES.create, component: CreateRecipeComponent, canActivate: [IsLoginGuard] },
       { path: `${RECIPE_ROUTES.update}/:id`, component: UpdateRecipeComponent },
       { path: RECIPE_ROUTES.search, component: SearchComponent },
       { path: '', redirectTo: RECIPE_ROUTES.search, pathMatch: 'full' },

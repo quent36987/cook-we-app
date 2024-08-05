@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EUnit } from '@interfaces/EUnit';
@@ -31,25 +40,31 @@ export class RecipeFormComponent implements OnInit {
   @Output() submitForm: EventEmitter<EmitRecipeForm> = new EventEmitter();
 
   fileName = '';
+  private files: File[] = [];
+  private objectURLs: string[] = [];
 
   onPictureSelected(event: any) {
-
     const file: File = event.target.files[0];
 
     if (file) {
-
       console.log('file', file);
-
       this.autoService.generateRecipeWithPicture(file).subscribe({
         next: (data) => {
           console.log('picture creatyjyujed', data);
+          this.formGroup.patchValue({
+            name: data.name,
+            type: data.type,
+            season: data.season,
+            portions: data.portions,
+            time: data.time,
+            steps: data.steps.map((step: { text: string }) => step.text),
+            ingredients: data.ingredients,
+          });
         },
         error: (error) => {
           console.error('An error occurred', error);
         },
       });
-
-
     }
   }
 
@@ -69,6 +84,7 @@ export class RecipeFormComponent implements OnInit {
               private storageService: StorageService,
               private notificationService: NotificationService,
               private autoService: AutoService,
+              private cdr: ChangeDetectorRef
   ) {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -180,6 +196,9 @@ export class RecipeFormComponent implements OnInit {
 
   removePicture(index: number) {
     this.pictureForms.removeAt(index);
+    this.files.splice(index, 1);
+    URL.revokeObjectURL(this.objectURLs[index]);
+    this.objectURLs.splice(index, 1);
   }
 
   addPicture() {
@@ -196,13 +215,24 @@ export class RecipeFormComponent implements OnInit {
   }
 
   getImageUrl(index: number): string {
-    const formGroup = this.pictureForms.at(index);
-    const file = formGroup.get('file')?.value as File ?? null;
-    return file ? URL.createObjectURL(file) : '';
+    return this.objectURLs[index] || '';
   }
 
   onFileSelected(event: any, i: number): void {
-    this.pictureForms.at(i).setValue({ file: event.target.files[0] as File });
+    const file = event.target.files[0] as File;
+    if (file) {
+      this.files[i] = file;
+
+      const objectURL = URL.createObjectURL(file);
+      if (this.objectURLs[i]) {
+        URL.revokeObjectURL(this.objectURLs[i]); // Clean up previous URL if it exists
+      }
+      this.objectURLs[i] = objectURL;
+    }
+  }
+
+  ngOnDestroy() {
+    this.objectURLs.forEach(url => URL.revokeObjectURL(url));
   }
 
   protected readonly EType = EType;

@@ -4,6 +4,7 @@
   </div>
 
   <div class='nav-menu-overlay' *ngIf='isMenuOpen' (click)='toggleMenu()'></div>
+
   <div class='nav-menu-content' *ngIf='isMenuOpen'>
     <ul class='menu-list' (click)="closeMenu()">
       <li *ngFor='let service of services'>
