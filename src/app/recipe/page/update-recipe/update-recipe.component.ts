@@ -47,16 +47,16 @@ export class UpdateRecipeComponent implements OnInit {
       next: (data) => {
         this.notificationService.openSnackBarSuccess('Recette mis a jour', 'Close');
 
-        // for (let i = 0; i < recipeRequest.pictures.length; i++) {
-        //   this.pictureService.postPicture(recipeRequest.pictures[i], data.id).subscribe({
-        //     next: (data) => {
-        //       console.log('picture created', data);
-        //     },
-        //     error: (error) => {
-        //       console.error('An error occurred', error);
-        //     },
-        //   });
-        // }
+        for (let i = 0; i < recipeRequest.pictures.length; i++) {
+          this.pictureService.postPicture(recipeRequest.pictures[i], data.id).subscribe({
+            next: (data) => {
+              console.log('picture created', data);
+            },
+            error: (error) => {
+              console.error('An error occurred', error);
+            },
+          });
+        }
 
         setTimeout(() => {
           this.router.navigate(['/', RECIPE_ROUTES.path, data.id]);

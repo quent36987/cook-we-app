@@ -8,6 +8,7 @@ const type = {
   [EUnit.MILLILITER]: 'ml',
   [EUnit.TABLESPOON]: 'c. a s.',
   [EUnit.TEASPOON]: 'c. a c.',
+  [EUnit.POT]: 'pot',
 };
 
 @Pipe({ standalone: true, name: 'unitFormat' })
@@ -19,12 +20,12 @@ export class UnitFormat implements PipeTransform {
   transform(number: number, unit: EUnit): string {
     let unitString = type[unit];
 
-    if (unit == EUnit.GRAM && number >= 200) {
+    if (unit == EUnit.GRAM && number >= 1000) {
       unitString = 'kg';
       number = number / 1000;
     }
 
-    if (unit == EUnit.MILLILITER && number >= 200) {
+    if (unit == EUnit.MILLILITER && number >= 1000) {
       unitString = 'L';
       number = number / 1000;
     }

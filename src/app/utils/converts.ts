@@ -82,6 +82,8 @@ export function EUnitToString(unit: EUnit): string {
       return 'TABLESPOON';
     case EUnit.TEASPOON:
       return 'TEASPOON';
+    case EUnit.POT:
+      return 'POT';
     default:
       return '';
   }
@@ -127,6 +129,8 @@ export function StringToEUnit(unit: string): EUnit {
       return EUnit.TABLESPOON;
     case 'TEASPOON':
       return EUnit.TEASPOON;
+    case 'POT':
+      return EUnit.POT;
     default:
       return EUnit.PIECE;
   }

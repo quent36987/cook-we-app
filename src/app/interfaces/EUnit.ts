@@ -5,4 +5,5 @@ export enum EUnit {
   TABLESPOON = 'TABLESPOON',
   CUP = 'CUP',
   PIECE = 'PIECE',
+  POT = 'POT',
 }

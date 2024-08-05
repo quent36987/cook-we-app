@@ -26,4 +26,10 @@ import { TitleFormat } from '@utils/format/title-format';
 })
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
+
+  thumbnail() {
+    const thumbnail = this.recipe.getPictureUrl()?.at(0);
+
+    return thumbnail ? thumbnail : "../../../../assets/logo.jpg";
+  }
 }

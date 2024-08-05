@@ -2,7 +2,7 @@
   <div *ngIf='recipe' class='card-wrapper'>
 
     <div class='image-container'>
-      <img [src]='recipe.getPictureUrl()[0] ?? "../../../../assets/logo.jpg"' alt='img'>
+      <img [src]='thumbnail()' alt='img'>
     </div>
 
     <div class='content'>

@@ -1,18 +1,14 @@
 import {
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core';
 import { RecipeRequest } from '@interfaces/requestInterface/RecipeRequest';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EUnit } from '@interfaces/EUnit';
 import { ingredientsExemple } from '@app/recipe/component/recipe-form/constante';
-import { AuthService } from '@app/_services/api/auth.service';
 import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';
 import { EType } from '@interfaces/EType';
@@ -21,6 +17,7 @@ import { RecipeDetail } from '@interfaces/RecipeDetail';
 import { AutoService } from '@app/_services/api/auto.service';
 import { RecipeStep } from '@interfaces/RecipeStep';
 import { Ingredient } from '@interfaces/Ingredient';
+import { SpinnerService } from '@app/_services/spinner.service';
 
 
 export interface EmitRecipeForm extends RecipeRequest {
@@ -39,34 +36,9 @@ export class RecipeFormComponent implements OnInit {
 
   @Output() submitForm: EventEmitter<EmitRecipeForm> = new EventEmitter();
 
-  fileName = '';
   private files: File[] = [];
   private objectURLs: string[] = [];
-
-  onPictureSelected(event: any) {
-    const file: File = event.target.files[0];
-
-    if (file) {
-      console.log('file', file);
-      this.autoService.generateRecipeWithPicture(file).subscribe({
-        next: (data) => {
-          console.log('picture creatyjyujed', data);
-          this.formGroup.patchValue({
-            name: data.name,
-            type: data.type,
-            season: data.season,
-            portions: data.portions,
-            time: data.time,
-            steps: data.steps.map((step: { text: string }) => step.text),
-            ingredients: data.ingredients,
-          });
-        },
-        error: (error) => {
-          console.error('An error occurred', error);
-        },
-      });
-    }
-  }
+  public formGroup: FormGroup;
 
   units = [
     { value: EUnit.PIECE, viewValue: 'pièce' },
@@ -75,16 +47,14 @@ export class RecipeFormComponent implements OnInit {
     { value: EUnit.MILLILITER, viewValue: 'ml' },
     { value: EUnit.TABLESPOON, viewValue: 'cuillère à soupe' },
     { value: EUnit.TEASPOON, viewValue: 'cuillère à café' },
+    { value: EUnit.POT, viewValue: 'pot' },
   ];
 
-  formGroup: FormGroup;
-
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService,
               private storageService: StorageService,
               private notificationService: NotificationService,
               private autoService: AutoService,
-              private cdr: ChangeDetectorRef
+              private spinnerService: SpinnerService,
   ) {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -123,6 +93,35 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
+  onPictureSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.spinnerService.showSpinner();
+      this.autoService.generateRecipeWithPicture(file).subscribe({
+        next: (data) => {
+          this.formGroup.patchValue({
+            name: data.name,
+            type: data.type,
+            season: data.season,
+            portions: data.portions,
+            time: data.time,
+          });
+          data.steps.forEach((step) => {
+            this.addStep(step);
+          });
+          data.ingredients.forEach((ingredient) => {
+            this.addIngredient(ingredient as Ingredient);
+          });
+          this.spinnerService.hideSpinner();
+        },
+        error: (error) => {
+          console.error('An error occurred', error);
+          this.spinnerService.hideSpinner();
+        },
+      });
+    }
+  }
+
   public _filter(index: number): string[] {
     const value = this.formGroup.get('ingredients')?.value[index].name;
     const filterValue = value.toLowerCase();
@@ -141,7 +140,7 @@ export class RecipeFormComponent implements OnInit {
       season: form.season,
       steps: form.steps.map((step: { text: string }) => step.text),
       ingredients: form.ingredients,
-      pictures: form.pictures.map((picture: { file: File }) => picture.file),
+      pictures: this.files,
     };
   }
 
@@ -207,11 +206,6 @@ export class RecipeFormComponent implements OnInit {
     });
 
     this.pictureForms.push(picture);
-  }
-
-  onFileChange(event: any) {
-    console.log('onFileChange');
-    console.log(event);
   }
 
   getImageUrl(index: number): string {
