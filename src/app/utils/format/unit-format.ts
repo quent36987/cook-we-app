@@ -12,6 +12,13 @@ const type = {
   [EUnit.PINCH]: "pincée"
 };
 
+const intergerType =  [
+  EUnit.PINCH,
+  EUnit.PIECE,
+  EUnit.TABLESPOON,
+  EUnit.TEASPOON,
+]
+
 @Pipe({ standalone: true, name: 'unitFormat' })
 export class UnitFormat implements PipeTransform {
 
@@ -29,6 +36,11 @@ export class UnitFormat implements PipeTransform {
     if (unit == EUnit.MILLILITER && number >= 1000) {
       unitString = 'L';
       number = number / 1000;
+    }
+
+    if (intergerType.includes(unit)) {
+      number = Math.round(number);
+      number === 0 ? number = 1 : number;
     }
 
     return (Math.round(number * 100) / 100) + ' ' + unitString;

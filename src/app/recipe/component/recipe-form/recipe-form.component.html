@@ -6,7 +6,7 @@
     </mat-form-field>
 
     <div class='example-button-container'>
-      <input type='file' accept='image/*' class='input-picture'
+      <input type='file' accept='image/*'  capture='environment' class='input-picture'
              (change)='onPictureSelected($event)' #fileUpload>
       <div class='file-upload'>
         <button mat-mini-fab aria-label='take a picture of a recipe' color='primary' type='button'

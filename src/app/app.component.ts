@@ -7,6 +7,7 @@ import { NgForOf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '@app/_shared/component/header/header.component';
 import { SpinnerComponent } from '@app/_shared/component/spinner/spinner.component';
+import { VersionService } from '@app/_services/version.service';
 
 
 @Component({
@@ -25,11 +26,14 @@ import { SpinnerComponent } from '@app/_shared/component/spinner/spinner.compone
 })
 export class AppComponent implements OnInit {
 
+
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
   ) {
+
   }
+
 
   ngOnInit(): void {
 

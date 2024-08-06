@@ -6,7 +6,7 @@ import { UpdateRecipeComponent } from '@app/recipe/page/update-recipe/update-rec
 import { RecipePageComponent } from '@app/recipe/page/recipe/recipe-page.component';
 import { RecipeFormComponent } from '@app/recipe/component/recipe-form/recipe-form.component';
 import { MatIcon } from '@angular/material/icon';
-import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import {  MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/material/autocomplete';
@@ -14,7 +14,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatDivider } from '@angular/material/divider';
 import { RecipeComponent } from '@app/recipe/recipe/recipe.component';
 import { MatButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import {  MatInputModule } from '@angular/material/input';
 import { TimeFormat } from '@utils/format/time-format';
 import { TypeFormat } from '@utils/format/type-format';
 import { SeasonFormat } from '@utils/format/season-format';
@@ -40,7 +40,7 @@ export const recipeRoutes: Routes = [
     path: '',
     component: RecipeComponent,
     children: [
-      { path: RECIPE_ROUTES.create, component: CreateRecipeComponent, canActivate: [] },
+      { path: RECIPE_ROUTES.create, component: CreateRecipeComponent, canActivate: [IsLoginGuard] },
       { path: `${RECIPE_ROUTES.update}/:id`, component: UpdateRecipeComponent },
       { path: RECIPE_ROUTES.search, component: SearchComponent },
       { path: '', redirectTo: RECIPE_ROUTES.search, pathMatch: 'full' },

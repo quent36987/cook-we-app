@@ -119,6 +119,11 @@
   margin-bottom: 1rem;
 }
 
+.item {
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
 .ingredients-container,
 .steps-container {
   margin-top: 20px;
