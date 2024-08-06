@@ -25,6 +25,7 @@ import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansi
 import { MatChip, MatChipOption } from '@angular/material/chips';
 import { MatSelect } from '@angular/material/select';
 import { IsLoginGuard } from '@utils/guard/IsLoginGuard';
+import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const RECIPE_ROUTES = {
   path: 'recipe',
@@ -86,6 +87,7 @@ export const recipeRoutes: Routes = [
     MatChip,
     MatSelect,
     MatChipOption,
+    MatProgressSpinnerModule
   ],
   exports: [],
 })

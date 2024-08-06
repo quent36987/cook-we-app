@@ -1,12 +1,4 @@
-import { RecipePictureResponse } from '@interfaces/responseInterface/RecipePictureResponse';
-import { RecipePicture } from '@interfaces/RecipePicture';
-import { UserResponse } from '@interfaces/responseInterface/UserResponse';
-import { User } from '@interfaces/User';
-import { RecipeStepResponse } from '@interfaces/responseInterface/RecipeStepResponse';
-import { RecipeStep } from '@interfaces/RecipeStep';
 import { ESeason } from '@interfaces/ESeason';
-import { RecipeResponse } from '@interfaces/responseInterface/RecipeResponse';
-import { Recipe } from '@interfaces/Recipe';
 import { EUnit } from '@interfaces/EUnit';
 import { EType } from '@interfaces/EType';
 
@@ -84,6 +76,8 @@ export function EUnitToString(unit: EUnit): string {
       return 'TEASPOON';
     case EUnit.POT:
       return 'POT';
+    case EUnit.PINCH:
+      return 'PINCH';
     default:
       return '';
   }
@@ -131,6 +125,8 @@ export function StringToEUnit(unit: string): EUnit {
       return EUnit.TEASPOON;
     case 'POT':
       return EUnit.POT;
+    case 'PINCH':
+      return EUnit.PINCH;
     default:
       return EUnit.PIECE;
   }

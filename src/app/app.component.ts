@@ -6,6 +6,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '@app/_shared/component/header/header.component';
+import { SpinnerComponent } from '@app/_shared/component/spinner/spinner.component';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { HeaderComponent } from '@app/_shared/component/header/header.component'
     HttpClientModule,
     RouterLink,
     HeaderComponent,
+    SpinnerComponent,
   ],
   selector: 'app-root',
   standalone: true,

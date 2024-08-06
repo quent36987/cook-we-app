@@ -9,6 +9,7 @@ const type = {
   [EUnit.TABLESPOON]: 'c. a s.',
   [EUnit.TEASPOON]: 'c. a c.',
   [EUnit.POT]: 'pot',
+  [EUnit.PINCH]: "pincée"
 };
 
 @Pipe({ standalone: true, name: 'unitFormat' })

@@ -48,6 +48,7 @@ export class RecipeFormComponent implements OnInit {
     { value: EUnit.TABLESPOON, viewValue: 'cuillère à soupe' },
     { value: EUnit.TEASPOON, viewValue: 'cuillère à café' },
     { value: EUnit.POT, viewValue: 'pot' },
+    {value: EUnit.PINCH, viewValue: 'pincée'}
   ];
 
   constructor(private formBuilder: FormBuilder,
@@ -96,6 +97,7 @@ export class RecipeFormComponent implements OnInit {
   onPictureSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
+      console.log('icic');
       this.spinnerService.showSpinner();
       this.autoService.generateRecipeWithPicture(file).subscribe({
         next: (data) => {
@@ -103,8 +105,8 @@ export class RecipeFormComponent implements OnInit {
             name: data.name,
             type: data.type,
             season: data.season,
-            portions: data.portions,
-            time: data.time,
+            portions: data.portions !== 0 ? data.portions : '',
+            time: data.time !== 0 ? data.time : '',
           });
           data.steps.forEach((step) => {
             this.addStep(step);
