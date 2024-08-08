@@ -1,6 +1,6 @@
 import { IngredientResponse } from '@interfaces/responseInterface/IngredientResponse';
 import { CreateIngredientRequest } from '@interfaces/requestInterface/CreateIngredientRequest';
-import { StringToEUnit } from '@utils/converts';
+import { StringToEUnit } from '@utils/converter/converts';
 import { EUnit } from '@interfaces/EUnit';
 
 export class Ingredient {

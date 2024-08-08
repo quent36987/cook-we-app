@@ -2,7 +2,7 @@ import { User } from './User';
 import { RecipeStep } from './RecipeStep';
 import { RecipePicture } from './RecipePicture';
 import { ESeason } from './ESeason';
-import {  StringToESeason, StringToEType } from '@utils/converts';
+import {  StringToESeason, StringToEType } from '@utils/converter/converts';
 import { EType } from '@interfaces/EType';
 import { RecipeResponse } from '@interfaces/responseInterface/RecipeResponse';
 import { API_URL } from '@app/environments/environment';

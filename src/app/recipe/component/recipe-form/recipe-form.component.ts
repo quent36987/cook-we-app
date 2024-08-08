@@ -18,6 +18,7 @@ import { AutoService } from '@app/_services/api/auto.service';
 import { RecipeStep } from '@interfaces/RecipeStep';
 import { Ingredient } from '@interfaces/Ingredient';
 import { SpinnerService } from '@app/_services/spinner.service';
+import { convertToMinutes, convertToTimeString, timeFormatValidator } from '@utils/converter/time-converter';
 
 
 export interface EmitRecipeForm extends RecipeRequest {
@@ -62,7 +63,7 @@ export class RecipeFormComponent implements OnInit {
       type: ['', Validators.required],
       season: ['', Validators.required],
       portions: ['', Validators.required],
-      time: ['', Validators.required],
+      time: ['', [Validators.required, timeFormatValidator()]],
       ingredients: this.formBuilder.array([]),
       steps: this.formBuilder.array([]),
       pictures: this.formBuilder.array([]),
@@ -81,7 +82,7 @@ export class RecipeFormComponent implements OnInit {
         type: this.recipe.type,
         season: this.recipe.season,
         portions: this.recipe.portions,
-        time: this.recipe.time,
+        time: convertToTimeString(this.recipe.time),
       });
 
       this.recipe.steps.forEach((step) => {
@@ -106,7 +107,7 @@ export class RecipeFormComponent implements OnInit {
             type: data.type,
             season: data.season,
             portions: data.portions !== 0 ? data.portions : '',
-            time: data.time !== 0 ? data.time : '',
+            time: data.time !== 0 ? convertToTimeString(data.time) : '',
           });
           data.steps.forEach((step) => {
             this.addStep(step);
@@ -136,7 +137,7 @@ export class RecipeFormComponent implements OnInit {
 
     return {
       name: form.name,
-      time: form.time,
+      time: convertToMinutes(form.time),
       portions: form.portions,
       type: form.type,
       season: form.season,
