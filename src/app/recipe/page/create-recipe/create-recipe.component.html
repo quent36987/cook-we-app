@@ -1,7 +1,11 @@
-<div>
-  <div class='app-title'>
-    Creer une recette
-  </div>
-  <app-recipe-form [recipe]='null' (submitForm)='onSubmitted($event)' [canSubmit]='canSubmit' />
-
+<div class='app-title'>
+  {{ chooseSelected ? 'Creer une recette' : 'Comment souhaitez-vous créer votre recette ?' }}
 </div>
+
+@if (chooseSelected) {
+  <app-recipe-form [recipe]='recipe' (submitForm)='onSubmitted($event)' [canSubmit]='canSubmit' />
+} @else {
+  <app-how-create (recipe)='OnChooseSelected($event)' />
+}
+
+

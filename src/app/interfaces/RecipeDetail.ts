@@ -14,10 +14,10 @@ export class RecipeDetail extends Recipe {
   constructor(recipe: RecipeDetailResponse) {
 
     super(recipe);
-    this.ingredients = recipe.ingredients.map(i => new Ingredient(i));
-    this.steps = recipe.steps.map(s => new RecipeStep(s));
+    this.ingredients = recipe.ingredients?.map(i => new Ingredient(i)) ?? [];
+    this.steps = recipe.steps?.map(s => new RecipeStep(s)) ?? [];
     this.ownerUsername = recipe.ownerUsername;
-    this.comments = recipe.comments.map(c => new RecipeComment(c));
+    this.comments = recipe.comments?.map(c => new RecipeComment(c)) ?? [];
   }
 
   public ingredientCount(): number {

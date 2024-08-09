@@ -1,0 +1,27 @@
+<div class='chooses'>
+  <button mat-raised-button color='primary' class='button-style' (click)='createRecipe()'>
+    <mat-icon>description</mat-icon>
+    Formulaire vierge
+  </button>
+
+  <input type='file' accept='image/*' capture='environment' class='input-picture'
+         (change)='onPictureSelected($event)' #fileUpload>
+  <button mat-raised-button color='primary' class='button-style' (click)='fileUpload.click()'>
+    <mat-icon>add_a_photo</mat-icon>
+    Prendre en photo la recette
+  </button>
+
+  <input type='file' accept='image/*' class='input-picture'
+         (change)='onPictureSelected($event)' #fileUpload>
+  <button mat-raised-button color='primary' class='button-style' (click)='fileUpload.click()'>
+    <mat-icon>photo</mat-icon>
+    Télécharger une image de recette
+  </button>
+
+
+  <button mat-raised-button disabled color='primary' class='button-style' (click)='createRecipeFromText()'>
+    <mat-icon>content_copy</mat-icon>
+    Copier coller la recette
+  </button>
+</div>
+

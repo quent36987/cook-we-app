@@ -20,7 +20,7 @@ export class Recipe {
   constructor(recipe: RecipeResponse) {
     this.id = recipe.id;
     this.name = recipe.name;
-    this.pictures = recipe.pictures.map(p => new RecipePicture(p));
+    this.pictures = recipe.pictures?.map(p => new RecipePicture(p)) ?? [];
     this.season = StringToESeason(recipe.season);
     this.type = StringToEType(recipe.type);
     this.time = recipe.time;

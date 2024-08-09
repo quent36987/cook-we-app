@@ -21,11 +21,12 @@ import { SeasonFormat } from '@utils/format/season-format';
 import { UnitFormat } from '@utils/format/unit-format';
 import { SearchComponent } from '@app/recipe/page/search/search.component';
 import { RecipeCardListComponent } from '@app/_shared/component/recipe-card-list/recipe-card-list.component';
-import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChip, MatChipOption } from '@angular/material/chips';
 import { MatSelect } from '@angular/material/select';
 import { IsLoginGuard } from '@utils/guard/IsLoginGuard';
-import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HowCreateComponent } from '@app/recipe/component/how-create/how-create.component';
 
 export const RECIPE_ROUTES = {
   path: 'recipe',
@@ -57,6 +58,7 @@ export const recipeRoutes: Routes = [
     RecipeFormComponent,
     RecipeComponent,
     SearchComponent,
+    HowCreateComponent,
   ],
   imports: [
     CommonModule,

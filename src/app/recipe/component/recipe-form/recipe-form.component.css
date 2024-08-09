@@ -3,12 +3,6 @@
   overflow-y: auto;
 }
 
-.example-button-container {
-  display: flex;
-  justify-content: center;
-  margin: var(--spacing-s);
-}
-
 .toggles {
   border-radius: var(--border-radius);
   margin-bottom: var(--spacing-s);
@@ -38,6 +32,3 @@ input[type="text"] {
   margin-bottom: -1em;
 }
 
-.input-picture {
-  display: none;
-}

@@ -95,36 +95,6 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
-  onPictureSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      console.log('icic');
-      this.spinnerService.showSpinner();
-      this.autoService.generateRecipeWithPicture(file).subscribe({
-        next: (data) => {
-          this.formGroup.patchValue({
-            name: data.name,
-            type: data.type,
-            season: data.season,
-            portions: data.portions !== 0 ? data.portions : '',
-            time: data.time !== 0 ? convertToTimeString(data.time) : '',
-          });
-          data.steps.forEach((step) => {
-            this.addStep(step);
-          });
-          data.ingredients.forEach((ingredient) => {
-            this.addIngredient(ingredient as Ingredient);
-          });
-          this.spinnerService.hideSpinner();
-        },
-        error: (error) => {
-          console.error('An error occurred', error);
-          this.spinnerService.hideSpinner();
-        },
-      });
-    }
-  }
-
   public _filter(index: number): string[] {
     const value = this.formGroup.get('ingredients')?.value[index].name;
     const filterValue = value.toLowerCase();
