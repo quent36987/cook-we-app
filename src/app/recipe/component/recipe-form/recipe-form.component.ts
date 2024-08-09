@@ -14,11 +14,11 @@ import { NotificationService } from '@app/_services/notification.service';
 import { EType } from '@interfaces/EType';
 import { ESeason } from '@interfaces/ESeason';
 import { RecipeDetail } from '@interfaces/RecipeDetail';
-import { AutoService } from '@app/_services/api/auto.service';
 import { RecipeStep } from '@interfaces/RecipeStep';
 import { Ingredient } from '@interfaces/Ingredient';
-import { SpinnerService } from '@app/_services/spinner.service';
 import { convertToMinutes, convertToTimeString, timeFormatValidator } from '@utils/converter/time-converter';
+import { RecipePicture } from '@interfaces/RecipePicture';
+import { PictureService } from '@app/_services/api/picture.service';
 
 
 export interface EmitRecipeForm extends RecipeRequest {
@@ -49,14 +49,13 @@ export class RecipeFormComponent implements OnInit {
     { value: EUnit.TABLESPOON, viewValue: 'cuillère à soupe' },
     { value: EUnit.TEASPOON, viewValue: 'cuillère à café' },
     { value: EUnit.POT, viewValue: 'pot' },
-    {value: EUnit.PINCH, viewValue: 'pincée'}
+    { value: EUnit.PINCH, viewValue: 'pincée' },
   ];
 
   constructor(private formBuilder: FormBuilder,
               private storageService: StorageService,
               private notificationService: NotificationService,
-              private autoService: AutoService,
-              private spinnerService: SpinnerService,
+              private pictureService: PictureService,
   ) {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -165,6 +164,16 @@ export class RecipeFormComponent implements OnInit {
     return this.formGroup.get('pictures') as FormArray;
   }
 
+  removeSavedPicture(picture: RecipePicture) {
+    this.pictureService.deletePicture(picture.imageUrl).subscribe({
+      next: () => {
+        this.recipe?.pictures.splice(this.recipe.pictures.indexOf(picture), 1);
+      },
+      error: (error) => {
+        this.notificationService.openSnackBarError('Erreur lors de la suppression de l\'image', 'Close');
+      },
+    });
+  }
 
   removePicture(index: number) {
     this.pictureForms.removeAt(index);
@@ -192,7 +201,7 @@ export class RecipeFormComponent implements OnInit {
 
       const objectURL = URL.createObjectURL(file);
       if (this.objectURLs[i]) {
-        URL.revokeObjectURL(this.objectURLs[i]); // Clean up previous URL if it exists
+        URL.revokeObjectURL(this.objectURLs[i]);
       }
       this.objectURLs[i] = objectURL;
     }

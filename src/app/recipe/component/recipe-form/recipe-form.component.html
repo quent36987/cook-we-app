@@ -14,6 +14,21 @@
     </button>
   </div>
 
+  <div *ngFor="let picture of recipe?.pictures ?? []; let i = index;">
+    <div class='flex-row gap-s center'>
+      <div>
+        <img [src]='picture.getPictureUrl()' alt='' height='50px' width='50px'>
+      </div>
+
+      <div class='example-button-container'>
+        <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-style'
+                (click)='removeSavedPicture(picture)'>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div formArrayName='pictures'>
     <div *ngFor="let picture of pictureForms.controls; let i = index;">
       <div class='flex-row gap-s center' [formGroupName]='i'>

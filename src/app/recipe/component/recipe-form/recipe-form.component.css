@@ -17,6 +17,9 @@ input[type="text"] {
   font-size: 0.7rem
 }
 
+.input-picture {
+  display: none;
+}
 
 .button-style {
   height: 2rem;
