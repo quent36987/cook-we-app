@@ -8,51 +8,21 @@
 
   <div class='flex-row gap-s margin-bottom-s'>
     <div class='app-sub-title'>Photos</div>
+    <input type='file' accept='image/*' class='input-picture'
+           (change)='onFileSelected($event)' required #pictureUpload>
     <button mat-mini-fab aria-label='add a pictures' color='primary' class='button-style' type='button'
-            (click)='addPicture()'>
+            (click)='pictureUpload.click()'>
       <mat-icon>add</mat-icon>
     </button>
   </div>
 
-  <div *ngFor="let picture of recipe?.pictures ?? []; let i = index;">
-    <div class='flex-row gap-s center'>
-      <div>
-        <img [src]='picture.getPictureUrl()' alt='' height='50px' width='50px'>
-      </div>
+  <div class="pictures">
+    <app-picture-form *ngFor="let picture of recipe?.pictures ?? []; let i = index;"
+                      [pictureUrl]="picture.getPictureUrl()" (delete)="removeSavedPicture(picture)" />
 
-      <div class='example-button-container'>
-        <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-style'
-                (click)='removeSavedPicture(picture)'>
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </div>
+    <app-picture-form *ngFor="let picture of objectURLs; let i = index;"
+                      [pictureUrl]="picture" (delete)="removePicture(i)" />
   </div>
-
-  <div formArrayName='pictures'>
-    <div *ngFor="let picture of pictureForms.controls; let i = index;">
-      <div class='flex-row gap-s center' [formGroupName]='i'>
-        <input type='file' accept='image/*' class='input-picture'
-               (change)='onFileSelected($event,i)' required #pictureUpload>
-        <button mat-mini-fab aria-label='take a picture of a recipe' color='primary' type='button' class='button-style'
-                (click)='pictureUpload.click()'>
-          <mat-icon>camera_alt</mat-icon>
-        </button>
-
-        <div>
-          <img [src]='getImageUrl(i)' alt='' height='50px' width='50px'>
-        </div>
-
-        <div class='example-button-container'>
-          <button mat-mini-fab aria-label='suprimer' color='primary' type='button' class='button-style'
-                  (click)='removePicture(i)'>
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
   <mat-button-toggle-group name='type' aria-label='Type de plat' class='toggles' appearance='legacy'
                            formControlName='type' required>

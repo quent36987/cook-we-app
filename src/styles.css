@@ -160,3 +160,10 @@
 html, body { height: 100%; }
 body { margin: 0; }
 
+.toggles  .mat-button-toggle-label-content {
+  padding: 0 15px !important;
+}
+
+.toggles  .mat-pseudo-checkbox {
+  margin-right: 1px !important;
+}

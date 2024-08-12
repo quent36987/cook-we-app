@@ -19,6 +19,7 @@ import { Ingredient } from '@interfaces/Ingredient';
 import { convertToMinutes, convertToTimeString, timeFormatValidator } from '@utils/converter/time-converter';
 import { RecipePicture } from '@interfaces/RecipePicture';
 import { PictureService } from '@app/_services/api/picture.service';
+import { SpinnerService } from '@app/_services/spinner.service';
 
 
 export interface EmitRecipeForm extends RecipeRequest {
@@ -38,7 +39,7 @@ export class RecipeFormComponent implements OnInit {
   @Output() submitForm: EventEmitter<EmitRecipeForm> = new EventEmitter();
 
   private files: File[] = [];
-  private objectURLs: string[] = [];
+  public objectURLs: string[] = [];
   public formGroup: FormGroup;
 
   units = [
@@ -56,6 +57,7 @@ export class RecipeFormComponent implements OnInit {
               private storageService: StorageService,
               private notificationService: NotificationService,
               private pictureService: PictureService,
+              private spinnerService: SpinnerService,
   ) {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
@@ -65,7 +67,6 @@ export class RecipeFormComponent implements OnInit {
       time: ['', [Validators.required, timeFormatValidator()]],
       ingredients: this.formBuilder.array([]),
       steps: this.formBuilder.array([]),
-      pictures: this.formBuilder.array([]),
     });
   }
 
@@ -160,11 +161,8 @@ export class RecipeFormComponent implements OnInit {
     }));
   }
 
-  get pictureForms() {
-    return this.formGroup.get('pictures') as FormArray;
-  }
-
   removeSavedPicture(picture: RecipePicture) {
+    console.log('delete');
     this.pictureService.deletePicture(picture.imageUrl).subscribe({
       next: () => {
         this.recipe?.pictures.splice(this.recipe.pictures.indexOf(picture), 1);
@@ -176,34 +174,24 @@ export class RecipeFormComponent implements OnInit {
   }
 
   removePicture(index: number) {
-    this.pictureForms.removeAt(index);
     this.files.splice(index, 1);
     URL.revokeObjectURL(this.objectURLs[index]);
     this.objectURLs.splice(index, 1);
   }
 
-  addPicture() {
-    const picture = this.formBuilder.group({
-      file: [''],
-    });
 
-    this.pictureForms.push(picture);
-  }
 
   getImageUrl(index: number): string {
     return this.objectURLs[index] || '';
   }
 
-  onFileSelected(event: any, i: number): void {
+  onFileSelected(event: any): void {
     const file = event.target.files[0] as File;
     if (file) {
-      this.files[i] = file;
+      this.files.push(file);
 
       const objectURL = URL.createObjectURL(file);
-      if (this.objectURLs[i]) {
-        URL.revokeObjectURL(this.objectURLs[i]);
-      }
-      this.objectURLs[i] = objectURL;
+      this.objectURLs.push(objectURL);
     }
   }
 

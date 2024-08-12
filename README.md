@@ -1,27 +1,14 @@
-# CookWeApp
+# CookWeApp V1 (frontend)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+It is a simple web application to save and share recipes. you can create an account and save your recipes. You can also share your recipes with others. You can also search for recipes by name or by ingredients. You can also see the recipes of other users. You can also like and comment on the recipes of other users.
 
-## Development server
+## Architecture
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The application use a [Java Spring Boot backend](https://github.com/quent36987/cook-we) and a postgres SQL. 
+I have built a pipeline with GitHub Action to build/test and deploy the project.
+I use a cluster with [K3s and argocd to deploy the application.](https://github.com/quent36987/cook-we-config)
 
-## Code scaffolding
+## Screenshots
+![alt text](screenshots/screen1.png)
+![alt text](screenshots/screen2.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

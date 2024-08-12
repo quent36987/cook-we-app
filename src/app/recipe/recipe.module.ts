@@ -27,6 +27,7 @@ import { MatSelect } from '@angular/material/select';
 import { IsLoginGuard } from '@utils/guard/IsLoginGuard';
 import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HowCreateComponent } from '@app/recipe/component/how-create/how-create.component';
+import { PictureFormComponent } from '@app/recipe/component/picture-form/picture-form.component';
 
 export const RECIPE_ROUTES = {
   path: 'recipe',
@@ -59,6 +60,7 @@ export const recipeRoutes: Routes = [
     RecipeComponent,
     SearchComponent,
     HowCreateComponent,
+    PictureFormComponent
   ],
   imports: [
     CommonModule,

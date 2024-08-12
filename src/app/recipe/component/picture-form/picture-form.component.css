@@ -1,0 +1,14 @@
+.picture-form {
+  position: relative;
+}
+
+.button-delete {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 1;
+
+  height: 2rem;
+  width: 2rem;
+  font-size: 1rem;
+}
