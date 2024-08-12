@@ -31,7 +31,7 @@ export class SearchComponent {
     this.recipeService.getAllRecipes(
       { name: this.searchText,
         type: this.selectedFiltersType,
-        season: this.selectedFiltersSeason
+        season: this.selectedFiltersSeason.length > 1 ? [...this.selectedFiltersSeason, ESeason.ALL] : []
       }
     ).subscribe({
       next: page => {
