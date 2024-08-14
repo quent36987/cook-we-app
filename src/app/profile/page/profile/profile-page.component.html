@@ -10,6 +10,12 @@
         <div class='info'>Nom: {{user.lastName}}</div>
       </div>
     </div>
+    <div class='button-password'>
+      <div (click)='changePassword()' class='button'>
+        <mat-icon>vpn_key</mat-icon>
+        <span>Changer de mot de passe</span>
+      </div>
+    </div>
   </div>
   <div class='logout'>
     <div (click)='logout()' class='button'>

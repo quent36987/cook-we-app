@@ -3,11 +3,12 @@ import { StorageService } from './_services/storage.service';
 import { UserDetailResponse } from '@interfaces/responseInterface/UserDetailResponse';
 import { AuthService } from '@app/_services/api/auth.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { NgForOf } from '@angular/common';
+import { CommonModule, NgForOf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '@app/_shared/component/header/header.component';
 import { SpinnerComponent } from '@app/_shared/component/spinner/spinner.component';
 import { VersionService } from '@app/_services/version.service';
+import { PopupComponent } from '@app/_shared/component/popup/popup.component';
 
 
 @Component({
@@ -18,6 +19,8 @@ import { VersionService } from '@app/_services/version.service';
     RouterLink,
     HeaderComponent,
     SpinnerComponent,
+    PopupComponent,
+    CommonModule,
   ],
   selector: 'app-root',
   standalone: true,

@@ -1,0 +1,72 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-s);
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.popup-content {
+  background: white;
+  padding: var(--spacing-m);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-content h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.popup-content p {
+  margin: var(--spacing-s) 0;
+  font-size: 1rem;
+}
+
+input[type="text"] {
+  font-size: 0.7rem;
+  padding: var(--spacing-xs);
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+.popup-buttons {
+  display: flex;
+  gap: var(--spacing-s);
+  margin-top: var(--spacing-s);
+  width: 100%;
+  justify-content: center;
+}
+
+.popup-button {
+  padding: var(--spacing-s) var(--spacing-m);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.popup-button.confirm {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.popup-button.cancel {
+  background-color: var(--color-primary);
+  color: white;
+}

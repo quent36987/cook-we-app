@@ -23,6 +23,11 @@
   padding: var(--spacing-s);
 }
 
+.button-password {
+  margin: var(--spacing-s);
+  width: max-content;
+}
+
 .button {
   font-size: 0.9em;
   background-color: var(--light-gray);

@@ -6,10 +6,10 @@ import { SignupRequest } from '@interfaces/requestInterface/SignupRequest';
 import { UserResponse, UserResponseSchema } from '@interfaces/responseInterface/UserResponse';
 import { LoginRequest } from '@interfaces/requestInterface/LoginRequest';
 import { parseResponse } from '@app/_services/parseResponse';
-import {  HTTP_OPTIONS } from '@app/_services/constante';
+import { HTTP_OPTIONS } from '@app/_services/constante';
 import { MessageResponse, MessageResponseSchema } from '@interfaces/responseInterface/MessageResponse';
 import { API_URL } from '@app/environments/environment';
-
+import { ChangePasswordRequest } from '@interfaces/requestInterface/ChangePasswordRequest';
 
 
 @Injectable({
@@ -29,7 +29,7 @@ export class AuthService {
     );
   }
 
-  register(signupRequest : SignupRequest): Observable<UserResponse> {
+  register(signupRequest: SignupRequest): Observable<UserResponse> {
     return this.http.post<UserResponse>(
       API_URL + '/auth/signup',
       signupRequest,
@@ -42,7 +42,7 @@ export class AuthService {
   logout(): Observable<MessageResponse> {
     return this.http.post<MessageResponse>(
       API_URL + '/auth/signout',
-      HTTP_OPTIONS
+      HTTP_OPTIONS,
     ).pipe(
       parseResponse(MessageResponseSchema),
     );
@@ -51,9 +51,29 @@ export class AuthService {
   me(): Observable<UserDetailResponse> {
     return this.http.get<UserDetailResponse>(
       API_URL + '/auth/me',
-      HTTP_OPTIONS
+      HTTP_OPTIONS,
     ).pipe(
-        parseResponse(UserDetailResponseSchema),
+      parseResponse(UserDetailResponseSchema),
+    );
+  }
+
+  newPassword(email : string): Observable<MessageResponse> {
+    return this.http.post<MessageResponse>(
+      API_URL + '/auth/new-password',
+      email,
+      HTTP_OPTIONS,
+    ).pipe(
+      parseResponse(MessageResponseSchema),
+    );
+  }
+
+  changePassword(password : string): Observable<MessageResponse> {
+    return this.http.post<MessageResponse>(
+      API_URL + '/auth/change-password',
+      {password},
+      HTTP_OPTIONS,
+    ).pipe(
+      parseResponse(MessageResponseSchema),
     );
   }
 }

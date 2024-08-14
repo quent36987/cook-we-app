@@ -1,0 +1,17 @@
+<div class="popup-overlay" *ngIf="popupConfig">
+  <div class="popup-content">
+    <h2>{{ popupConfig.title }}</h2>
+    <p>{{ popupConfig.description }}</p>
+
+    <ng-container [ngSwitch]="popupConfig.type">
+      <ng-container *ngSwitchCase="popupType.Input">
+        <input type="text" [(ngModel)]="popupConfig.inputValue" placeholder="Entrez votre réponse" />
+      </ng-container>
+    </ng-container>
+
+    <div class="popup-buttons">
+      <button class="popup-button confirm" (click)="onConfirm()">{{ popupConfig.confirmButton }}</button>
+      <button class="popup-button cancel" (click)="onCancel()">Annuler</button>
+    </div>
+  </div>
+</div>

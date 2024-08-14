@@ -4,7 +4,8 @@ import { StorageService } from '@app/_services/storage.service';
 import { NotificationService } from '@app/_services/notification.service';
 import { LoginRequest } from '@interfaces/requestInterface/LoginRequest';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AUTH_ROUTES } from '@app/auth/auth.module';
+import { PopupService } from '@app/_services/popup.service';
+import { PopupType } from '@app/_shared/component/popup/popup.model';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent {
     private notification: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
+    private popupService: PopupService,
   ) {
   }
 
@@ -66,6 +68,30 @@ export class LoginComponent {
     }
 
     this.router.navigateByUrl(this.router.createUrlTree(['/auth/register']));
+  }
+
+  onPasswordForgotten() {
+    this.popupService.showPopup({
+      type: PopupType.Input,
+      title: 'Mot de passe oublié',
+      description: 'Veuillez entrer votre adresse email, un email vous sera envoyé (verifiez vos spams)',
+      confirmButton: 'Envoyer',
+      callback: (email) => {
+        if (!email) {
+          this.notification.openSnackBarError('Veuillez entrer une adresse email', 'Close');
+          return;
+        }
+
+        this.authService.newPassword(email).subscribe({
+          next: () => {
+            this.notification.openSnackBarSuccess('Un email vous a été envoyé', 'Close');
+          },
+          error: () => {
+            this.notification.openSnackBarError("Erreur lors de l'envoi de l'email", 'Close');
+          },
+        });
+      }
+    });
   }
 
 }
