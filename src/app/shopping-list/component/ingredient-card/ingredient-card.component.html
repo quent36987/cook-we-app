@@ -3,7 +3,7 @@
     <input *ngIf='ingredient'
            type='text'
            class='input'
-           placeholder='Entrez un ingrédient'
+           placeholder='Entrez un ingrédient en plus'
            [(ngModel)]='ingredient.name' (focusout)='onUpdate()' />
   } @else {
     <div class='input'>{{ ingredient.name }}</div>

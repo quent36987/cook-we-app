@@ -1,3 +1,16 @@
 <div class='app-title title'>
   Paramètres de la liste
 </div>
+
+<div class='cta-button' (click)='addUser()'>
+  Ajouter un utilisateur
+</div>
+
+<div>
+  Les utilisateurs qui partagent cette liste:
+</div>
+<div class='list'>
+
+  <app-user-card *ngFor='let username of shoppingList?.sharedUsers' [username]='username'
+                 (deleteUser)='onDeleteUser(username)' />
+</div>

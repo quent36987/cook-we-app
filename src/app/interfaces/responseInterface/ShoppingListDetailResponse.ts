@@ -9,6 +9,7 @@ export const ShoppingListDetailResponseSchema = z.object({
   createdAt: z.string(),
   recipes: z.array(RecipeShoppingListResponseSchema),
   ingredients: z.array(IngredientShoppingListResponseSchema),
+  sharedUsers: z.array(z.string()),
 });
 
 export type ShoppingListDetailResponse = z.infer<typeof ShoppingListDetailResponseSchema>;

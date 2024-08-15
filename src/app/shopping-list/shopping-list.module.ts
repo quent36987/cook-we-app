@@ -21,6 +21,7 @@ import {
   ParameterShoppingListComponent
 } from '@app/shopping-list/page/parameter-shopping-list/parameter-shopping-list.component';
 import { SearchPopupComponent } from '@app/_shared/component/search-popup/search-popup.component';
+import { UserCardComponent } from '@app/shopping-list/component/user-card/user-card.component';
 
 
 export const SHOPPING_LIST_ROUTES = {
@@ -60,7 +61,8 @@ export const shoppingListRoutes: Routes = [
     ShoppingListPageComponent,
     IngredientCardComponent,
     DetailShoppingListComponent,
-    ParameterShoppingListComponent
+    ParameterShoppingListComponent,
+    UserCardComponent,
   ],
   imports: [
     CommonModule,

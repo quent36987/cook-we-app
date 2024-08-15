@@ -1,0 +1,23 @@
+.cta-button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: max-content;
+  margin: var(--spacing-s);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-s);
+  margin-right: var(--spacing-xl);
+  margin-left: var(--spacing-xl);
+  margin-bottom: 25px;
+}
+

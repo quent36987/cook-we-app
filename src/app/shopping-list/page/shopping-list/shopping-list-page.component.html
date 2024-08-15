@@ -20,11 +20,11 @@
 
 <div class='list'>
   <app-recipe-shopping-list-card *ngFor='let elt of shoppingList?.recipes' [recipeShoppingList]='elt'
-                                 (deleteRecipeShoppingList)='onDeleteRecipe(elt.id)' (changePortion)='changePortions(elt.id,$event)' />
+                                 (deleteRecipeShoppingList)='onDeleteRecipe(elt.id)' (changePortion)='changePortions(elt.recipeId,$event)' />
 
   <div class='separator'></div>
 
-  <app-ingredient-card *ngFor='let elt of shoppingList?.ingredients' [ingredient]='elt'
+  <app-ingredient-card *ngFor='let elt of ingredientExtra()' [ingredient]='elt'
                        (deleteIngredient)='onDeleteIngredient(elt.id)' (editIngredient)='onIngredientChange($event)' />
 
   <app-ingredient-card [ingredient]='ingredientEmpty' (editIngredient)='onIngredientChange($event)' />

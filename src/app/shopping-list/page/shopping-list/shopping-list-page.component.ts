@@ -80,6 +80,10 @@ export class ShoppingListPageComponent implements OnInit {
     });
   }
 
+  ingredientExtra() {
+    return this.shoppingList?.ingredients.filter(ingredient => ingredient.shoppingListRecipeId === null);
+  }
+
 
   onIngredientChange(event: IngredientShoppingListResponse) {
     if (event.name === '') {
@@ -164,12 +168,13 @@ export class ShoppingListPageComponent implements OnInit {
     this.recipePopup = !this.recipePopup;
   }
 
-  changePortions(id: number, portion: number) {
-    console.log('Change portions', id, portion);
-    this.addRecipe(id, portion);
+  changePortions(recipeId: number, portion: number) {
+    console.log('Change portions', recipeId, portion);
+    this.addRecipe(recipeId, portion);
   }
 
   addRecipe(recipeId: number, portion: number = 0) {
+    console.log('Add recipe', recipeId, portion);
     this.recipeService.getRecipeById(recipeId).subscribe({
       next: (recipeResponse) => {
         const recipe = new RecipeDetail((recipeResponse));
@@ -184,11 +189,9 @@ export class ShoppingListPageComponent implements OnInit {
 
         this.shoppingListRecipeService.addOrUpdateRecipe(this.shoppingListId, recipeRequest).subscribe({
           next: (response: RecipeShoppingListResponse) => {
-            if (!this.shoppingList) {
-              return;
+            if (portion === 0 && this.shoppingList) {
+              this.shoppingList.recipes.push(response);
             }
-
-            this.shoppingList.recipes.push(response);
           },
           error: err => {
             this.notificationService.openSnackBarError(err.error, 'Close');
