@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PROFILE_ROUTES } from '@app/profile/profile.module';
 import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
+import { SHOPPING_LIST_ROUTES } from '@app/shopping-list/shopping-list.module';
 
 @Component({
   selector: 'app-header',
@@ -72,9 +73,9 @@ export class HeaderComponent {
       link: '',
       subServices: [
         {
-          icon: 'add',
-          title: 'Créer une liste',
-          link: '',
+          icon: 'shopping_cart',
+          title: 'Mes listes',
+          link: `${SHOPPING_LIST_ROUTES.path}`,
         },
       ],
     },

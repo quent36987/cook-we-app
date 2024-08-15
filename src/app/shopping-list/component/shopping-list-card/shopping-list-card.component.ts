@@ -9,5 +9,5 @@ import { ShoppingListResponse } from '@interfaces/responseInterface/ShoppingList
 export class ShoppingListCardComponent {
 
   @Input() shoppingList!: ShoppingListResponse;
-  @Input() showOwner = false;
+  @Input() showOwner = true;
 }

@@ -1,17 +1,22 @@
 <div class='card'>
-  <div class='card-top'>
-    <img src='{{ recipeShoppingList.imageUrl }}' alt='{{ recipeShoppingList.name }}' />
+  <div class='card-top' (click)='onCardClick()'>
+
+    <img [src]='thumbnail()' alt='img' class='image-container'>
+
     <div class='title'>
       {{ recipeShoppingList.name }}
     </div>
   </div>
 
   <div class='card-bottom'>
-    <mat-icon class='material-icons'>minus</mat-icon>
     <div class='portions'>
-      {{ recipeShoppingList.portions }}
+    <mat-icon class='material-icons' (click)='decrease()'>remove</mat-icon>
+    <div class='portion'>
+      {{ recipeShoppingList.portion }}
+      <mat-icon class='material-icons'>person</mat-icon>
     </div>
-    <mat-icon class='material-icons'>add</mat-icon>
-    <mat-icon class='material-icons'>delete</mat-icon>
+    <mat-icon class='material-icons' (click)='increase()'>add</mat-icon>
+    </div>
+    <mat-icon class='material-icons delete' (click)='delete()'> delete</mat-icon>
   </div>
 </div>

@@ -26,6 +26,7 @@ import { TitleFormat } from '@utils/format/title-format';
 })
 export class RecipeCardComponent {
   @Input() recipe!: Recipe;
+  @Input() showButton = true;
 
   thumbnail() {
     const thumbnail = this.recipe.getPictureUrl()?.at(0);

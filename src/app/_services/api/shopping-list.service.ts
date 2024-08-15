@@ -35,7 +35,7 @@ export class ShoppingListService {
   public createShoppingList(name: string): Observable<ShoppingListResponse> {
     return this.http.post<ShoppingListResponse>(
       API_URL + '/shopping-list',
-      { name },
+      name,
       HTTP_OPTIONS
     ).pipe(
       parseResponse(ShoppingListResponseSchema),

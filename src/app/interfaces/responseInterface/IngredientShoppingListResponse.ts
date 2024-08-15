@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const IngredientShoppingListResponseSchema = z.object({
-  id: z.number(),
-  recipeId: z.number(),
+  id: z.number().nullable(),
+  shoppingListRecipeId: z.number().nullable(),
   name: z.string(),
   checked: z.boolean(),
 });

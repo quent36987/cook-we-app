@@ -1,0 +1,23 @@
+<div class='popup-overlay'>
+  <div class='popup-content'>
+    <div class='app-title textCenter'>
+      Rechercher une recette
+    </div>
+
+    <div class='cta-button' (click)='togglePopupSearch()'>
+      <mat-icon>close</mat-icon>
+    </div>
+
+    <mat-form-field appearance='fill'>
+      <input matInput type='text' [(ngModel)]='searchText' (ngModelChange)='onSearch()' placeholder='Ex: Tartiflette'>
+      <button *ngIf='searchText' matSuffix mat-icon-button aria-label='Clear' (click)='clearSearch()'>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class='recipes-list'>
+      <app-recipe-card [recipe]='recipe' (click)='onClick(recipe.id)'
+                       *ngFor='let recipe of recipes' [showButton]='false' />
+    </div>
+  </div>
+</div>

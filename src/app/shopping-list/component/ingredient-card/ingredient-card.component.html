@@ -1,1 +1,12 @@
-<p>ingredient-card works!</p>
+<div class='card'>
+  @if (editMode) {
+    <input *ngIf='ingredient'
+           type='text'
+           class='input'
+           placeholder='Entrez un ingrédient'
+           [(ngModel)]='ingredient.name' (focusout)='onUpdate()' />
+  } @else {
+    <div class='input'>{{ ingredient.name }}</div>
+  }
+  <mat-icon *ngIf='ingredient.id' class='delete' (click)='onDelete()'>delete</mat-icon>
+</div>

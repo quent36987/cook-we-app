@@ -1,0 +1,34 @@
+<div class='app-title'>
+  {{ shoppingList?.name }}
+</div>
+
+<div class='buttons'>
+  <div class='cta-button' (click)='togglePopupSearch()'>
+    <mat-icon>add</mat-icon>
+  </div>
+  <div class='cta-button' [class.disable]='username != shoppingList?.ownerUsername'
+       [routerLink]='["/",SHOPPING_LIST_ROUTES.path,SHOPPING_LIST_ROUTES.parameters,shoppingList?.id]'>
+    <mat-icon>group_add</mat-icon>
+  </div>
+  <div class='cta-button' [class.disable]='username != shoppingList?.ownerUsername' (click)='onDeleteShoppingList()'>
+    <mat-icon>delete</mat-icon>
+  </div>
+  <div class='cta-button' [routerLink]='["/",SHOPPING_LIST_ROUTES.path,SHOPPING_LIST_ROUTES.detail,shoppingList?.id]'>
+    <mat-icon>find_in_page</mat-icon>
+  </div>
+</div>
+
+<div class='list'>
+  <app-recipe-shopping-list-card *ngFor='let elt of shoppingList?.recipes' [recipeShoppingList]='elt'
+                                 (deleteRecipeShoppingList)='onDeleteRecipe(elt.id)' (changePortion)='changePortions(elt.id,$event)' />
+
+  <div class='separator'></div>
+
+  <app-ingredient-card *ngFor='let elt of shoppingList?.ingredients' [ingredient]='elt'
+                       (deleteIngredient)='onDeleteIngredient(elt.id)' (editIngredient)='onIngredientChange($event)' />
+
+  <app-ingredient-card [ingredient]='ingredientEmpty' (editIngredient)='onIngredientChange($event)' />
+</div>
+
+
+<app-search-popup *ngIf='recipePopup' (closePopup)='togglePopupSearch()' (onClickRecipe)='addRecipe($event,0)' />
