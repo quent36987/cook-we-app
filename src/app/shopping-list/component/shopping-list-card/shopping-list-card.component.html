@@ -1,0 +1,8 @@
+<div class='card'>
+  <div class='title'>
+    {{ shoppingList.name}}
+  </div>
+  <div *ngIf='showOwner' class='owner'>
+    {{ shoppingList.ownerUsername}}
+  </div>
+</div>
