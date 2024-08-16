@@ -40,7 +40,7 @@ export class MyRecipesComponent implements OnInit {
         },
         error: err => {
           this.isWaiting = false;
-          this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+          this.notificationService.openSnackBarError(err.error.message, 'Close');
         },
       });
     }

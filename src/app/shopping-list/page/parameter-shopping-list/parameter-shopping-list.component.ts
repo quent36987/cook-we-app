@@ -41,7 +41,7 @@ export class ParameterShoppingListComponent implements OnInit {
         this.shoppingList = shoppingList;
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
       complete: () => {
         this.spinnerService.hideSpinner();
@@ -56,7 +56,7 @@ export class ParameterShoppingListComponent implements OnInit {
         this.shoppingList?.sharedUsers.splice(this.shoppingList.sharedUsers.indexOf(username), 1);
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
     });
   }
@@ -79,7 +79,7 @@ export class ParameterShoppingListComponent implements OnInit {
           },
           error: err => {
             console.log(err);
-            this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+            this.notificationService.openSnackBarError(err.error.message, 'Close');
           },
         });
       },

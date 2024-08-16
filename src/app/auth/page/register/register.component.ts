@@ -52,7 +52,7 @@ export class RegisterComponent {
       },
       error: err => {
         this.isWaiting = false;
-        this.notification.openSnackBarError(err.error.messsage, "Close");
+        this.notification.openSnackBarError(err.error.message, "Close");
       }
     });
   }

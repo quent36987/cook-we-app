@@ -115,7 +115,7 @@ export class RecipePageComponent implements OnInit {
             this.router.navigate(['/', RECIPE_ROUTES.path]);
           },
           error: err => {
-            this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+            this.notificationService.openSnackBarError(err.error.message, 'Close');
           },
         });
       },
@@ -138,7 +138,7 @@ export class RecipePageComponent implements OnInit {
           this.notificationService.openSnackBarSuccess('Recipe removed from favorites', 'Close');
         },
         error: err => {
-          this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+          this.notificationService.openSnackBarError(err.error.message, 'Close');
         },
       });
     } else {
@@ -147,7 +147,7 @@ export class RecipePageComponent implements OnInit {
           this.notificationService.openSnackBarSuccess('Recipe added to favorites', 'Close');
         },
         error: err => {
-          this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+          this.notificationService.openSnackBarError(err.error.message, 'Close');
         },
       });
     }
@@ -161,7 +161,7 @@ export class RecipePageComponent implements OnInit {
         this.notificationService.openSnackBarSuccess('Comment added', 'Close');
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
     });
   }
