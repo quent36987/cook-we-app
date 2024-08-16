@@ -36,7 +36,7 @@ export class UpdateRecipeComponent implements OnInit {
         this.recipe = new RecipeDetail(data);
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.messsage, 'Close');
       },
     });
   }

@@ -35,7 +35,7 @@ export class DetailShoppingListComponent {
         this.shoppingList = shoppingList;
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.messsage, 'Close');
       },
       complete: () => {
         this.spinnerService.hideSpinner();

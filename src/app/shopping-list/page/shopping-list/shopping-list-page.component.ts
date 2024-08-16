@@ -17,6 +17,7 @@ import { Recipe } from '@interfaces/Recipe';
 import { map } from 'rxjs/operators';
 import { RecipeDetail } from '@interfaces/RecipeDetail';
 import { RecipeService } from '@app/_services/api/recipe.service';
+import { UnitFormat } from '@utils/format/unit-format';
 
 @Component({
   selector: 'app-shopping-list',
@@ -33,6 +34,8 @@ export class ShoppingListPageComponent implements OnInit {
   username: string | undefined;
 
   recipePopup = false;
+
+  unitFormatPipe = new UnitFormat();
 
   ingredientEmpty: IngredientShoppingListResponse = {
     id: null,
@@ -66,7 +69,7 @@ export class ShoppingListPageComponent implements OnInit {
         this.shoppingList = shoppingList;
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
       complete: () => {
         this.spinnerService.hideSpinner();
@@ -102,7 +105,7 @@ export class ShoppingListPageComponent implements OnInit {
         this.ingredientEmpty.name = '';
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
     });
   }
@@ -121,7 +124,7 @@ export class ShoppingListPageComponent implements OnInit {
         this.shoppingList.ingredients = this.shoppingList?.ingredients.filter((ingredient) => ingredient.id !== ingredientId);
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
     });
   }
@@ -141,7 +144,7 @@ export class ShoppingListPageComponent implements OnInit {
         this.shoppingList.ingredients = this.shoppingList?.ingredients.filter((ingredient) => ingredient.shoppingListRecipeId !== shoppingListRecipeId);
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
     });
   }
@@ -158,7 +161,7 @@ export class ShoppingListPageComponent implements OnInit {
           this.router.navigate(['/', SHOPPING_LIST_ROUTES.path]);
         },
         error: err => {
-          this.notificationService.openSnackBarError(err.error, 'Close');
+          this.notificationService.openSnackBarError(err.error.message, 'Close');
         },
       });
     });
@@ -183,7 +186,8 @@ export class ShoppingListPageComponent implements OnInit {
           recipeId: recipeId,
           portion: portion === 0 ? recipe.portions : portion,
           ingredients: recipe.getIngredientsForPortion(portion === 0 ? recipe.portions : portion).map(ingredient => {
-            return `${ingredient.quantity} ${ingredient.unit} ${ingredient.name}`;
+            const formattedQuantity = this.unitFormatPipe.transform(ingredient.quantity, ingredient.unit);
+            return ` ${formattedQuantity} ${ingredient.name}`;
           }),
         };
 
@@ -194,12 +198,12 @@ export class ShoppingListPageComponent implements OnInit {
             }
           },
           error: err => {
-            this.notificationService.openSnackBarError(err.error, 'Close');
+            this.notificationService.openSnackBarError(err.error.message, 'Close');
           },
         });
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.message, 'Close');
       },
     });
   }

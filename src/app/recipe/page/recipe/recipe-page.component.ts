@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '@app/_services/api/recipe.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '@interfaces/Recipe';
 import { RecipeDetailResponse } from '@interfaces/responseInterface/RecipeDetailResponse';
 import recipemodkdata from '@app/mockdata/recipe';
@@ -13,6 +13,7 @@ import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
+import { PopupService } from '@app/_services/popup.service';
 
 @Component({
   selector: 'app-page-recipe',
@@ -33,6 +34,8 @@ export class RecipePageComponent implements OnInit {
               private notificationService: NotificationService,
               private storageService: StorageService,
               private commentService: CommentService,
+              private router: Router,
+              private popupService: PopupService,
   ) {
 
   }
@@ -50,37 +53,35 @@ export class RecipePageComponent implements OnInit {
       map((recipeResponse) => {
         this.recipe = new RecipeDetail((recipeResponse));
         this.portions = this.recipe.portions;
-      })
+      }),
     );
 
     // Observable to check if recipe is favorite
     const favoriteObservable = this.storageService.isLoggedIn() ?
       this.userService.getMyFavRecipes().pipe(
-        map(data => data.some((fav) => fav.id == this.recipeId))
+        map(data => data.some((fav) => fav.id == this.recipeId)),
       ) :
       of(false);
 
     const isMineObservable = combineLatest([
       this.storageService.getUsername(),
-      recipeObservable.pipe(map(() => this.recipe?.ownerUsername))
+      recipeObservable.pipe(map(() => this.recipe?.ownerUsername)),
     ]).pipe(
-      map(([username, ownerUsername]) =>
-      {
-        console.log('u',username,ownerUsername);
-       return username == ownerUsername
-      }
-
-      )
+      map(([username, ownerUsername]) => {
+          console.log('u', username, ownerUsername);
+          return username == ownerUsername;
+        },
+      ),
     );
 
     // Subscribe to combined observables to update isMine
     combineLatest([
       favoriteObservable,
-      isMineObservable
+      isMineObservable,
     ]).subscribe(([isFavorite, isMine]) => {
       this.isFavorite = isFavorite;
       this.$isMine.next(isMine);
-      console.log('ismine',isMine);
+      console.log('ismine', isMine);
     });
 
   }
@@ -102,6 +103,25 @@ export class RecipePageComponent implements OnInit {
     this.portions++;
   }
 
+  onDeleteRecipe() {
+    this.popupService.showConfirmationPopup('Supression', 'Etes-vous sûr de vouloir supprimer cette recette ?', () => {
+        if (!this.recipe) {
+          return;
+        }
+
+        this.recipeService.deleteRecipe(this.recipe.id).subscribe({
+          next: () => {
+            this.notificationService.openSnackBarSuccess('Recipe deleted', 'Close');
+            this.router.navigate(['/', RECIPE_ROUTES.path]);
+          },
+          error: err => {
+            this.notificationService.openSnackBarError(err.error.messsage, 'Close');
+          },
+        });
+      },
+    );
+  }
+
   toggleFavorite() {
     if (!this.recipe) {
       return;
@@ -118,7 +138,7 @@ export class RecipePageComponent implements OnInit {
           this.notificationService.openSnackBarSuccess('Recipe removed from favorites', 'Close');
         },
         error: err => {
-          this.notificationService.openSnackBarError(err.error, 'Close');
+          this.notificationService.openSnackBarError(err.error.messsage, 'Close');
         },
       });
     } else {
@@ -127,7 +147,7 @@ export class RecipePageComponent implements OnInit {
           this.notificationService.openSnackBarSuccess('Recipe added to favorites', 'Close');
         },
         error: err => {
-          this.notificationService.openSnackBarError(err.error, 'Close');
+          this.notificationService.openSnackBarError(err.error.messsage, 'Close');
         },
       });
     }
@@ -141,7 +161,7 @@ export class RecipePageComponent implements OnInit {
         this.notificationService.openSnackBarSuccess('Comment added', 'Close');
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.messsage, 'Close');
       },
     });
   }

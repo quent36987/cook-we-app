@@ -5,7 +5,7 @@
 
     <ng-container [ngSwitch]="popupConfig.type">
       <ng-container *ngSwitchCase="popupType.Input">
-        <input type="text" [(ngModel)]="popupConfig.inputValue" placeholder="Entrez votre réponse" />
+        <input type="text" [(ngModel)]="popupConfig.inputValue" placeholder="Entrez votre réponse"  #popupInput />
       </ng-container>
     </ng-container>
 

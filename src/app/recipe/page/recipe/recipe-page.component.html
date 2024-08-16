@@ -3,6 +3,10 @@
     <div class='title flex-1'>{{ recipe.name }}</div>
 
     <mat-icon *ngIf="$isMine | async" class='favorite-icon margin-right-s'
+              (click)='onDeleteRecipe()'>delete
+    </mat-icon>
+
+    <mat-icon *ngIf="$isMine | async" class='favorite-icon margin-right-s'
               [routerLink]="['/',RECIPE_ROUTES.path,RECIPE_ROUTES.update,recipe.id]">edit
     </mat-icon>
 

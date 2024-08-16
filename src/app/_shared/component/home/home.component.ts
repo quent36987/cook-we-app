@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
         this.recipes = data.content.map(r => new Recipe(r));
       },
       error: err => {
-        console.log(err);
+        console.log(err.error.message);
       },
     });
   }

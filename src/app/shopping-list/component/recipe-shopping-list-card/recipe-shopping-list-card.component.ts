@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecipeShoppingListResponse } from '@interfaces/responseInterface/RecipeShoppingListResponse';
 import { Router } from '@angular/router';
 import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
+import { API_URL } from '@app/environments/environment';
 
 @Component({
   selector: 'app-recipe-shopping-list-card',
@@ -22,7 +23,7 @@ export class RecipeShoppingListCardComponent {
   thumbnail() {
     const thumbnail = this.recipeShoppingList.imageUrl;
 
-    return thumbnail ? thumbnail : '../../../../assets/logo.jpg';
+    return thumbnail ? `${API_URL}/pictures/${thumbnail}` : '../../../../assets/logo.jpg';
   }
 
   increase() {
@@ -45,6 +46,4 @@ export class RecipeShoppingListCardComponent {
   onCardClick() {
     this.router.navigate(['/', RECIPE_ROUTES.path, this.recipeShoppingList.recipeId]);
   }
-
-
 }

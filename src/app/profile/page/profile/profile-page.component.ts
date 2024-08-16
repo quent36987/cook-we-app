@@ -37,7 +37,7 @@ export class ProfilePageComponent implements OnInit {
         this.user = new UserDetail(user);
       },
       error: err => {
-        this.notificationService.openSnackBarError(err.error, 'Close');
+        this.notificationService.openSnackBarError(err.error.messsage, 'Close');
       },
     });
   }
@@ -64,7 +64,7 @@ export class ProfilePageComponent implements OnInit {
             this.notificationService.openSnackBarSuccess(res.message, 'Close');
           },
           error: err => {
-            this.notificationService.openSnackBarError(err.error, 'Close');
+            this.notificationService.openSnackBarError(err.error.messsage, 'Close');
           },
         });
       },
