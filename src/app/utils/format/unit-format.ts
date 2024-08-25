@@ -9,7 +9,8 @@ const type = {
   [EUnit.TABLESPOON]: 'c. a s.',
   [EUnit.TEASPOON]: 'c. a c.',
   [EUnit.POT]: 'pot',
-  [EUnit.PINCH]: "pincée"
+  [EUnit.PINCH]: "pincée",
+  [EUnit.SACHET]: 'sachet',
 };
 
 const intergerType =  [

@@ -51,6 +51,8 @@ export function EUnitToString(unit: EUnit): string {
       return 'POT';
     case EUnit.PINCH:
       return 'PINCH';
+    case EUnit.SACHET:
+      return 'SACHET';
     default:
       return '';
   }
@@ -100,6 +102,8 @@ export function StringToEUnit(unit: string): EUnit {
       return EUnit.POT;
     case 'PINCH':
       return EUnit.PINCH;
+    case 'SACHET':
+      return EUnit.SACHET;
     default:
       return EUnit.PIECE;
   }

@@ -6,6 +6,7 @@ import { PictureService } from '@app/_services/api/picture.service';
 import { EmitRecipeForm } from '@app/recipe/component/recipe-form/recipe-form.component';
 import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
 import { RecipeDetail } from '@interfaces/RecipeDetail';
+import { SpinnerService } from '@app/_services/spinner.service';
 
 @Component({
   selector: 'app-create-recipe',
@@ -22,6 +23,7 @@ export class CreateRecipeComponent implements OnInit {
               private notificationService: NotificationService,
               private router: Router,
               private pictureService: PictureService,
+              private spinnerService: SpinnerService,
   ) {
   }
 
@@ -37,6 +39,7 @@ export class CreateRecipeComponent implements OnInit {
 
   onSubmitted(recipeRequest: EmitRecipeForm) {
     this.canSubmit = false;
+    this.spinnerService.showSpinner();
 
     this.recipeService.postRecipe(recipeRequest).subscribe({
       next: (data) => {
@@ -46,12 +49,14 @@ export class CreateRecipeComponent implements OnInit {
         }
 
         setTimeout(() => {
+          this.spinnerService.hideSpinner();
           this.router.navigate(['/', RECIPE_ROUTES.path, data.id]);
-        }, 2000);
+        }, 1000);
       },
       error: () => {
         this.notificationService.openSnackBarError('Erreur lors de la création de la recette', 'Close');
         this.canSubmit = true;
+        this.spinnerService.hideSpinner();
       },
     });
   }

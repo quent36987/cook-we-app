@@ -6,5 +6,6 @@ export enum EUnit {
   CUP = 'CUP',
   PIECE = 'PIECE',
   POT = 'POT',
-  PINCH = 'PINCH'
+  PINCH = 'PINCH',
+  SACHET = 'SACHET',
 }

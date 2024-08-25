@@ -1,6 +1,7 @@
 export enum PopupType {
   Confirmation = 'Confirmation',
-  Input = 'Input'
+  Input = 'Input',
+  CHOICE = 'CHOICE',
 }
 
 export interface PopupConfig {
@@ -9,5 +10,9 @@ export interface PopupConfig {
   description: string;
   inputValue?: string;
   confirmButton?: string;
+  choiceButtons?: {
+    text: string;
+    callback: () => void;
+  }[];
   callback?: (input?: string) => void;
 }

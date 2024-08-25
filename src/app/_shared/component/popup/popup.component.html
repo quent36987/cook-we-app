@@ -1,17 +1,25 @@
-<div class="popup-overlay" *ngIf="popupConfig">
-  <div class="popup-content">
+<div class='popup-overlay' *ngIf='popupConfig'>
+  <div class='popup-content'>
     <h2>{{ popupConfig.title }}</h2>
     <p>{{ popupConfig.description }}</p>
 
-    <ng-container [ngSwitch]="popupConfig.type">
-      <ng-container *ngSwitchCase="popupType.Input">
-        <input type="text" [(ngModel)]="popupConfig.inputValue" placeholder="Entrez votre réponse"  #popupInput />
+    <ng-container [ngSwitch]='popupConfig.type'>
+      <ng-container *ngSwitchCase='popupType.Input'>
+        <input type='text' [(ngModel)]='popupConfig.inputValue' placeholder='Entrez votre réponse' #popupInput />
+      </ng-container>
+
+      <ng-container *ngSwitchCase='popupType.CHOICE'>
+        <div class='buttons-choice'>
+          <div class='cta-button' *ngFor='let choice of popupConfig.choiceButtons' (click)='choice.callback()'>
+            {{ choice.text }}
+          </div>
+        </div>
       </ng-container>
     </ng-container>
 
-    <div class="popup-buttons">
-      <button class="popup-button confirm" (click)="onConfirm()">{{ popupConfig.confirmButton }}</button>
-      <button class="popup-button cancel" (click)="onCancel()">Annuler</button>
+    <div class='popup-buttons' *ngIf='popupConfig.type != popupType.CHOICE'>
+      <button class='popup-button confirm' (click)='onConfirm()'>{{ popupConfig.confirmButton }}</button>
+      <button class='popup-button cancel' (click)='onCancel()'>Annuler</button>
     </div>
   </div>
 </div>

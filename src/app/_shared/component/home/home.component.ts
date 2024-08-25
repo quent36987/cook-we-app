@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit {
   version: string = '';
 
   constructor(private recipeService: RecipeService,
-              private versionService: VersionService) {
+              private versionService: VersionService,
+  ) {
     versionService.getVersion().subscribe({
       next: data => {
-        console.log('version', data);
         this.version = data.version;
       },
       error: err => {

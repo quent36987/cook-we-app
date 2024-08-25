@@ -1,10 +1,18 @@
-<div class='app-title flex-row center gap-s'>
+<div class='app-title flex-row center gap-s flex-1'>
   <div class='cta-button' [routerLink]='["/",SHOPPING_LIST_ROUTES.path,shoppingList?.id]'>
     <mat-icon class='icon'>arrow_back</mat-icon>
   </div>
+  <div class='title'>
     {{ shoppingList?.name }}
+  </div>
+  <div class='flex-1'>
+  </div>
 </div>
 
 <div class='list'>
-  <app-ingredient-card *ngFor='let elt of shoppingList?.ingredients' [ingredient]='elt' [editMode]='false' />
+  <div class='flex-row width-100' *ngFor='let elt of shoppingList?.ingredients'>
+    <mat-checkbox class='example-margin' [checked]='elt.checked' (change)='onCkeckedChange(elt.id, $event.checked)' />
+    <app-ingredient-card [ingredient]='elt' [editMode]='false' />
+  </div>
 </div>
+

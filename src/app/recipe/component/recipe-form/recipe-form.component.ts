@@ -51,6 +51,7 @@ export class RecipeFormComponent implements OnInit {
     { value: EUnit.TEASPOON, viewValue: 'cuillère à café' },
     { value: EUnit.POT, viewValue: 'pot' },
     { value: EUnit.PINCH, viewValue: 'pincée' },
+    { value: EUnit.SACHET, viewValue: 'sachet' },
   ];
 
   constructor(private formBuilder: FormBuilder,
