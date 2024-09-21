@@ -50,8 +50,8 @@ export class UpdateRecipeComponent implements OnInit {
       next: (data) => {
         this.notificationService.openSnackBarSuccess('Recette mis a jour', 'Close');
 
-        for (let i = 0; i < recipeRequest.pictures.length; i++) {
-          this.pictureService.postPicture(recipeRequest.pictures[i], data.id).subscribe({
+        for (const element of recipeRequest.pictures) {
+          this.pictureService.postPicture(element, data.id).subscribe({
             error: (error) => {
               console.error('An error occurred', error);
             },
@@ -61,7 +61,7 @@ export class UpdateRecipeComponent implements OnInit {
         setTimeout(() => {
           this.spinnerService.hideSpinner();
           this.router.navigate(['/', RECIPE_ROUTES.path, data.id]);
-        }, 1000);
+        }, 2000);
       },
       error: () => {
         this.spinnerService.hideSpinner();
