@@ -57,6 +57,11 @@ export class HeaderComponent {
       link: '',
       subServices: [
         {
+          icon: 'list',
+          title: 'Toutes les recettes',
+          link: `${RECIPE_ROUTES.path}/${RECIPE_ROUTES.all}`,
+        },
+        {
           icon: 'create',
           title: 'Créer une recette',
           link: `${RECIPE_ROUTES.path}/${RECIPE_ROUTES.create}`,

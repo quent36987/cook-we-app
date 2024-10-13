@@ -6,6 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { PROFILE_ROUTES } from '@app/profile/profile.module';
 import { RouterLink } from '@angular/router';
 import { VersionService } from '@app/_services/version.service';
+import { RECIPE_ROUTES } from '@app/recipe/recipe.module';
 
 @Component({
   selector: 'app-home',
@@ -49,4 +50,5 @@ export class HomeComponent implements OnInit {
   }
 
   protected readonly PROFILE_ROUTES = PROFILE_ROUTES;
+  protected readonly RECIPE_ROUTES = RECIPE_ROUTES;
 }

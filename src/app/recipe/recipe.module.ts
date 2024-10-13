@@ -28,12 +28,14 @@ import { IsLoginGuard } from '@utils/guard/IsLoginGuard';
 import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HowCreateComponent } from '@app/recipe/component/how-create/how-create.component';
 import { PictureFormComponent } from '@app/recipe/component/picture-form/picture-form.component';
+import { AllRecipesComponent } from '@app/recipe/page/all-recipes/all-recipes.component';
 
 export const RECIPE_ROUTES = {
   path: 'recipe',
   create: 'create',
   update: 'update',
   search: 'search',
+  all: 'all',
   detail: '',
 };
 
@@ -45,6 +47,7 @@ export const recipeRoutes: Routes = [
       { path: RECIPE_ROUTES.create, component: CreateRecipeComponent, canActivate: [IsLoginGuard] },
       { path: `${RECIPE_ROUTES.update}/:id`, component: UpdateRecipeComponent },
       { path: RECIPE_ROUTES.search, component: SearchComponent },
+      { path: RECIPE_ROUTES.all, component: AllRecipesComponent},
       { path: '', redirectTo: RECIPE_ROUTES.search, pathMatch: 'full' },
       { path: ':id', component: RecipePageComponent },
     ],
@@ -53,6 +56,7 @@ export const recipeRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    AllRecipesComponent,
     RecipePageComponent,
     CreateRecipeComponent,
     UpdateRecipeComponent,
